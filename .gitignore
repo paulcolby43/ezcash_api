@@ -34,4 +34,3 @@
 /nbproject/private/
 # Ignore application configuration
 /config/application.yml
-Dockerfile
