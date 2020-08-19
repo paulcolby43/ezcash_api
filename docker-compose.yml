@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    ports:
+      - "3000:3000"
+    image: jeremysenn/ezcash_api_app
+    # environment:
+    #  - EZCASH_PASSWORD=${EZCASH_PASSWORD}
