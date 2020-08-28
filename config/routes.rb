@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :bill_counts, only: [:show, :index]
       resources :bill_hists, only: [:show, :index]
       resources :denoms, only: [:show, :index]
+      resources :transactions
+      resources :customer_barcodes
     end
   end
   
