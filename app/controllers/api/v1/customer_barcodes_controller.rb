@@ -80,7 +80,7 @@ class Api::V1::CustomerBarcodesController < ApplicationController
   end
   
   def customer_barcode_params
-    params.require(:device).permit(:CustomerID, :CompanyNumber, :Barcode, :TranID, :Used, :amount, :ActID, :DevID)
+    params.require(:customer_barcode).permit(:CustomerID, :CompanyNumber, :Barcode, :TranID, :Used, :amount, :ActID, :DevID)
   end
       
 end
