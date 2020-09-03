@@ -63,10 +63,6 @@ class Api::V1::CustomerBarcodesController < ApplicationController
     @customer_barcode = CustomerBarcode.find(params[:id])
   end
   
-  def customer_barcode_params
-    params.require(:customer_barcode).permit()
-  end
-  
   def customer_barcodes_limit
     (1..100).include?(params[:limit].to_i) ?  params[:limit] : 10
   end
@@ -81,6 +77,10 @@ class Api::V1::CustomerBarcodesController < ApplicationController
     else
       nil
     end
+  end
+  
+  def customer_barcodes_params
+    params.require(:device).permit(:CustomerID, :CompanyNumber, :Barcode, :TranID, :Used, :amount, :ActID, :DevID)
   end
       
 end
