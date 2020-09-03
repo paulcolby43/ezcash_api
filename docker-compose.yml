@@ -3,7 +3,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./docker/app/Dockerfile
+      #dockerfile: ./docker/app/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
     #image: jeremysenn/ezcash_api_app
