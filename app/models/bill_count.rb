@@ -12,7 +12,19 @@ class BillCount < ApplicationRecord
   #     Instance Methods      #
   #############################
   
+  def denomination
+#    denom = Denom.find_by dev_id: 201, cassette_nbr: 9
+    denoms = Denom.device_and_cassette_nbr(self.dev_id, self.cassette_nbr)
+    unless denoms.blank?
+      return denoms.first.denomination
+    else
+      return nil
+    end
+  end
   
+  def attributes_with_denomination
+    as_json.merge({denomination: self.denomination})
+  end
   
   #############################
   #     Class Methods         #

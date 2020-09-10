@@ -8,14 +8,17 @@ class Api::V1::BillCountsController < ApplicationController
     .cassette_nbr(params[:cassette_nbr])
     .cassette_id(params[:cassette_id])
     .status(params[:status])
+    .limit(bill_counts_limit)
 #    render json: @bill_counts
-    render json: JSON.pretty_generate(JSON.parse(@bill_counts.to_json))
+#    render json: JSON.pretty_generate(JSON.parse(@bill_counts.to_json))
+    render json: JSON.pretty_generate(JSON.parse(@bill_counts.collect{|bc| bc.attributes_with_denomination}.to_json))
   end
   
   # GET /bill_counts/:id
   def show
 #    render json: @bill_count
-    render json: JSON.pretty_generate(JSON.parse(@bill_count.to_json))
+#    render json: JSON.pretty_generate(JSON.parse(@bill_count.to_json))
+    render json: JSON.pretty_generate(JSON.parse(@bill_count.attributes_with_denomination.to_json))
     rescue ActiveRecord::RecordNotFound
       head :not_found
   end
@@ -52,6 +55,10 @@ class Api::V1::BillCountsController < ApplicationController
   end
   
   private
+  
+  def bill_counts_limit
+    (1..100).include?(params[:limit].to_i) ?  params[:limit] : 10
+  end
   
   def set_bill_count
     @bill_count = BillCount.find(params[:id])
