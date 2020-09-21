@@ -1,5 +1,5 @@
 class BillCount < ApplicationRecord
-  self.primary_key = 'host_start_count'
+  self.primary_key = 'cassette_nbr'
   
   belongs_to :device, :foreign_key => 'dev_id'
   
@@ -11,6 +11,11 @@ class BillCount < ApplicationRecord
   #############################
   #     Instance Methods      #
   #############################
+  
+  def as_json(options={})
+    super.merge({'denomination' => denomination})
+#    super(only: [:device, :cassette_nbr, :status], methods: [:denomination])
+  end
   
   def denomination
 #    denom = Denom.find_by dev_id: 201, cassette_nbr: 9

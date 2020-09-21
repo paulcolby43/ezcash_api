@@ -11,14 +11,14 @@ class Api::V1::BillCountsController < ApplicationController
     .limit(bill_counts_limit)
 #    render json: @bill_counts
 #    render json: JSON.pretty_generate(JSON.parse(@bill_counts.to_json))
-    render json: JSON.pretty_generate(JSON.parse(@bill_counts.collect{|bc| bc.attributes_with_denomination}.to_json))
+    render json: JSON.pretty_generate(@bill_counts.as_json)
   end
   
   # GET /bill_counts/:id
   def show
 #    render json: @bill_count
 #    render json: JSON.pretty_generate(JSON.parse(@bill_count.to_json))
-    render json: JSON.pretty_generate(JSON.parse(@bill_count.attributes_with_denomination.to_json))
+    render json: JSON.pretty_generate(@bill_count.as_json)
     rescue ActiveRecord::RecordNotFound
       head :not_found
   end
@@ -61,11 +61,11 @@ class Api::V1::BillCountsController < ApplicationController
   end
   
   def set_bill_count
-    @bill_count = BillCount.find(params[:id])
+    @bill_count = BillCount.find_by(dev_id: params[:device_id], cassette_nbr: params[:id])
   end
   
   def bill_count_params
-    params.require(:bill_count).permit()
+    params.require(:bill_count).permit(:host_start_count, :host_cycle_count, :dev_start_count, :dev_cycle_count, :dev_divert_count, :added_count, :old_added, :status)
   end
       
 end
