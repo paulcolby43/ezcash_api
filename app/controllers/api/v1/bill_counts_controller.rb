@@ -5,6 +5,7 @@ class Api::V1::BillCountsController < ApplicationController
   def index
 #    @bill_counts = BillCount.all
     @bill_counts = BillCount.device(params[:dev_id])
+    .device(params[:device_id])
     .cassette_nbr(params[:cassette_nbr])
     .cassette_id(params[:cassette_id])
     .status(params[:status])
