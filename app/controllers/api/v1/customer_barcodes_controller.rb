@@ -64,7 +64,7 @@ class Api::V1::CustomerBarcodesController < ApplicationController
   end
   
   def customer_barcodes_limit
-    (1..100).include?(params[:limit].to_i) ?  params[:limit] : 10
+    (1..1000).include?(params[:limit].to_i) ?  params[:limit] : 100
   end
   
   def parse_datetime(datetime)

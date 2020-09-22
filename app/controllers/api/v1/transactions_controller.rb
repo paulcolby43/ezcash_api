@@ -8,14 +8,15 @@ class Api::V1::TransactionsController < ApplicationController
     .start_time(parse_datetime(params[:start_time]))
     .end_time(parse_datetime(params[:end_time]))
     .from_customer_id(params[:FromCustID])
+    .limit(transactions_limit)
 #    render json: @transactions
-    render json: JSON.pretty_generate(JSON.parse(@transactions.to_json))
+    render json: JSON.pretty_generate(@transactions.as_json)
   end
   
   # GET /transactions/:id
   def show
 #    render json: @transaction
-    render json: JSON.pretty_generate(JSON.parse(@transaction.to_json))
+    render json: JSON.pretty_generate(@transaction.as_json)
     rescue ActiveRecord::RecordNotFound
       head :not_found
   end
@@ -53,12 +54,20 @@ class Api::V1::TransactionsController < ApplicationController
   
   private
   
+  def transactions_limit
+    (1..1000).include?(params[:limit].to_i) ?  params[:limit] : 100
+  end
+  
   def set_transaction
     @transaction = Transaction.find(params[:id])
   end
   
   def transaction_params
-    params.require(:transaction).permit()
+    params.require(:transaction).permit(:date_time, :dev_id, :FromCustID, :ToCustID, :tran_status, :error_code, :tran_code, :card_nbr, :receipt_nbr, :amt_req, :amt_auth, 
+      :cassette_1_disp, :cassette_2_disp, :cassette_3_disp, :cassette_4_disp, :cassette_5_disp, :cassette_6_disp, :track2, :bank_id_nbr, :coin_disp, :coin_1_disp, :coin_2_disp, 
+      :coin_3_disp, :coin_4_disp, :coin_5_disp, :coin_6_disp, :cashBalance, :ActID, :CreateDate, :CreateUser, :ModifiedDate, :ModifiedUser, :card_seq, :from_acct_id, :from_acct_type, 
+      :to_acct_id, :to_acct_type, :authID, :sec_tran_code, :BlockID, :AddFlag, :MoveFlag, :Description, :ChpFee, :DevCompanyNbr, :IssuingCompanyNbr, :BarcodeHash, :CheckCategoryID, 
+      :FeedActID, :OrigTranID, :from_acct_nbr, :to_acct_nbr, :Note, :FailedLimitID, :external_ref_nbr, :upload_file, :event_id, :dev_address, :custID, :user_id)
   end
   
   def parse_datetime(datetime)
