@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :customer_barcodes
       resources :customers
       resources :dev_statuses, only: [:index]
+      resources :status_descs, only: [:show, :index]
     end
   end
   

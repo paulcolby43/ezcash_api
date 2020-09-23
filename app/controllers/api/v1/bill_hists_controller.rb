@@ -10,13 +10,13 @@ class Api::V1::BillHistsController < ApplicationController
     .user_name(params[:user_name])
     .cut_date(params[:cut_dt])
 #    render json: @bill_hists
-    render json: JSON.pretty_generate(JSON.parse(@bill_hists.to_json))
+    render json: JSON.pretty_generate(@bill_hists.as_json)
   end
   
   # GET /bill_hists/:id
   def show
 #    render json: @bill_hist
-    render json: JSON.pretty_generate(JSON.parse(@bill_hist.to_json))
+    render json: JSON.pretty_generate(@bill_hist.as_json)
     rescue ActiveRecord::RecordNotFound
       head :not_found
   end
