@@ -3,7 +3,6 @@ class Api::V1::TransactionsController < ApplicationController
   
   # GET /transactions
   def index
-    @transactions = Transaction.all
     @transactions = Transaction.device(params[:dev_id])
     .start_time(parse_datetime(params[:start_time]))
     .end_time(parse_datetime(params[:end_time]))
@@ -15,6 +14,7 @@ class Api::V1::TransactionsController < ApplicationController
     .secondary_transaction_code(params[:sec_tran_code])
     .error_code(params[:error_code])
     .original_transaction_id(params[:OrigTranID])
+    .order("date_time DESC")
     .limit(transactions_limit)
 #    render json: @transactions
     render json: JSON.pretty_generate(@transactions.as_json)
