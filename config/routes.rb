@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :devices do
         resources :bill_counts
+        resources :bill_hists
         resources :dev_statuses
       end
       resources :bill_counts, only: [:index]

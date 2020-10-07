@@ -9,6 +9,8 @@ class Api::V1::BillHistsController < ApplicationController
     .cassette_id(params[:cassette_id])
     .user_name(params[:user_name])
     .cut_date(params[:cut_dt])
+    .order("cut_dt DESC")
+    .limit(bill_hists_limit)
 #    render json: @bill_hists
     render json: JSON.pretty_generate(@bill_hists.as_json)
   end
@@ -54,12 +56,16 @@ class Api::V1::BillHistsController < ApplicationController
   
   private
   
+  def bill_hists_limit
+    (1..100).include?(params[:limit].to_i) ?  params[:limit] : 10
+  end
+  
   def set_bill_hist
     @bill_hist = BillHist.find(params[:id])
   end
   
   def bill_hist_params
-    params.require(:bill_hist).permit()
+    params.require(:bill_hist).permit(:cut_dt, :old_start, :old_term_cyc, :old_host_cyc, :added, :replaced, :new_start, :cassette_id, :dev_id, :old_added, :user_name, :denomination)
   end
   
 end
