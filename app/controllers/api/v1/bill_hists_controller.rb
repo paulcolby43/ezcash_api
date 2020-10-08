@@ -57,7 +57,7 @@ class Api::V1::BillHistsController < ApplicationController
   private
   
   def bill_hists_limit
-    (1..100).include?(params[:limit].to_i) ?  params[:limit] : 10
+    (1..100).include?(params[:limit].to_i) ?  params[:limit] : 100
   end
   
   def set_bill_hist
