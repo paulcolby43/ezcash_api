@@ -6,6 +6,7 @@ class Api::V1::BillHistsController < ApplicationController
 #    @bill_hists = BillHist.all
     @bill_hists = BillHist.denomination(params[:denomination])
     .device(params[:dev_id])
+    .device(params[:device_id])
     .cassette_id(params[:cassette_id])
     .user_name(params[:user_name])
     .cut_date(params[:cut_dt])
