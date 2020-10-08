@@ -8,8 +8,8 @@ Rails.application.routes.draw do
         resources :bill_hists
         resources :dev_statuses
       end
-      resources :bill_counts, only: [:index]
-      resources :bill_hists, only: [:show, :index]
+      resources :bill_counts
+      resources :bill_hists
       resources :denoms, only: [:show, :index]
       resources :transactions
       resources :customer_barcodes
