@@ -13,6 +13,7 @@ class Api::V1::CustomerBarcodesController < ApplicationController
     .account_id(params[:ActID])
     .start_time(parse_datetime(params[:start_time]))
     .end_time(parse_datetime(params[:end_time]))
+    .order("date_time DESC")
     .limit(customer_barcodes_limit)
 #    render json: @customer_barcodes
     render json: JSON.pretty_generate(JSON.parse(@customer_barcodes.to_json))

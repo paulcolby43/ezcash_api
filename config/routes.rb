@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         resources :bill_counts
         resources :bill_hists
         resources :dev_statuses
+        resources :auth_params
       end
       resources :bill_counts
       resources :bill_hists
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
       resources :dev_statuses, only: [:index]
       resources :status_descs, only: [:show, :index]
       resources :op_code_maps, only: [:index]
+      resources :auth_params
     end
   end
   
