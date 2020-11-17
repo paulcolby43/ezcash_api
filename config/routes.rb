@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :devices do
-        resources :bill_counts
-        resources :bill_hists
-        resources :dev_statuses
-        resources :auth_params
+        resources :bill_counts, only: [:show, :index]
+        resources :bill_hists, only: [:show, :index]
+        resources :dev_statuses, only: [:show, :index]
+        resources :auth_params, only: [:show, :index]
       end
       resources :bill_counts
       resources :bill_hists
