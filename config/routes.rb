@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :status_descs, only: [:show, :index]
       resources :op_code_maps, only: [:index]
       resources :auth_params
+      resources :accounts
     end
   end
   

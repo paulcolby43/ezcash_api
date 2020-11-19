@@ -4,7 +4,7 @@ class Api::V1::CustomersController < ApplicationController
   # GET /customers
   def index
 #    @customers = Customer.all
-    @customers = Customer.company_number(params[:CompanyNumber])
+    @customers = Customer.company(params[:CompanyNumber])
     .limit(customers_limit)
 #    render json: @customers
     render json: JSON.pretty_generate(JSON.parse(@customers.to_json))
