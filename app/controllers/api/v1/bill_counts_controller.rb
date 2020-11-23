@@ -58,11 +58,11 @@ class Api::V1::BillCountsController < ApplicationController
   private
   
   def bill_counts_limit
-    (1..100).include?(params[:limit].to_i) ?  params[:limit] : 10
+    (1..1000).include?(params[:limit].to_i) ?  params[:limit] : 100
   end
   
   def set_bill_count
-    @bill_count = BillCount.find_by(dev_id: params[:device_id], cassette_nbr: params[:id])
+    @bill_count = BillCount.find_by(dev_id: params[:dev_id], cassette_nbr: params[:id])
   end
   
   def bill_count_params
