@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Bill Counts - EZcash API</title>
+<title>Bill Hists - EZcash API</title>
 <%= render partial: 'docs/v1/shared/head' %>
 <body>
 
@@ -27,11 +27,11 @@
       <h5>END POINTS</h5>
       POST /api/v1/bill_hists
       <br>
-      GET /api/v1/bill_hists/:id
+      GET /api/v1/bill_hists/:id?dev_id=:dev_id
       <br>
-      PUT /api/v1/bill_hists/:id
+      PUT /api/v1/bill_hists/:id?dev_id=:dev_id
       <br>
-      DELETE /api/v1/bill_hists/:id
+      DELETE /api/v1/bill_hists/:id?dev_id=:dev_id
       <br>
       GET /api/v1/bill_hists
     </div>

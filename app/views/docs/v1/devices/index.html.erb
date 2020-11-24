@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<title>Devices - EZcash API</title>
+<%= render partial: 'docs/v1/shared/head' %>
+<body>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+  
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" >
+<%= render partial: 'docs/v1/shared/navigation' %>
+</header>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Devices</h1>
+    <p>
+    Device objects allow you to perform calls on devices. 
+    The API allows you to create, delete, and update devices. 
+    You can retrieve individual devices as well as a list of all devices.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>END POINTS</h5>
+      POST /api/v1/devices
+      <br>
+      GET /api/v1/devices/:id
+      <br>
+      PUT /api/v1/devices/:id
+      <br>
+      DELETE /api/v1/devices/:id
+      <br>
+      GET /api/v1/devices
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>The Device Object</h1>
+    <h5>Attributes</h5>
+    <hr>
+    <b>dev_id</b> <small>integer</small>
+    <hr>
+    <b>online</b> <small>integer</small>
+    <hr>
+    <b>description</b> <small>string</small>
+    <hr>
+    <b>address</b> <small>string</small>
+    <hr>
+    <b>encryption_key</b> <small>string</small>
+    <hr>
+    <b>welcome1</b> <small>string</small>
+    <hr>
+    <b>welcome2</b> <small>string</small>
+    <hr>
+    <b>jpg_bank_code</b> <small>string</small>
+    <hr>
+    <b>load_file</b> <small>string</small>
+    <hr>
+    <b>receipt_file</b> <small>string</small>
+    <hr>
+    <b>ip_address</b> <small>string</small>
+    <hr>
+    <b>coin_dev_id</b> <small>integer</small>
+    <hr>
+    <b>camera_group</b> <small>string</small>
+    <hr>
+    <b>use_jpegger</b> <small> integer</small>
+    <hr>
+    <b>jpegger_addr</b> <small> string</small>
+    <hr>
+    <b>jpegger_port</b> <small> integer</small>
+    <hr>
+    <b>jpegger_location</b> <small> string</small>
+    <hr>
+    <b>retries</b> <small> integer</small>
+    <hr>
+    <b>round_to</b> <small> integer</small>
+    <hr>
+    <b>round_method</b> <small> integer</small>
+    <hr>
+    <b>maxcoin</b> <small> decimal</small>
+    <hr>
+    <b>fitness</b> <small> string</small>
+    <hr>
+    <b>fitness_dt</b> <small> datetime</small>
+    <hr>
+    <b>config</b> <small> string</small>
+    <hr>
+    <b>config_dt</b> <small> datetime</small>
+    <hr>
+    <b>supplies</b> <small> string</small>
+    <hr>
+    <b>supplies_dt</b> <small> datetime</small>
+    <hr>
+    <b>comm_port</b> <small> integer</small>
+    <hr>
+    <b>baud_rate</b> <small> integer</small>
+    <hr>
+    <b>advanced_ndc</b> <small> integer</small>
+    <hr>
+    <b>caution_flag</b> <small> integer</small>
+    <hr>
+    <b>caution_status</b> <small> string</small>
+    <hr>
+    <b>monitor_group</b> <small> string</small>
+    <hr>
+    <b>monitor_site</b> <small> string</small>
+    <hr>
+    <b>dev_group</b> <small> string</small>
+    <hr>
+    <b>dev_site</b> <small> string</small>
+    <hr>
+    <b>bills_in_bundle</b> <small> integer</small>
+    <hr>
+    <b>TranID</b> <small> integer</small>
+    <hr>
+    <b>DispenseByAmtFlag</b> <small> integer</small>
+    <hr>
+    <b>TMK_LMK</b> <small> string</small>
+    <hr>
+    <b>TPK_LMK</b> <small> string</small>
+    <hr>
+    <b>PINEnabled</b> <small> integer</small>
+    <hr>
+    <b>inactive_flag</b> <small> integer</small>
+    <hr>
+    <b>CompanyNbr</b> <small> integer</small>
+    <hr>
+    <b>VendorID</b> <small> integer</small>
+    <hr>
+    <b>InstitutionID</b> <small> integer</small>
+    <hr>
+    <b>VendorPAN</b> <small> string</small>
+    <hr>
+    <b>BDK_LMK</b> <small> string</small>
+    <hr>
+    <b>uses_DUKPT</b> <small> integer</small>
+    <hr>
+    <b>dev_typeID</b> <small> integer</small>
+    <hr>
+    <b>isTCPClient</b> <small> integer</small>
+    <hr>
+    <b>PortNbr</b> <small> integer</small>
+    <hr>
+    <b>edge_atm</b> <small> boolean</small>
+    <hr>
+    <b>OwningEntityID</b> <small> integer</small>
+    <hr>
+    <b>CanAcquire</b> <small> integer</small>
+    <hr>
+    <b>ChkCashCompanyNbr</b> <small> integer</small>
+    <hr>
+    <b>ReviewVerification</b> <small> integer</small>
+    <hr>
+    <b>num_images</b> <small> integer</small>
+    <hr>
+    <b>capture_interval</b> <small> integer</small>
+    <hr>
+    <b>image_interval</b> <small> integer</small>
+    <hr>
+    <b>yardid</b> <small> string</small>
+    <hr>
+    <b>LocCompanyNbr</b> <small> integer</small>
+    <hr>
+    <b>payment_type</b> <small> string</small>
+    
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>THE DEVICE OBJECT</h5>
+      <pre>
+        {
+          "dev_id": 99,
+          "online": 1,
+          "description": "Paul Fujitsu",
+          "address": null,
+          "encryption_key": "",
+          "welcome1": "Welcome to Pauls Fujitsu",
+          "welcome2": null,
+          "jpg_bank_code": null,
+          "load_file": null,
+          "receipt_file": null,
+          "ip_address": "192.168.1.21",
+          "coin_dev_id": 101,
+          "camera_group": null,
+          "use_jpegger": 0,
+          "jpegger_addr": null,
+          "jpegger_port": null,
+          "jpegger_location": null,
+          "retries": null,
+          "round_to": null,
+          "round_method": null,
+          "maxcoin": "0.0",
+          "fitness": null,
+          "fitness_dt": "1899-12-30T00:00:00.000Z",
+          "config": null,
+          "config_dt": "1899-12-30T00:00:00.000Z",
+          "supplies": null,
+          "supplies_dt": "1899-12-30T00:00:00.000Z",
+          "comm_port": null,
+          "baud_rate": null,
+          "advanced_ndc": 0,
+          "caution_flag": 1,
+          "caution_status": "9024",
+          "monitor_group": null,
+          "monitor_site": null,
+          "dev_group": null,
+          "dev_site": null,
+          "bills_in_bundle": 50,
+          "TranID": null,
+          "DispenseByAmtFlag": null,
+          "TMK_LMK": null,
+          "TPK_LMK": null,
+          "PINEnabled": 0,
+          "inactive_flag": 0,
+          "CompanyNbr": 10,
+          "VendorID": null,
+          "InstitutionID": null,
+          "VendorPAN": null,
+          "BDK_LMK": null,
+          "uses_DUKPT": null,
+          "dev_typeID": 11,
+          "isTCPClient": 1,
+          "PortNbr": 3402,
+          "edge_atm": false,
+          "OwningEntityID": null,
+          "CanAcquire": null,
+          "ChkCashCompanyNbr": null,
+          "ReviewVerification": null,
+          "num_images": null,
+          "capture_interval": null,
+          "image_interval": null,
+          "yardid": null,
+          "LocCompanyNbr": 10,
+          "payment_type": "ATM"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Create a Device</h1>
+    <h5>Parameters</h5>
+    <hr>
+    <b>dev_id</b> <small>required</small>
+    <hr>
+    <b>online</b> <small>optional</small>
+    <hr>
+    <b>description</b> <small>optional</small>
+    <hr>
+    <b>address</b> <small>optional</small>
+    <hr>
+    <b>encryption_key</b> <small>optional</small>
+    <hr>
+    <b>welcome1</b> <small>optional</small>
+    <hr>
+    <b>welcome2</b> <small>optional</small>
+    <hr>
+    <b>jpg_bank_code</b> <small>optional</small>
+    <hr>
+    <b>load_file</b> <small>optional</small>
+    <hr>
+    <b>receipt_file</b> <small>optional</small>
+    <hr>
+    <b>ip_address</b> <small>optional</small>
+    <hr>
+    <b>coin_dev_id</b> <small>optional</small>
+    <hr>
+    <b>camera_group</b> <small>optional</small>
+    <hr>
+    <b>use_jpegger</b> <small> optional</small>
+    <hr>
+    <b>jpegger_addr</b> <small> optional</small>
+    <hr>
+    <b>jpegger_port</b> <small> optional</small>
+    <hr>
+    <b>jpegger_location</b> <small> optional</small>
+    <hr>
+    <b>retries</b> <small> optional</small>
+    <hr>
+    <b>round_to</b> <small> optional</small>
+    <hr>
+    <b>round_method</b> <small> optional</small>
+    <hr>
+    <b>maxcoin</b> <small> optional</small>
+    <hr>
+    <b>fitness</b> <small> optional</small>
+    <hr>
+    <b>fitness_dt</b> <small> optional</small>
+    <hr>
+    <b>config</b> <small> optional</small>
+    <hr>
+    <b>config_dt</b> <small> optional</small>
+    <hr>
+    <b>supplies</b> <small> optional</small>
+    <hr>
+    <b>supplies_dt</b> <small> optional</small>
+    <hr>
+    <b>comm_port</b> <small> optional</small>
+    <hr>
+    <b>baud_rate</b> <small> optional</small>
+    <hr>
+    <b>advanced_ndc</b> <small> optional</small>
+    <hr>
+    <b>caution_flag</b> <small> optional</small>
+    <hr>
+    <b>caution_status</b> <small> optional</small>
+    <hr>
+    <b>monitor_group</b> <small> optional</small>
+    <hr>
+    <b>monitor_site</b> <small> optional</small>
+    <hr>
+    <b>dev_group</b> <small> optional</small>
+    <hr>
+    <b>dev_site</b> <small> optional</small>
+    <hr>
+    <b>bills_in_bundle</b> <small> optional</small>
+    <hr>
+    <b>TranID</b> <small> optional</small>
+    <hr>
+    <b>DispenseByAmtFlag</b> <small> optional</small>
+    <hr>
+    <b>TMK_LMK</b> <small> optional</small>
+    <hr>
+    <b>TPK_LMK</b> <small> optional</small>
+    <hr>
+    <b>PINEnabled</b> <small> optional</small>
+    <hr>
+    <b>inactive_flag</b> <small> optional</small>
+    <hr>
+    <b>CompanyNbr</b> <small> optional</small>
+    <hr>
+    <b>VendorID</b> <small> optional</small>
+    <hr>
+    <b>InstitutionID</b> <small> optional</small>
+    <hr>
+    <b>VendorPAN</b> <small> optional</small>
+    <hr>
+    <b>BDK_LMK</b> <small> optional</small>
+    <hr>
+    <b>uses_DUKPT</b> <small> optional</small>
+    <hr>
+    <b>dev_typeID</b> <small> optional</small>
+    <hr>
+    <b>isTCPClient</b> <small> optional</small>
+    <hr>
+    <b>PortNbr</b> <small> optional</small>
+    <hr>
+    <b>edge_atm</b> <small> optional</small>
+    <hr>
+    <b>OwningEntityID</b> <small> optional</small>
+    <hr>
+    <b>CanAcquire</b> <small> optional</small>
+    <hr>
+    <b>ChkCashCompanyNbr</b> <small> optional</small>
+    <hr>
+    <b>ReviewVerification</b> <small> optional</small>
+    <hr>
+    <b>num_images</b> <small> optional</small>
+    <hr>
+    <b>capture_interval</b> <small> optional</small>
+    <hr>
+    <b>image_interval</b> <small> optional</small>
+    <hr>
+    <b>yardid</b> <small> optional</small>
+    <hr>
+    <b>LocCompanyNbr</b> <small> optional</small>
+    <hr>
+    <b>payment_type</b> <small> optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>POST /api/v1/devices</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "dev_id": 99,
+          "online": 1,
+          "description": "Paul Fujitsu",
+          "address": null,
+          "encryption_key": "",
+          "welcome1": "Welcome to Pauls Fujitsu",
+          "welcome2": null,
+          "jpg_bank_code": null,
+          "load_file": null,
+          "receipt_file": null,
+          "ip_address": "192.168.1.21",
+          "coin_dev_id": 101,
+          "camera_group": null,
+          "use_jpegger": 0,
+          "jpegger_addr": null,
+          "jpegger_port": null,
+          "jpegger_location": null,
+          "retries": null,
+          "round_to": null,
+          "round_method": null,
+          "maxcoin": "0.0",
+          "fitness": null,
+          "fitness_dt": "1899-12-30T00:00:00.000Z",
+          "config": null,
+          "config_dt": "1899-12-30T00:00:00.000Z",
+          "supplies": null,
+          "supplies_dt": "1899-12-30T00:00:00.000Z",
+          "comm_port": null,
+          "baud_rate": null,
+          "advanced_ndc": 0,
+          "caution_flag": 1,
+          "caution_status": "9024",
+          "monitor_group": null,
+          "monitor_site": null,
+          "dev_group": null,
+          "dev_site": null,
+          "bills_in_bundle": 50,
+          "TranID": null,
+          "DispenseByAmtFlag": null,
+          "TMK_LMK": null,
+          "TPK_LMK": null,
+          "PINEnabled": 0,
+          "inactive_flag": 0,
+          "CompanyNbr": 10,
+          "VendorID": null,
+          "InstitutionID": null,
+          "VendorPAN": null,
+          "BDK_LMK": null,
+          "uses_DUKPT": null,
+          "dev_typeID": 11,
+          "isTCPClient": 1,
+          "PortNbr": 3402,
+          "edge_atm": false,
+          "OwningEntityID": null,
+          "CanAcquire": null,
+          "ChkCashCompanyNbr": null,
+          "ReviewVerification": null,
+          "num_images": null,
+          "capture_interval": null,
+          "image_interval": null,
+          "yardid": null,
+          "LocCompanyNbr": 10,
+          "payment_type": "ATM"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Retrieve a Device</h1>
+    <p>Retrieves the details of an existing Device. You need only supply the unique identifier was returned upon Device creation.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Returns a Device object if a valid identifier was provided.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/devices/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "dev_id": 99,
+          "online": 1,
+          "description": "Paul Fujitsu",
+          "address": null,
+          "encryption_key": "",
+          "welcome1": "Welcome to Pauls Fujitsu",
+          "welcome2": null,
+          "jpg_bank_code": null,
+          "load_file": null,
+          "receipt_file": null,
+          "ip_address": "192.168.1.21",
+          "coin_dev_id": 101,
+          "camera_group": null,
+          "use_jpegger": 0,
+          "jpegger_addr": null,
+          "jpegger_port": null,
+          "jpegger_location": null,
+          "retries": null,
+          "round_to": null,
+          "round_method": null,
+          "maxcoin": "0.0",
+          "fitness": null,
+          "fitness_dt": "1899-12-30T00:00:00.000Z",
+          "config": null,
+          "config_dt": "1899-12-30T00:00:00.000Z",
+          "supplies": null,
+          "supplies_dt": "1899-12-30T00:00:00.000Z",
+          "comm_port": null,
+          "baud_rate": null,
+          "advanced_ndc": 0,
+          "caution_flag": 1,
+          "caution_status": "9024",
+          "monitor_group": null,
+          "monitor_site": null,
+          "dev_group": null,
+          "dev_site": null,
+          "bills_in_bundle": 50,
+          "TranID": null,
+          "DispenseByAmtFlag": null,
+          "TMK_LMK": null,
+          "TPK_LMK": null,
+          "PINEnabled": 0,
+          "inactive_flag": 0,
+          "CompanyNbr": 10,
+          "VendorID": null,
+          "InstitutionID": null,
+          "VendorPAN": null,
+          "BDK_LMK": null,
+          "uses_DUKPT": null,
+          "dev_typeID": 11,
+          "isTCPClient": 1,
+          "PortNbr": 3402,
+          "edge_atm": false,
+          "OwningEntityID": null,
+          "CanAcquire": null,
+          "ChkCashCompanyNbr": null,
+          "ReviewVerification": null,
+          "num_images": null,
+          "capture_interval": null,
+          "image_interval": null,
+          "yardid": null,
+          "LocCompanyNbr": 10,
+          "payment_type": "ATM"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Update a Device</h1>
+    <p>Updates the specified Device by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+    <p>This request accepts mostly the same arguments as the Device creation call.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>dev_id</b> <small>required</small>
+    <hr>
+    <b>online</b> <small>optional</small>
+    <hr>
+    <b>description</b> <small>optional</small>
+    <hr>
+    <b>address</b> <small>optional</small>
+    <hr>
+    <b>encryption_key</b> <small>optional</small>
+    <hr>
+    <b>welcome1</b> <small>optional</small>
+    <hr>
+    <b>welcome2</b> <small>optional</small>
+    <hr>
+    <b>jpg_bank_code</b> <small>optional</small>
+    <hr>
+    <b>load_file</b> <small>optional</small>
+    <hr>
+    <b>receipt_file</b> <small>optional</small>
+    <hr>
+    <b>ip_address</b> <small>optional</small>
+    <hr>
+    <b>coin_dev_id</b> <small>optional</small>
+    <hr>
+    <b>camera_group</b> <small>optional</small>
+    <hr>
+    <b>use_jpegger</b> <small> optional</small>
+    <hr>
+    <b>jpegger_addr</b> <small> optional</small>
+    <hr>
+    <b>jpegger_port</b> <small> optional</small>
+    <hr>
+    <b>jpegger_location</b> <small> optional</small>
+    <hr>
+    <b>retries</b> <small> optional</small>
+    <hr>
+    <b>round_to</b> <small> optional</small>
+    <hr>
+    <b>round_method</b> <small> optional</small>
+    <hr>
+    <b>maxcoin</b> <small> optional</small>
+    <hr>
+    <b>fitness</b> <small> optional</small>
+    <hr>
+    <b>fitness_dt</b> <small> optional</small>
+    <hr>
+    <b>config</b> <small> optional</small>
+    <hr>
+    <b>config_dt</b> <small> optional</small>
+    <hr>
+    <b>supplies</b> <small> optional</small>
+    <hr>
+    <b>supplies_dt</b> <small> optional</small>
+    <hr>
+    <b>comm_port</b> <small> optional</small>
+    <hr>
+    <b>baud_rate</b> <small> optional</small>
+    <hr>
+    <b>advanced_ndc</b> <small> optional</small>
+    <hr>
+    <b>caution_flag</b> <small> optional</small>
+    <hr>
+    <b>caution_status</b> <small> optional</small>
+    <hr>
+    <b>monitor_group</b> <small> optional</small>
+    <hr>
+    <b>monitor_site</b> <small> optional</small>
+    <hr>
+    <b>dev_group</b> <small> optional</small>
+    <hr>
+    <b>dev_site</b> <small> optional</small>
+    <hr>
+    <b>bills_in_bundle</b> <small> optional</small>
+    <hr>
+    <b>TranID</b> <small> optional</small>
+    <hr>
+    <b>DispenseByAmtFlag</b> <small> optional</small>
+    <hr>
+    <b>TMK_LMK</b> <small> optional</small>
+    <hr>
+    <b>TPK_LMK</b> <small> optional</small>
+    <hr>
+    <b>PINEnabled</b> <small> optional</small>
+    <hr>
+    <b>inactive_flag</b> <small> optional</small>
+    <hr>
+    <b>CompanyNbr</b> <small> optional</small>
+    <hr>
+    <b>VendorID</b> <small> optional</small>
+    <hr>
+    <b>InstitutionID</b> <small> optional</small>
+    <hr>
+    <b>VendorPAN</b> <small> optional</small>
+    <hr>
+    <b>BDK_LMK</b> <small> optional</small>
+    <hr>
+    <b>uses_DUKPT</b> <small> optional</small>
+    <hr>
+    <b>dev_typeID</b> <small> optional</small>
+    <hr>
+    <b>isTCPClient</b> <small> optional</small>
+    <hr>
+    <b>PortNbr</b> <small> optional</small>
+    <hr>
+    <b>edge_atm</b> <small> optional</small>
+    <hr>
+    <b>OwningEntityID</b> <small> optional</small>
+    <hr>
+    <b>CanAcquire</b> <small> optional</small>
+    <hr>
+    <b>ChkCashCompanyNbr</b> <small> optional</small>
+    <hr>
+    <b>ReviewVerification</b> <small> optional</small>
+    <hr>
+    <b>num_images</b> <small> optional</small>
+    <hr>
+    <b>capture_interval</b> <small> optional</small>
+    <hr>
+    <b>image_interval</b> <small> optional</small>
+    <hr>
+    <b>yardid</b> <small> optional</small>
+    <hr>
+    <b>LocCompanyNbr</b> <small> optional</small>
+    <hr>
+    <b>payment_type</b> <small> optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>PUT /api/v1/devices/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "dev_id": 99,
+          "online": 1,
+          "description": "Paul Fujitsu",
+          "address": null,
+          "encryption_key": "",
+          "welcome1": "Welcome to Pauls Fujitsu",
+          "welcome2": null,
+          "jpg_bank_code": null,
+          "load_file": null,
+          "receipt_file": null,
+          "ip_address": "192.168.1.21",
+          "coin_dev_id": 101,
+          "camera_group": null,
+          "use_jpegger": 0,
+          "jpegger_addr": null,
+          "jpegger_port": null,
+          "jpegger_location": null,
+          "retries": null,
+          "round_to": null,
+          "round_method": null,
+          "maxcoin": "0.0",
+          "fitness": null,
+          "fitness_dt": "1899-12-30T00:00:00.000Z",
+          "config": null,
+          "config_dt": "1899-12-30T00:00:00.000Z",
+          "supplies": null,
+          "supplies_dt": "1899-12-30T00:00:00.000Z",
+          "comm_port": null,
+          "baud_rate": null,
+          "advanced_ndc": 0,
+          "caution_flag": 1,
+          "caution_status": "9024",
+          "monitor_group": null,
+          "monitor_site": null,
+          "dev_group": null,
+          "dev_site": null,
+          "bills_in_bundle": 50,
+          "TranID": null,
+          "DispenseByAmtFlag": null,
+          "TMK_LMK": null,
+          "TPK_LMK": null,
+          "PINEnabled": 0,
+          "inactive_flag": 0,
+          "CompanyNbr": 10,
+          "VendorID": null,
+          "InstitutionID": null,
+          "VendorPAN": null,
+          "BDK_LMK": null,
+          "uses_DUKPT": null,
+          "dev_typeID": 11,
+          "isTCPClient": 1,
+          "PortNbr": 3402,
+          "edge_atm": false,
+          "OwningEntityID": null,
+          "CanAcquire": null,
+          "ChkCashCompanyNbr": null,
+          "ReviewVerification": null,
+          "num_images": null,
+          "capture_interval": null,
+          "image_interval": null,
+          "yardid": null,
+          "LocCompanyNbr": 10,
+          "payment_type": "ATM"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Delete a Device</h1>
+    <p>Permanently deletes a Device. It cannot be undone.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Message: "Device deleted". If the Device identifier does not exist, this call raises an error.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>DELETE /api/v1/devices/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+          Device deleted
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>List All Device</h1>
+    <p>Returns a list of your devices. The devices are returned in the order they were created, with the oldest devices appearing first.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      An array of devices. Passing optional parameter(s) will result in filtering the devices by the passed parameter(s). 
+      Each entry in the array is a separate device object. Use limit parameter to specify the number of objects in the array.
+      If no more devices are available, the resulting array will be empty. 
+      This request should never raise an error.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/devices</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        [
+          {
+            "dev_id": 99,
+            "online": 1,
+            "description": "Paul Fujitsu",
+            "address": null,
+            "encryption_key": "",
+            "welcome1": "Welcome to Pauls Fujitsu",
+            "welcome2": null,
+            "jpg_bank_code": null,
+            "load_file": null,
+            "receipt_file": null,
+            "ip_address": "192.168.1.21",
+            "coin_dev_id": 101,
+            "camera_group": null,
+            "use_jpegger": 0,
+            "jpegger_addr": null,
+            "jpegger_port": null,
+            "jpegger_location": null,
+            "retries": null,
+            "round_to": null,
+            "round_method": null,
+            "maxcoin": "0.0",
+            "fitness": null,
+            "fitness_dt": "1899-12-30T00:00:00.000Z",
+            "config": null,
+            "config_dt": "1899-12-30T00:00:00.000Z",
+            "supplies": null,
+            "supplies_dt": "1899-12-30T00:00:00.000Z",
+            ...
+          },
+          {...},
+          {...}
+        ]
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <p>Powered by <a href="https://www.tranact.com" target="_blank" class="w3-hover-text-green">Tranact</a></p>
+</footer>
+
+</body>
+</html>

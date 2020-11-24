@@ -15,9 +15,9 @@ Rails.application.routes.draw do
       resources :transactions
       resources :customer_barcodes
       resources :customers
-      resources :dev_statuses, only: [:index]
-      resources :status_descs, only: [:show, :index]
-      resources :op_code_maps, only: [:index]
+      resources :dev_statuses
+      resources :status_descs
+      resources :op_code_maps
       resources :auth_params
       resources :accounts
     end
@@ -27,13 +27,16 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'welcome/index'
       root 'welcome#index'
+      resources :accounts, only: [:index]
       resources :devices, only: [:index]
+      resources :dev_statuses, only: [:index]
       resources :customers, only: [:index]
       resources :customer_barcodes, only: [:index]
       resources :transactions, only: [:index]
       resources :bill_counts, only: [:index]
       resources :bill_hists, only: [:index]
       resources :denoms, only: [:index]
+      resources :transactions, only: [:index]
     end
   end
   
