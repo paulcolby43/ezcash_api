@@ -10,6 +10,7 @@ class Transaction < ApplicationRecord
   scope :from_account_id, ->(from_acct_id) { where("from_acct_id = ?", from_acct_id) unless from_acct_id.blank?}
   scope :to_account_id, ->(to_acct_id) { where("to_acct_id = ?", to_acct_id) unless to_acct_id.blank?}
   scope :transaction_code, ->(tran_code) { where("tran_code = ?", tran_code) unless tran_code.blank?}
+  scope :transaction_status, ->(tran_status) { where("tran_status = ?", tran_status) unless tran_status.blank?}
   scope :secondary_transaction_code, ->(sec_tran_code) { where("sec_tran_code = ?", sec_tran_code) unless sec_tran_code.blank?}
   scope :error_code, ->(error_code) { where("error_code = ?", error_code) unless error_code.blank?}
   scope :original_transaction_id, ->(orig_tran_id) { where("OrigTranID = ?", orig_tran_id) unless orig_tran_id.blank?}

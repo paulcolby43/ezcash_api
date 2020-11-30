@@ -11,6 +11,7 @@ class Api::V1::TransactionsController < ApplicationController
     .from_account_id(params[:from_acct_id])
     .to_account_id(params[:to_acct_id])
     .transaction_code(params[:tran_code])
+    .transaction_status(params[:tran_status])
     .secondary_transaction_code(params[:sec_tran_code])
     .error_code(params[:error_code])
     .original_transaction_id(params[:OrigTranID])
