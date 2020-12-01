@@ -1,6 +1,6 @@
 class BillHist < ApplicationRecord
 #  self.primary_key = 'cassette_id'
-  self.primary_keys = :cassette_id, :dev_id
+  self.primary_keys = :cassette_id, :dev_id #Composite primary keys
   self.table_name= 'bill_hist'
   
   belongs_to :device, :foreign_key => 'dev_id'
