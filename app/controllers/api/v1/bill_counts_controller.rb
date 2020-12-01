@@ -62,7 +62,8 @@ class Api::V1::BillCountsController < ApplicationController
   end
   
   def set_bill_count
-    @bill_count = BillCount.find_by(dev_id: params[:dev_id], cassette_nbr: params[:id])
+#    @bill_count = BillCount.find_by(dev_id: params[:dev_id], cassette_nbr: params[:id])
+    @bill_count = BillCount.find([params[:id], params[:dev_id]])
   end
   
   def bill_count_params

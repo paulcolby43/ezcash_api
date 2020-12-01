@@ -63,7 +63,8 @@ class Api::V1::BillHistsController < ApplicationController
   
   def set_bill_hist
 #    @bill_hist = BillHist.find(params[:id])
-    @bill_hist = BillHist.find_by(dev_id: params[:dev_id], cassette_id: params[:id])
+#    @bill_hist = BillHist.find_by(dev_id: params[:dev_id], cassette_id: params[:id])
+    @bill_hist = BillHist.find([params[:id], params[:dev_id]])
   end
   
   def bill_hist_params

@@ -1,5 +1,6 @@
 class BillCount < ApplicationRecord
-  self.primary_key = 'cassette_nbr'
+#  self.primary_key = 'cassette_nbr'
+  self.primary_keys = :cassette_nbr, :dev_id
   
   belongs_to :device, :foreign_key => 'dev_id'
   

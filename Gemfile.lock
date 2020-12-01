@@ -65,6 +65,8 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    composite_primary_keys (12.0.3)
+      activerecord (~> 6.0.0)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     diff-lcs (1.4.4)
@@ -194,6 +196,7 @@ DEPENDENCIES
   activerecord-sqlserver-adapter
   bootsnap
   byebug
+  composite_primary_keys
   figaro
   jbuilder (~> 2.7)
   listen (~> 3.2)
