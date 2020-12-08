@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :op_code_maps
       resources :auth_params
       resources :accounts
+      resources :users
     end
   end
   
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
       resources :bill_hists, only: [:index]
       resources :denoms, only: [:index]
       resources :transactions, only: [:index]
+      resources :users, only: [:index]
     end
   end
   

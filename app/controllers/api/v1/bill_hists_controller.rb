@@ -5,6 +5,8 @@ class Api::V1::BillHistsController < ApplicationController
   def index
 #    @bill_hists = BillHist.all
     @bill_hists = BillHist.denomination(params[:denomination])
+    .start_time(parse_datetime(params[:start_time]))
+    .end_time(parse_datetime(params[:end_time]))
     .device(params[:dev_id])
     .device(params[:device_id])
     .cassette_id(params[:cassette_id])
@@ -69,6 +71,18 @@ class Api::V1::BillHistsController < ApplicationController
   
   def bill_hist_params
     params.require(:bill_hist).permit(:cut_dt, :old_start, :old_term_cyc, :old_host_cyc, :added, :replaced, :new_start, :cassette_id, :dev_id, :old_added, :user_name, :denomination)
+  end
+  
+  def parse_datetime(datetime)
+    unless datetime.blank?
+      begin
+         Time.parse(datetime)
+      rescue ArgumentError
+         nil
+      end
+    else
+      nil
+    end
   end
   
 end
