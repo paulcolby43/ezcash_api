@@ -10,9 +10,11 @@ class Api::V1::TransactionsController < ApplicationController
     .to_customer_id(params[:ToCustID])
     .from_account_id(params[:from_acct_id])
     .to_account_id(params[:to_acct_id])
-    .transaction_code(params[:tran_code])
     .transaction_status(params[:tran_status])
+    .transaction_code(params[:tran_code])
     .secondary_transaction_code(params[:sec_tran_code])
+    .transaction_codes(params[:tran_codes])
+    .secondary_transaction_codes(params[:sec_tran_codes])
     .error_code(params[:error_code])
     .original_transaction_id(params[:OrigTranID])
     .order("date_time DESC")
@@ -81,7 +83,8 @@ class Api::V1::TransactionsController < ApplicationController
   def parse_datetime(datetime)
     unless datetime.blank?
       begin
-         Time.parse(datetime)
+#         Time.parse(datetime)
+         datetime.to_datetime
       rescue ArgumentError
          nil
       end

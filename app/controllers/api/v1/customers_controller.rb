@@ -62,7 +62,8 @@ class Api::V1::CustomersController < ApplicationController
   def parse_datetime(datetime)
     unless datetime.blank?
       begin
-         Time.parse(datetime)
+#         Time.parse(datetime)
+        datetime.to_datetime
       rescue ArgumentError
          nil
       end

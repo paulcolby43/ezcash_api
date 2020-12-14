@@ -11,7 +11,7 @@ class Api::V1::BillHistsController < ApplicationController
     .device(params[:device_id])
     .cassette_id(params[:cassette_id])
     .user_name(params[:user_name])
-    .cut_date(params[:cut_dt])
+    .cut_date(parse_datetime(params[:cut_dt]))
     .order("cut_dt DESC")
     .limit(bill_hists_limit)
 #    render json: @bill_hists
@@ -76,7 +76,8 @@ class Api::V1::BillHistsController < ApplicationController
   def parse_datetime(datetime)
     unless datetime.blank?
       begin
-         Time.parse(datetime)
+#         Time.parse(datetime)
+         datetime.to_datetime
       rescue ArgumentError
          nil
       end

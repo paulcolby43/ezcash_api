@@ -3,8 +3,8 @@ class Api::V1::UsersController < ApplicationController
   
   # GET /users
   def index
-    @users = User.all
-#    @users = User.user_name(params[:user_name])
+#    @users = User.all
+    @users = User.user_name(params[:user_name])
 #    .user_name(params[:user_name])
 #    .yard_id(params[:yardid])
 #    render json: @users

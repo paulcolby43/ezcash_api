@@ -9,9 +9,11 @@ class Transaction < ApplicationRecord
   scope :to_customer_id, ->(tocustid) { where("ToCustID = ?", tocustid) unless tocustid.blank?}
   scope :from_account_id, ->(from_acct_id) { where("from_acct_id = ?", from_acct_id) unless from_acct_id.blank?}
   scope :to_account_id, ->(to_acct_id) { where("to_acct_id = ?", to_acct_id) unless to_acct_id.blank?}
-  scope :transaction_code, ->(tran_code) { where("tran_code = ?", tran_code) unless tran_code.blank?}
   scope :transaction_status, ->(tran_status) { where("tran_status = ?", tran_status) unless tran_status.blank?}
+  scope :transaction_code, ->(tran_code) { where("tran_code = ?", tran_code) unless tran_code.blank?}
   scope :secondary_transaction_code, ->(sec_tran_code) { where("sec_tran_code = ?", sec_tran_code) unless sec_tran_code.blank?}
+  scope :transaction_codes, ->(tran_codes) { where("tran_code IN (?)", tran_codes) unless tran_codes.blank?}
+  scope :secondary_transaction_codes, ->(sec_tran_codes) { where("sec_tran_code IN (?)", sec_tran_codes) unless sec_tran_codes.blank?}
   scope :error_code, ->(error_code) { where("error_code = ?", error_code) unless error_code.blank?}
   scope :original_transaction_id, ->(orig_tran_id) { where("OrigTranID = ?", orig_tran_id) unless orig_tran_id.blank?}
   scope :start_time, ->(start_time) { where('date_time >= ?', start_time.to_datetime) unless start_time.blank?}
