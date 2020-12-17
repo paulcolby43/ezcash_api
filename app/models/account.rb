@@ -15,6 +15,50 @@ class Account < ApplicationRecord
   #     Instance Methods      #
   #############################
   
+  def balance
+    self.Balance
+  end
+  
+  def available_balance
+    # If the account minimum balance is nil, set to zero
+    unless self.MinBalance.blank? or self.MinBalance.zero?
+      if self.MinBalance < 0 and self.Balance < 0
+        account_balance = (self.MinBalance - self.Balance).abs
+      else
+        account_balance = self.Balance - self.MinBalance
+      end
+    else
+      account_balance = self.Balance
+    end
+    if account_balance < 0
+      return 0
+    else
+      return account_balance
+    end
+  end
+  
+  def minimum_balance
+    unless self.MinBalance.blank?
+      self.MinBalance.abs
+    else
+      0
+    end
+  end
+  
+  def authorize_amount_json(amount)
+#    available_balance > amount
+    if available_balance > amount
+      unless amount.zero?
+        amount = amount
+      else
+        amount = available_balance
+      end
+      return {"authorized" => true, "amount" => amount}
+    else
+      return {"authorized" => false, "amount" => 0, "message" => "Allowed amount is less than requested amount."}
+    end
+    
+  end
   
   #############################
   #     Class Methods         #

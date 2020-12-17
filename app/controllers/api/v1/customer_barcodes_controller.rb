@@ -1,5 +1,5 @@
 class Api::V1::CustomerBarcodesController < ApplicationController
-  before_action :set_customer_barcode, only: [:show, :update, :destroy]
+  before_action :set_customer_barcode, only: [:show, :update, :destroy, :authorize]
   
   # GET /customer_barcodes
   def index
@@ -56,6 +56,15 @@ class Api::V1::CustomerBarcodesController < ApplicationController
     else
       render error: {error: 'Unable to delete CustomerBarcode.'}, status: 400
     end
+  end
+  
+  # GET /customer_barcodes/:id/authorize
+  def authorize
+#    render json: JSON.pretty_generate(JSON.parse(@customer_barcode.to_json))
+    @account = @customer_barcode.account
+    render json: JSON.pretty_generate(@account.authorize_amount_json(@customer_barcode.amount.to_d))
+    rescue ActiveRecord::RecordNotFound
+      head :not_found
   end
   
   private

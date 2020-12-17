@@ -13,13 +13,19 @@ Rails.application.routes.draw do
       resources :bill_hists
       resources :denoms, only: [:show, :index]
       resources :transactions
-      resources :customer_barcodes
+      resources :customer_barcodes do
+        member do
+          get 'authorize'
+        end
+      end
       resources :customers
       resources :dev_statuses
       resources :status_descs
+      resources :tran_status_descs
       resources :op_code_maps
       resources :auth_params
       resources :accounts
+      resources :account_types
       resources :users
     end
   end
@@ -29,6 +35,7 @@ Rails.application.routes.draw do
       get 'welcome/index'
       root 'welcome#index'
       resources :accounts, only: [:index]
+      resources :account_types, only: [:index]
       resources :devices, only: [:index]
       resources :dev_statuses, only: [:index]
       resources :customers, only: [:index]
