@@ -23,7 +23,9 @@ class Transaction < ApplicationRecord
   #     Instance Methods      #
   #############################
   
-  
+  def from_account
+    Account.where(ActID: from_acct_id).first
+  end
   
   #############################
   #     Class Methods         #

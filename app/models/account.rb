@@ -3,6 +3,7 @@ class Account < ApplicationRecord
   self.table_name= 'Accounts'
   
   belongs_to :company, :foreign_key => 'CompanyNumber'
+  belongs_to :account_type, :foreign_key => 'ActTypeID'
   
   scope :active, ->(active) { where("Active = ?", active) unless active.blank?}
   scope :customer, ->(customer_id) { where("CustomerID = ?", customer_id) unless customer_id.blank?}
@@ -45,18 +46,79 @@ class Account < ApplicationRecord
     end
   end
   
-  def authorize_amount_json(amount)
-#    available_balance > amount
-    if available_balance > amount
-      unless amount.zero?
-        amount = amount
-      else
-        amount = available_balance
-      end
-      return {"authorized" => true, "amount" => amount}
+  # Withdraw a specific amount
+  def withdrawal_transactions
+    transactions = Transaction.where(from_acct_id: id, tran_code: 'WDL') + Transaction.where(to_acct_id: id, tran_code: 'WDL')
+    return transactions
+  end
+  
+  # Withdraw all available balance
+  def withdrawal_all_transactions
+    transactions = Transaction.where(from_acct_id: id, tran_code: 'ALL').order("date_time DESC") + Transaction.where(to_acct_id: id, tran_code: 'ALL').order("date_time DESC")
+    return transactions
+  end
+  
+  def withdrawal_reversals
+    transactions = Transaction.where(to_acct_id: id, tran_code: ['DEP', 'DEP '], sec_tran_code: ['REFD', 'REFD '])
+    return transactions
+  end
+  
+  def withdrawals
+    withdrawal_transactions + withdrawal_all_transactions
+  end
+  
+  def single_withdrawal_limit
+    account_type.single_withdrawal_limit unless account_type.blank?
+  end
+  
+  def daily_withdrawal_limit
+    account_type.daily_withdrawal_limit unless account_type.blank?
+  end
+  
+  def account_type_withdrawals_total_amount_today
+    unless account_type.blank?
+      account_type.withdrawals_total_amount_today 
     else
-      return {"authorized" => false, "amount" => 0, "message" => "Allowed amount is less than requested amount."}
+      0
     end
+  end
+  
+  def authorize_withdrawal_amount_json(amount)
+#    available_balance > amount
+    available_balance_amount = available_balance
+    single_withdrawal_limit_amount = single_withdrawal_limit
+    daily_withdrawal_limit_amount = daily_withdrawal_limit
+    requested_amount = amount.zero? ? available_balance_amount : amount
+    if requested_amount <= available_balance_amount
+      unless single_withdrawal_limit_amount.blank?
+        if requested_amount <= single_withdrawal_limit_amount
+          unless daily_withdrawal_limit_amount.blank?
+            if requested_amount + account_type_withdrawals_total_amount_today <= daily_withdrawal_limit_amount
+              response = {"authorized" => true, "amount" => requested_amount}
+            else
+              response = {"authorized" => false, "amount" => 0, "message" => "Daily Withdrawal Limit exceeded."}
+            end
+          else
+            response = {"authorized" => true, "amount" => requested_amount}
+          end
+        else
+          response = {"authorized" => false, "amount" => 0, "message" => "Single Withdrawal Limit exceeded."}
+        end
+      else
+        unless daily_withdrawal_limit_amount.blank?
+          if requested_amount + account_type_withdrawals_total_amount_today <= daily_withdrawal_limit_amount
+            response = {"authorized" => true, "amount" => requested_amount}
+          else
+            response = {"authorized" => false, "amount" => 0, "message" => "Daily Withdrawal Limit exceeded."}
+          end
+        else
+          response = {"authorized" => true, "amount" => requested_amount}
+        end
+      end
+    else
+      response = {"authorized" => false, "amount" => 0, "message" => "Available balance is less than requested amount."}
+    end
+    return response.merge({'available_balance' => available_balance_amount, 'single_withdrawal_limit' => single_withdrawal_limit_amount, 'daily_withdrawal_limit' => daily_withdrawal_limit_amount, 'requested_amount' => amount})
     
   end
   

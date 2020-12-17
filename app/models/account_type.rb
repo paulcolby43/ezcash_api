@@ -97,6 +97,16 @@ class AccountType < ApplicationRecord
     return sum
   end
   
+  def withdrawals_total_amount_today
+    total = 0
+    Transaction.where(date_time: Date.today.beginning_of_day..Date.today.end_of_day, tran_code: ["WDL", "WDL "]).each do |transaction|
+      if accounts.include?(transaction.from_account)
+        total = total + transaction.amt_auth
+      end 
+    end
+    return total
+  end
+  
   #############################
   #     Class Methods      #
   #############################

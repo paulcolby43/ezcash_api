@@ -64,10 +64,11 @@ class Api::V1::AccountTypesController < ApplicationController
   end
   
   def account_type_params
-    params.require(:account_type).permit(:CustomerID, :CompanyNumber, :EntityID, :ActTypeID, :ActNbr, :Balance, :ButtonText, :AddIndex, :AddFlag, :AddFee, :MoveIndex, :MoveFlag,
-      :MoveFee, :DepositFlag, :CreateDate, :CreateUser, :ModifiedDate, :ModifiedUser, :LockDate, :LockUser, :AddGroupID, :MoveGroupID, :AddParentID, :MoveParentID, :AuxText,
-      :Active, :AbleToDelete, :IsBankAccountType, :AbleToACH, :SecurityCode, :ExpDate, :IsPayeeAccountType, :MinBalance, :IssuingCompanyNumber, :BankActNbr, :RoutingNbr, :SMSOnCredit,
-      :SMSOnDebit, :MaintainBal, :LastACHDate)
+    params.require(:account_type).permit(:AccountTypeDesc, :LockDate, :LockUser, :AddFlag, :MoveFlag, :DepositFlag, :AddPriTranCode, :AddTranDesc, :AddTranIcon, :MovePriTranCode,
+      :MoveTranDesc, :MoveTranIcon, :AddBalEff, :AddFeeEff, :MoveBalEff, :MoveFeeEff, :AddSecTranCode, :MoveSecTranCode, :DescLangObjID, :AuxTextObjID, :CompanyNumber, :CanFundByACH, 
+      :CanFundByCC, :CanFundByCash, :CanWithdraw, :CanPull, :CanRequestPmtBySearch, :CanRequestPmtByScan, :CurrencyType, :CanSendPmt, :WithdrawAll, :CanBePulledBySearch, :CanBePulledByScan, 
+      :MinMaintainBal, :MinBalPercent, :MinBalMax, :DefaultMinBal, :CanBePushedByScan, :contract_id, :date_of_birth_required, :social_security_number_required, :clear_balances_bill_externally,
+      :hide_pull_payment_from_holder, :bill_code, :CorpAcctFlag, :single_withdrawal_limit, :daily_withdrawal_limit, :single_transfer_limit, :daily_transfer_limit)
   end
       
 end

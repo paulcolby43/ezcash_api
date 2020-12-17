@@ -1,5 +1,5 @@
 class Api::V1::CustomerBarcodesController < ApplicationController
-  before_action :set_customer_barcode, only: [:show, :update, :destroy, :authorize]
+  before_action :set_customer_barcode, only: [:show, :update, :destroy, :authorization]
   
   # GET /customer_barcodes
   def index
@@ -58,11 +58,11 @@ class Api::V1::CustomerBarcodesController < ApplicationController
     end
   end
   
-  # GET /customer_barcodes/:id/authorize
-  def authorize
+  # GET /customer_barcodes/:id/authorization
+  def authorization
 #    render json: JSON.pretty_generate(JSON.parse(@customer_barcode.to_json))
     @account = @customer_barcode.account
-    render json: JSON.pretty_generate(@account.authorize_amount_json(@customer_barcode.amount.to_d))
+    render json: JSON.pretty_generate(@account.authorize_withdrawal_amount_json(@customer_barcode.amount.to_d))
     rescue ActiveRecord::RecordNotFound
       head :not_found
   end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :transactions
       resources :customer_barcodes do
         member do
-          get 'authorize'
+          get 'authorization'
         end
       end
       resources :customers
