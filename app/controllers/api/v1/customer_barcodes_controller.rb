@@ -16,13 +16,13 @@ class Api::V1::CustomerBarcodesController < ApplicationController
     .order("date_time DESC")
     .limit(customer_barcodes_limit)
 #    render json: @customer_barcodes
-    render json: JSON.pretty_generate(JSON.parse(@customer_barcodes.to_json))
+    render json: JSON.pretty_generate(@customer_barcodes.as_json)
   end
   
   # GET /customer_barcodes/:id
   def show
 #    render json: @customer_barcode
-    render json: JSON.pretty_generate(JSON.parse(@customer_barcode.to_json))
+    render json: JSON.pretty_generate(@customer_barcode.as_json)
     rescue ActiveRecord::RecordNotFound
       head :not_found
   end
@@ -66,12 +66,12 @@ class Api::V1::CustomerBarcodesController < ApplicationController
       unless @customer_barcode.used?
         @account = @customer_barcode.account
         unless @account.blank?
-          render json: JSON.pretty_generate(@account.authorize_withdrawal_amount_json(@customer_barcode.amount.to_d).merge({'RowID' => @customer_barcode.id}))
+          render json: JSON.pretty_generate(@account.authorize_withdrawal_amount_json(@customer_barcode.amount.to_d).merge(@customer_barcode.as_json))
         else
-          render json: JSON.pretty_generate({"authorized" => false, "authorized_amount" => 0, "message" => "No Account associated with this Customer Barcode.", 'RowID' => @customer_barcode.id})
+          render json: JSON.pretty_generate({"authorized" => false, "authorized_amount" => 0, "message" => "No Account associated with this Customer Barcode."}.merge(@customer_barcode.as_json))
         end
       else
-        render json: JSON.pretty_generate({"authorized" => false, "authorized_amount" => 0, "message" => "Customer Barcode has been used.", 'RowID' => @customer_barcode.id})
+        render json: JSON.pretty_generate({"authorized" => false, "authorized_amount" => 0, "message" => "Customer Barcode has been used."}.merge(@customer_barcode.as_json))
       end
     else
 #      rescue ActiveRecord::RecordNotFound
