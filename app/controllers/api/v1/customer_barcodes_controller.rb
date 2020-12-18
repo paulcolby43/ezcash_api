@@ -1,5 +1,5 @@
 class Api::V1::CustomerBarcodesController < ApplicationController
-  before_action :set_customer_barcode, only: [:show, :update, :destroy, :authorization]
+  before_action :set_customer_barcode, only: [:show, :update, :destroy]
   
   # GET /customer_barcodes
   def index
@@ -61,8 +61,17 @@ class Api::V1::CustomerBarcodesController < ApplicationController
   # GET /customer_barcodes/:id/authorization
   def authorization
 #    render json: JSON.pretty_generate(JSON.parse(@customer_barcode.to_json))
-    @account = @customer_barcode.account
-    render json: JSON.pretty_generate(@account.authorize_withdrawal_amount_json(@customer_barcode.amount.to_d))
+    @customer_barcode = CustomerBarcode.find_by(Barcode: params[:Barcode])
+    unless @customer_barcode.used?
+      @account = @customer_barcode.account
+      unless @account.blank?
+        render json: JSON.pretty_generate(@account.authorize_withdrawal_amount_json(@customer_barcode.amount.to_d).merge({'RowID' => @customer_barcode.id}))
+      else
+        render json: JSON.pretty_generate({"authorized" => false, "authorized_amount" => 0, "message" => "No Account associated with this Customer Barcode.", 'RowID' => @customer_barcode.id})
+      end
+    else
+      render json: JSON.pretty_generate({"authorized" => false, "authorized_amount" => 0, "message" => "Customer Barcode has been used.", 'RowID' => @customer_barcode.id})
+    end
     rescue ActiveRecord::RecordNotFound
       head :not_found
   end

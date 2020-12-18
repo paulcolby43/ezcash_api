@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :denoms, only: [:show, :index]
       resources :transactions
       resources :customer_barcodes do
-        member do
+        collection do
           get 'authorization'
         end
       end

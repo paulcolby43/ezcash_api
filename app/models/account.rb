@@ -88,37 +88,37 @@ class Account < ApplicationRecord
     available_balance_amount = available_balance
     single_withdrawal_limit_amount = single_withdrawal_limit
     daily_withdrawal_limit_amount = daily_withdrawal_limit
-    requested_amount = amount.zero? ? available_balance_amount : amount
+    requested_amount = amount.zero? ? available_balance_amount : amount.to_f
     if requested_amount <= available_balance_amount
       unless single_withdrawal_limit_amount.blank?
         if requested_amount <= single_withdrawal_limit_amount
           unless daily_withdrawal_limit_amount.blank?
             if requested_amount + account_type_withdrawals_total_amount_today <= daily_withdrawal_limit_amount
-              response = {"authorized" => true, "amount" => requested_amount}
+              response = {"authorized" => true, "authorized_amount" => requested_amount}
             else
-              response = {"authorized" => false, "amount" => 0, "message" => "Daily Withdrawal Limit exceeded."}
+              response = {"authorized" => false, "authorized_amount" => 0, "message" => "Daily Withdrawal Limit exceeded."}
             end
           else
-            response = {"authorized" => true, "amount" => requested_amount}
+            response = {"authorized" => true, "authorized_amount" => requested_amount}
           end
         else
-          response = {"authorized" => false, "amount" => 0, "message" => "Single Withdrawal Limit exceeded."}
+          response = {"authorized" => false, "authorized_amount" => 0, "message" => "Single Withdrawal Limit exceeded."}
         end
       else
         unless daily_withdrawal_limit_amount.blank?
           if requested_amount + account_type_withdrawals_total_amount_today <= daily_withdrawal_limit_amount
-            response = {"authorized" => true, "amount" => requested_amount}
+            response = {"authorized" => true, "authorized_amount" => requested_amount}
           else
-            response = {"authorized" => false, "amount" => 0, "message" => "Daily Withdrawal Limit exceeded."}
+            response = {"authorized" => false, "authorized_amount" => 0, "message" => "Daily Withdrawal Limit exceeded."}
           end
         else
-          response = {"authorized" => true, "amount" => requested_amount}
+          response = {"authorized" => true, "authorized_amount" => requested_amount}
         end
       end
     else
-      response = {"authorized" => false, "amount" => 0, "message" => "Available balance is less than requested amount."}
+      response = {"authorized" => false, "authorized_amount" => 0, "message" => "Available balance is less than requested amount."}
     end
-    return response.merge({'available_balance' => available_balance_amount, 'single_withdrawal_limit' => single_withdrawal_limit_amount, 'daily_withdrawal_limit' => daily_withdrawal_limit_amount, 'requested_amount' => amount})
+    return response.merge({'available_balance' => available_balance_amount, 'single_withdrawal_limit' => single_withdrawal_limit_amount, 'daily_withdrawal_limit' => daily_withdrawal_limit_amount, 'requested_amount' => amount.to_f})
     
   end
   
