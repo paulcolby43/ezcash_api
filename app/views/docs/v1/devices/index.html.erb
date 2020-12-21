@@ -45,7 +45,7 @@
     <h1>The Device Object</h1>
     <h5>Attributes</h5>
     <hr>
-    <b>dev_id</b> <small>integer</small>
+    <b>dev_id</b> <small>unique identifier - integer (:id)</small>
     <hr>
     <b>online</b> <small>integer</small>
     <hr>
@@ -797,7 +797,7 @@
     <hr>
     <p>
       An array of devices. Passing optional parameter(s) will result in filtering the devices by the passed parameter(s). 
-      Each entry in the array is a separate device object. Use limit parameter to specify the number of objects in the array.
+      Each entry in the array is a separate device object. 
       If no more devices are available, the resulting array will be empty. 
       This request should never raise an error.
     </p>

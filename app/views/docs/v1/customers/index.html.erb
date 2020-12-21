@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html>
+<title>Customers - EZcash API</title>
+<%= render partial: 'docs/v1/shared/head' %>
+<body>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+  
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" >
+<%= render partial: 'docs/v1/shared/navigation' %>
+</header>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Customers</h1>
+    <p>
+    Customer objects allow you to perform calls on customers. 
+    The API allows you to create, delete, and update customers.
+    You can retrieve individual customers as well as a list of all customers.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>END POINTS</h5>
+      POST /api/v1/customers
+      <br>
+      GET /api/v1/customers/:id
+      <br>
+      PUT /api/v1/customers/:id
+      <br>
+      DELETE /api/v1/customers/:id
+      <br>
+      GET /api/v1/customers
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>The Customer Object</h1>
+    <h5>Attributes</h5>
+    <hr>
+    <b>CustomerID</b> <small>unique identifier - integer (:id)</small>
+    <hr>
+    <b>ParentCustID</b> <small>integer</small>
+    <hr>
+    <b>Tier</b> <small>string</small>
+    <hr>
+    <b>CreateDate</b> <small>datetime</small>
+    <hr>
+    <b>CreateUser</b> <small>varchar</small>
+    <hr>
+    <b>ModifiedDate</b> <small>datetime</small>
+    <hr>
+    <b>ModifiedUser</b> <small>varchar</small>
+    <hr>
+    <b>LockDate</b> <small>datetime</small>
+    <hr>
+    <b>LockUser</b> <small>varchar</small>
+    <hr>
+    <b>Active</b> <small>integer</small>
+    <hr>
+    <b>TranActive</b> <small>boolean</small>
+    <hr>
+    <b>LastTranLogDate</b> <small>datetime</small>
+    <hr>
+    <b>CompanyNumber</b> <small>integer</small>
+    <hr>
+    <b>DefaultAccount</b> <small>integer</small>
+    <hr>
+    <b>AddPrimaryAccount</b> <small>integer</small>
+    <hr>
+    <b>StartOnMoveScreen</b> <small>integer</small>
+    <hr>
+    <b>LangID</b> <small>integer</small>
+    <hr>
+    <b>user_name</b> <small>varchar</small>
+    <hr>
+    <b>pwd_hash</b> <small>string</small>
+    <hr>
+    <b>NameF</b> <small>string</small>
+    <hr>
+    <b>NameM</b> <small>string</small>
+    <hr>
+    <b>NameL</b> <small>string</small>
+    <hr>
+    <b>NameS</b> <small>string</small>
+    <hr>
+    <b>user_pin</b> <small>integer</small>
+    <hr>
+    <b>user_salt</b> <small>string</small>
+    <hr>
+    <b>UserLoggedIn</b> <small>integer</small>
+    <hr>
+    <b>UserLastLogin</b> <small>datetime</small>
+    <hr>
+    <b>PasswordExpired</b> <small>integer</small>
+    <hr>
+    <b>Email</b> <small>string</small>
+    <hr>
+    <b>AddressL1</b> <small>string</small>
+    <hr>
+    <b>AddressL2</b> <small>string</small>
+    <hr>
+    <b>City</b> <small>string</small>
+    <hr>
+    <b>State</b> <small>string</small>
+    <hr>
+    <b>Zip</b> <small>nchar</small>
+    <hr>
+    <b>PhoneHome</b> <small>string</small>
+    <hr>
+    <b>PhoneWork</b> <small>string</small>
+    <hr>
+    <b>PhoneMobile</b> <small>string</small>
+    <hr>
+    <b>SSN</b> <small>string</small>
+    <hr>
+    <b>DOB</b> <small>datetime</small>
+    <hr>
+    <b>Occupation</b> <small>string</small>
+    <hr>
+    <b>Race</b> <small>string</small>
+    <hr>
+    <b>County</b> <small>string</small>
+    <hr>
+    <b>Registration_Source</b> <small>string</small>
+    <hr>
+    <b>Registration_Source_ext</b> <small>varchar</small>
+    <hr>
+    <b>Background_CK_Flag</b> <small>string</small>
+    <hr>
+    <b>Registration_Flag</b> <small>string</small>
+    <hr>
+    <b>FingerMatch</b> <small>varchar</small>
+    <hr>
+    <b>LostCardCode</b> <small>integer</small>
+    <hr>
+    <b>Customer_ACK</b> <small>integer</small>
+    <hr>
+    <b>MessageSMS</b> <small>integer</small>
+    <hr>
+    <b>MessageEmail</b> <small>integer</small>
+    <hr>
+    <b>MessageLetter</b> <small>integer</small>
+    <hr>
+    <b>pwd_needs_change</b> <small>integer</small>
+    <hr>
+    <b>GroupID</b> <small>integer</small>
+    <hr>
+    <b>CurrentPhotoIDID</b> <small>integer</small>
+    <hr>
+    <b>PrimaryACHActID</b> <small>integer</small>
+    <hr>
+    <b>IsTempUserName</b> <small>integer</small>
+    <hr>
+    <b>IsTempPassword</b> <small>integer</small>
+    <hr>
+    <b>LangObjID1</b> <small>integer</small>
+    <hr>
+    <b>Answer1</b> <small>string</small>
+    <hr>
+    <b>LangObjID2</b> <small>integer</small>
+    <hr>
+    <b>Answer2</b> <small>string</small>
+    <hr>
+    <b>Sex</b> <small>char</small>
+    <hr>
+    <b>Height</b> <small>varchar</small>
+    <hr>
+    <b>Weight</b> <small>varchar</small>
+    <hr>
+    <b>EyeColor</b> <small>varchar</small>
+    <hr>
+    <b>HairColor</b> <small>varchar</small>
+    <hr>
+    <b>LangObjID3</b> <small>string</small>
+    <hr>
+    <b>Answer3</b> <small>string</small>
+    <hr>
+    <b>CustomQuestion1</b> <small>string</small>
+    <hr>
+    <b>CustomQuestion2</b> <small>string</small>
+    <hr>
+    <b>CustomQuestion3</b> <small>string</small>
+    <hr>
+    <b>ReviewNeeded</b> <small>varchar</small>
+    <hr>
+    <b>CKtimeout</b> <small>integer</small>
+    <hr>
+    <b>MoneyTransferFlag</b> <small>integer</small>
+    <hr>
+    <b>Country</b> <small>varchar</small>
+    <hr>
+    <b>CKActive</b> <small>integer</small>
+    <hr>
+    <b>wdl_fee</b> <small>float</small>
+    <hr>
+    <b>flat_fee_flag</b> <small>integer</small>
+    <hr>
+    <b>avatar</b> <small>varchar</small>
+    <hr>
+    <b>barcode_access_string</b> <small>varchar</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>THE CUSTOMER OBJECT</h5>
+      <pre>
+        {
+          "CustomerID": 82465,
+          "ParentCustID": null,
+          "Tier": null,
+          "CreateDate": "2019-04-15T13:25:24.526Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "LockDate": null,
+          "LockUser": null,
+          "Active": 1,
+          "TranActive": false,
+          "LastTranLogDate": null,
+          "CompanyNumber": 7,
+          "DefaultAccount": null,
+          "AddPrimaryAccount": null,
+          "StartOnMoveScreen": null,
+          "LangID": 1,
+          "user_name": null,
+          "pwd_hash": null,
+          "NameF": "Adam",
+          "NameM": null,
+          "NameL": "Greenberg",
+          "NameS": null,
+          "user_pin": null,
+          "user_salt": null,
+          "UserLoggedIn": null,
+          "UserLastLogin": null,
+          "PasswordExpired": null,
+          "Email": "argberg@gmail.com",
+          "AddressL1": null,
+          "AddressL2": null,
+          "City": null,
+          "State": null,
+          "Zip": null,
+          "PhoneHome": null,
+          "PhoneWork": null,
+          "PhoneMobile": "7275428225",
+          "SSN": "",
+          "DOB": null,
+          "Occupation": null,
+          "Race": null,
+          "County": null,
+          "Registration_Source": "",
+          "Registration_Source_ext": null,
+          "Background_CK_Flag": null,
+          "Registration_Flag": null,
+          "FingerMatch": null,
+          "LostCardCode": null,
+          "Customer_ACK": null,
+          "MessageSMS": null,
+          "MessageEmail": null,
+          "MessageLetter": null,
+          "pwd_needs_change": null,
+          "GroupID": 5,
+          "CurrentPhotoIDID": null,
+          "PrimaryACHActID": null,
+          "IsTempUserName": null,
+          "IsTempPassword": null,
+          "LangObjID1": null,
+          "Answer1": null,
+          "LangObjID2": null,
+          "Answer2": null,
+          "Sex": null,
+          "Height": null,
+          "Weight": null,
+          "EyeColor": null,
+          "HairColor": null,
+          "LangObjID3": null,
+          "Answer3": null,
+          "CustomQuestion1": null,
+          "CustomQuestion2": null,
+          "CustomQuestion3": null,
+          "ReviewNeeded": null,
+          "CKtimeout": null,
+          "MoneyTransferFlag": null,
+          "Country": null,
+          "CKActive": 1,
+          "wdl_fee": null,
+          "flat_fee_flag": null,
+          "avatar": "9D2AF637-94C5-47AD-A950-29E32679786E.jpeg",
+          "barcode_access_string": "0aXloUp0q-FbAOG1LXzn5A"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Create a Customer</h1>
+    <h5>Parameters</h5>
+    <hr>
+    <b>CustomerID</b> <small>required</small>
+    <hr>
+    <b>CompanyNumber</b> <small>required</small>
+    <hr>
+    <b>CreateDate</b> <small>required</small>
+    <hr>
+    <b>ParentCustID</b> <small>optional</small>
+    <hr>
+    <b>Tier</b> <small>optional</small>
+    <hr>
+    <b>CreateUser</b> <small>optional</small>
+    <hr>
+    <b>ModifiedDate</b> <small>optional</small>
+    <hr>
+    <b>ModifiedUser</b> <small>optional</small>
+    <hr>
+    <b>LockDate</b> <small>optional</small>
+    <hr>
+    <b>LockUser</b> <small>optional</small>
+    <hr>
+    <b>Active</b> <small>optional</small>
+    <hr>
+    <b>TranActive</b> <small>optional</small>
+    <hr>
+    <b>LastTranLogDate</b> <small>optional</small>
+    <hr>
+    <b>DefaultAccount</b> <small>optional</small>
+    <hr>
+    <b>AddPrimaryAccount</b> <small>optional</small>
+    <hr>
+    <b>StartOnMoveScreen</b> <small>optional</small>
+    <hr>
+    <b>LangID</b> <small>optional</small>
+    <hr>
+    <b>user_name</b> <small>optional</small>
+    <hr>
+    <b>pwd_hash</b> <small>optional</small>
+    <hr>
+    <b>NameF</b> <small>optional</small>
+    <hr>
+    <b>NameM</b> <small>optional</small>
+    <hr>
+    <b>NameL</b> <small>optional</small>
+    <hr>
+    <b>NameS</b> <small>optional</small>
+    <hr>
+    <b>user_pin</b> <small>optional</small>
+    <hr>
+    <b>user_salt</b> <small>optional</small>
+    <hr>
+    <b>UserLoggedIn</b> <small>optional</small>
+    <hr>
+    <b>UserLastLogin</b> <small>optional</small>
+    <hr>
+    <b>PasswordExpired</b> <small>optional</small>
+    <hr>
+    <b>Email</b> <small>optional</small>
+    <hr>
+    <b>AddressL1</b> <small>optional</small>
+    <hr>
+    <b>AddressL2</b> <small>optional</small>
+    <hr>
+    <b>City</b> <small>optional</small>
+    <hr>
+    <b>State</b> <small>optional</small>
+    <hr>
+    <b>Zip</b> <small>optional</small>
+    <hr>
+    <b>PhoneHome</b> <small>optional</small>
+    <hr>
+    <b>PhoneWork</b> <small>optional</small>
+    <hr>
+    <b>PhoneMobile</b> <small>optional</small>
+    <hr>
+    <b>SSN</b> <small>optional</small>
+    <hr>
+    <b>DOB</b> <small>optional</small>
+    <hr>
+    <b>Occupation</b> <small>optional</small>
+    <hr>
+    <b>Race</b> <small>optional</small>
+    <hr>
+    <b>County</b> <small>optional</small>
+    <hr>
+    <b>Registration_Source</b> <small>optional</small>
+    <hr>
+    <b>Registration_Source_ext</b> <small>optional</small>
+    <hr>
+    <b>Background_CK_Flag</b> <small>optional</small>
+    <hr>
+    <b>Registration_Flag</b> <small>optional</small>
+    <hr>
+    <b>FingerMatch</b> <small>optional</small>
+    <hr>
+    <b>LostCardCode</b> <small>optional</small>
+    <hr>
+    <b>Customer_ACK</b> <small>optional</small>
+    <hr>
+    <b>MessageSMS</b> <small>optional</small>
+    <hr>
+    <b>MessageEmail</b> <small>optional</small>
+    <hr>
+    <b>MessageLetter</b> <small>optional</small>
+    <hr>
+    <b>pwd_needs_change</b> <small>optional</small>
+    <hr>
+    <b>GroupID</b> <small>optional</small>
+    <hr>
+    <b>CurrentPhotoIDID</b> <small>optional</small>
+    <hr>
+    <b>PrimaryACHActID</b> <small>optional</small>
+    <hr>
+    <b>IsTempUserName</b> <small>optional</small>
+    <hr>
+    <b>IsTempPassword</b> <small>optional</small>
+    <hr>
+    <b>LangObjID1</b> <small>optional</small>
+    <hr>
+    <b>Answer1</b> <small>optional</small>
+    <hr>
+    <b>LangObjID2</b> <small>optional</small>
+    <hr>
+    <b>Answer2</b> <small>optional</small>
+    <hr>
+    <b>Sex</b> <small>optional</small>
+    <hr>
+    <b>Height</b> <small>optional</small>
+    <hr>
+    <b>Weight</b> <small>optional</small>
+    <hr>
+    <b>EyeColor</b> <small>optional</small>
+    <hr>
+    <b>HairColor</b> <small>optional</small>
+    <hr>
+    <b>LangObjID3</b> <small>optional</small>
+    <hr>
+    <b>Answer3</b> <small>optional</small>
+    <hr>
+    <b>CustomQuestion1</b> <small>optional</small>
+    <hr>
+    <b>CustomQuestion2</b> <small>optional</small>
+    <hr>
+    <b>CustomQuestion3</b> <small>optional</small>
+    <hr>
+    <b>ReviewNeeded</b> <small>optional</small>
+    <hr>
+    <b>CKtimeout</b> <small>optional</small>
+    <hr>
+    <b>MoneyTransferFlag</b> <small>optional</small>
+    <hr>
+    <b>Country</b> <small>optional</small>
+    <hr>
+    <b>CKActive</b> <small>optional</small>
+    <hr>
+    <b>wdl_fee</b> <small>optional</small>
+    <hr>
+    <b>flat_fee_flag</b> <small>optional</small>
+    <hr>
+    <b>avatar</b> <small>optional</small>
+    <hr>
+    <b>barcode_access_string</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>POST /api/v1/customers</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "CustomerID": 82465,
+          "ParentCustID": null,
+          "Tier": null,
+          "CreateDate": "2019-04-15T13:25:24.526Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "LockDate": null,
+          "LockUser": null,
+          "Active": 1,
+          "TranActive": false,
+          "LastTranLogDate": null,
+          "CompanyNumber": 7,
+          "DefaultAccount": null,
+          "AddPrimaryAccount": null,
+          "StartOnMoveScreen": null,
+          "LangID": 1,
+          "user_name": null,
+          "pwd_hash": null,
+          "NameF": "Adam",
+          "NameM": null,
+          "NameL": "Greenberg",
+          "NameS": null,
+          "user_pin": null,
+          "user_salt": null,
+          "UserLoggedIn": null,
+          "UserLastLogin": null,
+          "PasswordExpired": null,
+          "Email": "argberg@gmail.com",
+          "AddressL1": null,
+          "AddressL2": null,
+          "City": null,
+          "State": null,
+          "Zip": null,
+          "PhoneHome": null,
+          "PhoneWork": null,
+          "PhoneMobile": "7275428225",
+          "SSN": "",
+          "DOB": null,
+          "Occupation": null,
+          "Race": null,
+          "County": null,
+          "Registration_Source": "",
+          "Registration_Source_ext": null,
+          "Background_CK_Flag": null,
+          "Registration_Flag": null,
+          "FingerMatch": null,
+          "LostCardCode": null,
+          "Customer_ACK": null,
+          "MessageSMS": null,
+          "MessageEmail": null,
+          "MessageLetter": null,
+          "pwd_needs_change": null,
+          "GroupID": 5,
+          "CurrentPhotoIDID": null,
+          "PrimaryACHActID": null,
+          "IsTempUserName": null,
+          "IsTempPassword": null,
+          "LangObjID1": null,
+          "Answer1": null,
+          "LangObjID2": null,
+          "Answer2": null,
+          "Sex": null,
+          "Height": null,
+          "Weight": null,
+          "EyeColor": null,
+          "HairColor": null,
+          "LangObjID3": null,
+          "Answer3": null,
+          "CustomQuestion1": null,
+          "CustomQuestion2": null,
+          "CustomQuestion3": null,
+          "ReviewNeeded": null,
+          "CKtimeout": null,
+          "MoneyTransferFlag": null,
+          "Country": null,
+          "CKActive": 1,
+          "wdl_fee": null,
+          "flat_fee_flag": null,
+          "avatar": "9D2AF637-94C5-47AD-A950-29E32679786E.jpeg",
+          "barcode_access_string": "0aXloUp0q-FbAOG1LXzn5A"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Retrieve a Customer</h1>
+    <p>Retrieves the details of an existing Customer. You need only supply the unique identifier that was returned upon Customer creation.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Returns a Customer object if a valid identifier was provided.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/customers/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "CustomerID": 82465,
+          "ParentCustID": null,
+          "Tier": null,
+          "CreateDate": "2019-04-15T13:25:24.526Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "LockDate": null,
+          "LockUser": null,
+          "Active": 1,
+          "TranActive": false,
+          "LastTranLogDate": null,
+          "CompanyNumber": 7,
+          "DefaultAccount": null,
+          "AddPrimaryAccount": null,
+          "StartOnMoveScreen": null,
+          "LangID": 1,
+          "user_name": null,
+          "pwd_hash": null,
+          "NameF": "Adam",
+          "NameM": null,
+          "NameL": "Greenberg",
+          "NameS": null,
+          "user_pin": null,
+          "user_salt": null,
+          "UserLoggedIn": null,
+          "UserLastLogin": null,
+          "PasswordExpired": null,
+          "Email": "argberg@gmail.com",
+          "AddressL1": null,
+          "AddressL2": null,
+          "City": null,
+          "State": null,
+          "Zip": null,
+          "PhoneHome": null,
+          "PhoneWork": null,
+          "PhoneMobile": "7275428225",
+          "SSN": "",
+          "DOB": null,
+          "Occupation": null,
+          "Race": null,
+          "County": null,
+          "Registration_Source": "",
+          "Registration_Source_ext": null,
+          "Background_CK_Flag": null,
+          "Registration_Flag": null,
+          "FingerMatch": null,
+          "LostCardCode": null,
+          "Customer_ACK": null,
+          "MessageSMS": null,
+          "MessageEmail": null,
+          "MessageLetter": null,
+          "pwd_needs_change": null,
+          "GroupID": 5,
+          "CurrentPhotoIDID": null,
+          "PrimaryACHActID": null,
+          "IsTempUserName": null,
+          "IsTempPassword": null,
+          "LangObjID1": null,
+          "Answer1": null,
+          "LangObjID2": null,
+          "Answer2": null,
+          "Sex": null,
+          "Height": null,
+          "Weight": null,
+          "EyeColor": null,
+          "HairColor": null,
+          "LangObjID3": null,
+          "Answer3": null,
+          "CustomQuestion1": null,
+          "CustomQuestion2": null,
+          "CustomQuestion3": null,
+          "ReviewNeeded": null,
+          "CKtimeout": null,
+          "MoneyTransferFlag": null,
+          "Country": null,
+          "CKActive": 1,
+          "wdl_fee": null,
+          "flat_fee_flag": null,
+          "avatar": "9D2AF637-94C5-47AD-A950-29E32679786E.jpeg",
+          "barcode_access_string": "0aXloUp0q-FbAOG1LXzn5A"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Update a Customer</h1>
+    <p>Updates the specified Customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+    <p>This request accepts mostly the same arguments as the Customer creation call.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>CustomerID</b> <small>required</small>
+    <hr>
+    <b>CompanyNumber</b> <small>required</small>
+    <hr>
+    <b>CreateDate</b> <small>required</small>
+    <hr>
+    <b>ParentCustID</b> <small>optional</small>
+    <hr>
+    <b>Tier</b> <small>optional</small>
+    <hr>
+    <b>CreateUser</b> <small>optional</small>
+    <hr>
+    <b>ModifiedDate</b> <small>optional</small>
+    <hr>
+    <b>ModifiedUser</b> <small>optional</small>
+    <hr>
+    <b>LockDate</b> <small>optional</small>
+    <hr>
+    <b>LockUser</b> <small>optional</small>
+    <hr>
+    <b>Active</b> <small>optional</small>
+    <hr>
+    <b>TranActive</b> <small>optional</small>
+    <hr>
+    <b>LastTranLogDate</b> <small>optional</small>
+    <hr>
+    <b>DefaultAccount</b> <small>optional</small>
+    <hr>
+    <b>AddPrimaryAccount</b> <small>optional</small>
+    <hr>
+    <b>StartOnMoveScreen</b> <small>optional</small>
+    <hr>
+    <b>LangID</b> <small>optional</small>
+    <hr>
+    <b>user_name</b> <small>optional</small>
+    <hr>
+    <b>pwd_hash</b> <small>optional</small>
+    <hr>
+    <b>NameF</b> <small>optional</small>
+    <hr>
+    <b>NameM</b> <small>optional</small>
+    <hr>
+    <b>NameL</b> <small>optional</small>
+    <hr>
+    <b>NameS</b> <small>optional</small>
+    <hr>
+    <b>user_pin</b> <small>optional</small>
+    <hr>
+    <b>user_salt</b> <small>optional</small>
+    <hr>
+    <b>UserLoggedIn</b> <small>optional</small>
+    <hr>
+    <b>UserLastLogin</b> <small>optional</small>
+    <hr>
+    <b>PasswordExpired</b> <small>optional</small>
+    <hr>
+    <b>Email</b> <small>optional</small>
+    <hr>
+    <b>AddressL1</b> <small>optional</small>
+    <hr>
+    <b>AddressL2</b> <small>optional</small>
+    <hr>
+    <b>City</b> <small>optional</small>
+    <hr>
+    <b>State</b> <small>optional</small>
+    <hr>
+    <b>Zip</b> <small>optional</small>
+    <hr>
+    <b>PhoneHome</b> <small>optional</small>
+    <hr>
+    <b>PhoneWork</b> <small>optional</small>
+    <hr>
+    <b>PhoneMobile</b> <small>optional</small>
+    <hr>
+    <b>SSN</b> <small>optional</small>
+    <hr>
+    <b>DOB</b> <small>optional</small>
+    <hr>
+    <b>Occupation</b> <small>optional</small>
+    <hr>
+    <b>Race</b> <small>optional</small>
+    <hr>
+    <b>County</b> <small>optional</small>
+    <hr>
+    <b>Registration_Source</b> <small>optional</small>
+    <hr>
+    <b>Registration_Source_ext</b> <small>optional</small>
+    <hr>
+    <b>Background_CK_Flag</b> <small>optional</small>
+    <hr>
+    <b>Registration_Flag</b> <small>optional</small>
+    <hr>
+    <b>FingerMatch</b> <small>optional</small>
+    <hr>
+    <b>LostCardCode</b> <small>optional</small>
+    <hr>
+    <b>Customer_ACK</b> <small>optional</small>
+    <hr>
+    <b>MessageSMS</b> <small>optional</small>
+    <hr>
+    <b>MessageEmail</b> <small>optional</small>
+    <hr>
+    <b>MessageLetter</b> <small>optional</small>
+    <hr>
+    <b>pwd_needs_change</b> <small>optional</small>
+    <hr>
+    <b>GroupID</b> <small>optional</small>
+    <hr>
+    <b>CurrentPhotoIDID</b> <small>optional</small>
+    <hr>
+    <b>PrimaryACHActID</b> <small>optional</small>
+    <hr>
+    <b>IsTempUserName</b> <small>optional</small>
+    <hr>
+    <b>IsTempPassword</b> <small>optional</small>
+    <hr>
+    <b>LangObjID1</b> <small>optional</small>
+    <hr>
+    <b>Answer1</b> <small>optional</small>
+    <hr>
+    <b>LangObjID2</b> <small>optional</small>
+    <hr>
+    <b>Answer2</b> <small>optional</small>
+    <hr>
+    <b>Sex</b> <small>optional</small>
+    <hr>
+    <b>Height</b> <small>optional</small>
+    <hr>
+    <b>Weight</b> <small>optional</small>
+    <hr>
+    <b>EyeColor</b> <small>optional</small>
+    <hr>
+    <b>HairColor</b> <small>optional</small>
+    <hr>
+    <b>LangObjID3</b> <small>optional</small>
+    <hr>
+    <b>Answer3</b> <small>optional</small>
+    <hr>
+    <b>CustomQuestion1</b> <small>optional</small>
+    <hr>
+    <b>CustomQuestion2</b> <small>optional</small>
+    <hr>
+    <b>CustomQuestion3</b> <small>optional</small>
+    <hr>
+    <b>ReviewNeeded</b> <small>optional</small>
+    <hr>
+    <b>CKtimeout</b> <small>optional</small>
+    <hr>
+    <b>MoneyTransferFlag</b> <small>optional</small>
+    <hr>
+    <b>Country</b> <small>optional</small>
+    <hr>
+    <b>CKActive</b> <small>optional</small>
+    <hr>
+    <b>wdl_fee</b> <small>optional</small>
+    <hr>
+    <b>flat_fee_flag</b> <small>optional</small>
+    <hr>
+    <b>avatar</b> <small>optional</small>
+    <hr>
+    <b>barcode_access_string</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>PUT /api/v1/customers/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "CustomerID": 82465,
+          "ParentCustID": null,
+          "Tier": null,
+          "CreateDate": "2019-04-15T13:25:24.526Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "LockDate": null,
+          "LockUser": null,
+          "Active": 1,
+          "TranActive": false,
+          "LastTranLogDate": null,
+          "CompanyNumber": 7,
+          "DefaultAccount": null,
+          "AddPrimaryAccount": null,
+          "StartOnMoveScreen": null,
+          "LangID": 1,
+          "user_name": null,
+          "pwd_hash": null,
+          "NameF": "Adam",
+          "NameM": null,
+          "NameL": "Greenberg",
+          "NameS": null,
+          "user_pin": null,
+          "user_salt": null,
+          "UserLoggedIn": null,
+          "UserLastLogin": null,
+          "PasswordExpired": null,
+          "Email": "argberg@gmail.com",
+          "AddressL1": null,
+          "AddressL2": null,
+          "City": null,
+          "State": null,
+          "Zip": null,
+          "PhoneHome": null,
+          "PhoneWork": null,
+          "PhoneMobile": "7275428225",
+          "SSN": "",
+          "DOB": null,
+          "Occupation": null,
+          "Race": null,
+          "County": null,
+          "Registration_Source": "",
+          "Registration_Source_ext": null,
+          "Background_CK_Flag": null,
+          "Registration_Flag": null,
+          "FingerMatch": null,
+          "LostCardCode": null,
+          "Customer_ACK": null,
+          "MessageSMS": null,
+          "MessageEmail": null,
+          "MessageLetter": null,
+          "pwd_needs_change": null,
+          "GroupID": 5,
+          "CurrentPhotoIDID": null,
+          "PrimaryACHActID": null,
+          "IsTempUserName": null,
+          "IsTempPassword": null,
+          "LangObjID1": null,
+          "Answer1": null,
+          "LangObjID2": null,
+          "Answer2": null,
+          "Sex": null,
+          "Height": null,
+          "Weight": null,
+          "EyeColor": null,
+          "HairColor": null,
+          "LangObjID3": null,
+          "Answer3": null,
+          "CustomQuestion1": null,
+          "CustomQuestion2": null,
+          "CustomQuestion3": null,
+          "ReviewNeeded": null,
+          "CKtimeout": null,
+          "MoneyTransferFlag": null,
+          "Country": null,
+          "CKActive": 1,
+          "wdl_fee": null,
+          "flat_fee_flag": null,
+          "avatar": "9D2AF637-94C5-47AD-A950-29E32679786E.jpeg",
+          "barcode_access_string": "0aXloUp0q-FbAOG1LXzn5A"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Delete a Customer</h1>
+    <p>Permanently deletes a Customer. It cannot be undone.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Message: "Customer deleted". If the Customer identifier does not exist, this call raises an error.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>DELETE /api/v1/customers/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+          Customer deleted
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>List All Customers</h1>
+    <p>Returns a list of your customers. The customers are returned in the order they were created, with the oldest customers appearing first.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>CompanyNbr</b> <small>optional</small>
+    <hr>
+    <b>limit</b> <small>optional</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      An array of customers. Passing optional parameter(s) will result in filtering the customers by the passed parameter(s). 
+      Each entry in the array is a separate customer object. Use limit parameter to specify the number of objects in the array.
+      If no more customers are available, the resulting array will be empty. 
+      This request should never raise an error.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/customers</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        [
+          {
+            "CustomerID": 82465,
+            "ParentCustID": null,
+            "Tier": null,
+            "CreateDate": "2019-04-15T13:25:24.526Z",
+            "CreateUser": null,
+            "ModifiedDate": null,
+            "ModifiedUser": null,
+            "LockDate": null,
+            "LockUser": null,
+            "Active": 1,
+            "TranActive": false,
+            "LastTranLogDate": null,
+            "CompanyNumber": 7,
+            "DefaultAccount": null,
+            "AddPrimaryAccount": null,
+            "StartOnMoveScreen": null,
+            "LangID": 1,
+            "user_name": null,
+            "pwd_hash": null,
+            "NameF": "Adam",
+            "NameM": null,
+            "NameL": "Greenberg",
+            "NameS": null,
+            ...
+          },
+          {...},
+          {...}
+        ]
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <p>Powered by <a href="https://www.tranact.com" target="_blank" class="w3-hover-text-green">Tranact</a></p>
+</footer>
+
+</body>
+</html>

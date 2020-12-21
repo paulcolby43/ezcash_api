@@ -1,5 +1,6 @@
 class DevStatus < ApplicationRecord
-  self.primary_key = 'date_time'
+#  self.primary_key = 'date_time'
+  self.primary_keys = :status, :dev_id #Composite primary keys
   self.table_name = 'dev_statuses'
   
   belongs_to :device, :foreign_key => 'dev_id'

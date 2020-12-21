@@ -55,7 +55,8 @@ class Api::V1::DenomsController < ApplicationController
   private
   
   def set_denom
-    @denom = Denom.find(params[:id])
+#    @denom = Denom.find(params[:id])
+    @denom = Denom.find([params[:id], params[:dev_id]])
   end
   
   def denom_params

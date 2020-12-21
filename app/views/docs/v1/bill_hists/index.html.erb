@@ -27,11 +27,11 @@
       <h5>END POINTS</h5>
       POST /api/v1/bill_hists
       <br>
-      GET /api/v1/bill_hists/:id?dev_id=:dev_id
+      GET /api/v1/bill_hists/:id?dev_id=:device_id
       <br>
-      PUT /api/v1/bill_hists/:id?dev_id=:dev_id
+      PUT /api/v1/bill_hists/:id?dev_id=:device_id
       <br>
-      DELETE /api/v1/bill_hists/:id?dev_id=:dev_id
+      DELETE /api/v1/bill_hists/:id?dev_id=:device_id
       <br>
       GET /api/v1/bill_hists
     </div>
@@ -45,9 +45,9 @@
     <h1>The BillHist Object</h1>
     <h5>Attributes</h5>
     <hr>
-    <b>dev_id</b> <small>integer</small>
+    <b>cassette_id</b> <small>string (:id)</small>
     <hr>
-    <b>cassette_id</b> <small>string</small>
+    <b>dev_id</b> <small>integer</small>
     <hr>
     <b>cut_dt</b> <small>datetime</small>
     <hr>
@@ -167,7 +167,7 @@
 
   <div class="w3-half" style="padding-right:200px">
     <div style="float:right;">
-      <h5>GET /api/v1/bill_hists/:id?dev_id=:dev_id</h5>
+      <h5>GET /api/v1/bill_hists/:id?dev_id=:device_id</h5>
       <h5>RESPONSE</h5>
       <pre>
           {
@@ -198,9 +198,9 @@
     <p>This request accepts mostly the same arguments as the BillHist creation call.</p>
     <h5>Parameters</h5>
     <hr>
-    <b>dev_id</b> <small>optional</small>
+    <b>dev_id</b> <small>required</small>
     <hr>
-    <b>cassette_nbr</b> <small>optional</small>
+    <b>cassette_nbr</b> <small>required</small>
     <hr>
     <b>cut_dt</b> <small>optional</small>
     <hr>
@@ -225,7 +225,7 @@
 
   <div class="w3-half" style="padding-right:200px">
     <div style="float:right;">
-      <h5>PUT /api/v1/bill_hists/:id?dev_id=:dev_id</h5>
+      <h5>PUT /api/v1/bill_hists/:id</h5>
       <h5>RESPONSE</h5>
       <pre>
           {
@@ -264,7 +264,7 @@
 
   <div class="w3-half" style="padding-right:200px">
     <div style="float:right;">
-      <h5>DELETE /api/v1/bill_hists/:id?dev_id=:dev_id</h5>
+      <h5>DELETE /api/v1/bill_hists/:id?dev_id=:device_id</h5>
       <h5>RESPONSE</h5>
       <pre>
           BillHist deleted

@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+<title>Transactions - EZcash API</title>
+<%= render partial: 'docs/v1/shared/head' %>
+<body>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+  
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" >
+<%= render partial: 'docs/v1/shared/navigation' %>
+</header>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Transactions</h1>
+    <p>
+    Transaction objects allow you to perform calls on transactions. 
+    The API allows you to create, delete, and update transactions. 
+    You can retrieve individual transactions as well as a list of all transactions.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>END POINTS</h5>
+      POST /api/v1/transactions
+      <br>
+      GET /api/v1/transactions/:id
+      <br>
+      PUT /api/v1/transactions/:id
+      <br>
+      DELETE /api/v1/transactions/:id
+      <br>
+      GET /api/v1/transactions
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>The Transaction Object</h1>
+    <h5>Attributes</h5>
+    <hr>
+    <b>tranID</b> <small>unique identifier - integer (:id)</small>
+    <hr>
+    <b>date_time</b> <small>datetime</small>
+    <hr>
+    <b>dev_id</b> <small>integer</small>
+    <hr>
+    <b>FromCustID</b> <small>integer</small>
+    <hr>
+    <b>ToCustID</b> <small>integer</small>
+    <hr>
+    <b>tran_status</b> <small>integer</small>
+    <hr>
+    <b>error_code</b> <small>integer</small>
+    <hr>
+    <b>tran_code</b> <small>char</small>
+    <hr>
+    <b>card_nbr</b> <small>varchar</small>
+    <hr>
+    <b>receipt_nbr</b> <small>varchar</small>
+    <hr>
+    <b>amt_req</b> <small>decimal</small>
+    <hr>
+    <b>amt_auth</b> <small>decimal</small>
+    <hr>
+    <b>cassette_1_disp</b> <small>integer</small>
+    <hr>
+    <b>cassette_2_disp</b> <small>integer</small>
+    <hr>
+    <b>cassette_3_disp</b> <small>integer</small>
+    <hr>
+    <b>cassette_4_disp</b> <small>integer</small>
+    <hr>
+    <b>cassette_5_disp</b> <small>integer</small>
+    <hr>
+    <b>cassette_6_disp</b> <small>integer</small>
+    <hr>
+    <b>track2</b> <small>varchar</small>
+    <hr>
+    <b>bank_id_nbr</b> <small>decimal</small>
+    <hr>
+    <b>coin_disp</b> <small>decimal</small>
+    <hr>
+    <b>coin_1_disp</b> <small>integer</small>
+    <hr>
+    <b>coin_2_disp</b> <small>integer</small>
+    <hr>
+    <b>coin_3_disp</b> <small>integer</small>
+    <hr>
+    <b>coin_4_disp</b> <small>integer</small>
+    <hr>
+    <b>coin_5_disp</b> <small>integer</small>
+    <hr>
+    <b>coin_6_disp</b> <small>integer</small>
+    <hr>
+    <b>cashBalance</b> <small>money</small>
+    <hr>
+    <b>ActID</b> <small>integer</small>
+    <hr>
+    <b>CreateDate</b> <small>datetime</small>
+    <hr>
+    <b>CreateUser</b> <small>varchar</small>
+    <hr>
+    <b>ModifiedDate</b> <small>datetime</small>
+    <hr>
+    <b>ModifiedUser</b> <small>varchar</small>
+    <hr>
+    <b>card_seq</b> <small>integer</small>
+    <hr>
+    <b>from_acct_id</b> <small>integer</small>
+    <hr>
+    <b>from_acct_type</b> <small>integer</small>
+    <hr>
+    <b>to_acct_id</b> <small>integer</small>
+    <hr>
+    <b>to_acct_type</b> <small>integer</small>
+    <hr>
+    <b>authID</b> <small>char</small>
+    <hr>
+    <b>sec_tran_code</b> <small>char</small>
+    <hr>
+    <b>BlockID</b> <small>integer</small>
+    <hr>
+    <b>AddFlag</b> <small>integer</small>
+    <hr>
+    <b>MoveFlag</b> <small>integer</small>
+    <hr>
+    <b>Description</b> <small>varchar</small>
+    <hr>
+    <b>ChpFee</b> <small>money</small>
+    <hr>
+    <b>DevCompanyNbr</b> <small>integer</small>
+    <hr>
+    <b>IssuingCompanyNbr</b> <small>integer</small>
+    <hr>
+    <b>BarcodeHash</b> <small>varchar</small>
+    <hr>
+    <b>CheckCategoryID</b> <small>integer</small>
+    <hr>
+    <b>FeedActID</b> <small>integer</small>
+    <hr>
+    <b>OrigTranID</b> <small>integer</small>
+    <hr>
+    <b>from_acct_nbr</b> <small>varchar</small>
+    <hr>
+    <b>to_acct_nbr</b> <small>varchar</small>
+    <hr>
+    <b>Note</b> <small>varchar</small>
+    <hr>
+    <b>FailedLimitID</b> <small>integer</small>
+    <hr>
+    <b>external_ref_nbr</b> <small>varchar</small>
+    <hr>
+    <b>upload_file</b> <small>varchar</small>
+    <hr>
+    <b>event_id</b> <small>integer</small>
+    <hr>
+    <b>dev_address</b> <small>varchar</small>
+    <hr>
+    <b>custID</b> <small>integer</small>
+    <hr>
+    <b>user_id</b> <small>integer</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>THE TRANSACTION OBJECT</h5>
+      <pre>
+        {
+          "tranID": 318917,
+          "date_time": "2020-12-21T13:37:27.470Z",
+          "dev_id": 201,
+          "FromCustID": 94715,
+          "ToCustID": null,
+          "tran_status": 12,
+          "error_code": 0,
+          "tran_code": "WDL ",
+          "card_nbr": null,
+          "receipt_nbr": null,
+          "amt_req": "80.0",
+          "amt_auth": "80.0",
+          "cassette_1_disp": 0,
+          "cassette_2_disp": 4,
+          "cassette_3_disp": 0,
+          "cassette_4_disp": 0,
+          "cassette_5_disp": null,
+          "cassette_6_disp": null,
+          "track2": "0531030111",
+          "bank_id_nbr": null,
+          "coin_disp": null,
+          "coin_1_disp": 0,
+          "coin_2_disp": 0,
+          "coin_3_disp": 0,
+          "coin_4_disp": 0,
+          "coin_5_disp": null,
+          "coin_6_disp": null,
+          "cashBalance": null,
+          "ActID": 75318,
+          "CreateDate": "2020-12-21T13:37:27.470Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "card_seq": null,
+          "from_acct_id": 75318,
+          "from_acct_type": null,
+          "to_acct_id": null,
+          "to_acct_type": null,
+          "authID": null,
+          "sec_tran_code": "ALL ",
+          "BlockID": null,
+          "AddFlag": null,
+          "MoveFlag": null,
+          "Description": "Withdrawal at Arafath NDC ATM",
+          "ChpFee": null,
+          "DevCompanyNbr": 3,
+          "IssuingCompanyNbr": 30,
+          "BarcodeHash": null,
+          "CheckCategoryID": null,
+          "FeedActID": null,
+          "OrigTranID": null,
+          "from_acct_nbr": null,
+          "to_acct_nbr": null,
+          "Note": null,
+          "FailedLimitID": null,
+          "external_ref_nbr": null,
+          "upload_file": null,
+          "event_id": null,
+          "dev_address": null,
+          "custID": null,
+          "user_id": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Create a Transaction</h1>
+    <h5>Parameters</h5>
+    <hr>
+    <b>tranID</b> <small>required</small>
+    <hr>
+    <b>date_time</b> <small>required</small>
+    <hr>
+    <b>tran_status</b> <small>required</small>
+    <hr>
+    <b>error_code</b> <small>required</small>
+    <hr>
+    <b>tran_code</b> <small>required</small>
+    <hr>
+    <b>amt_req</b> <small>required</small>
+    <hr>
+    <b>amt_auth</b> <small>required</small>
+    <hr>
+    <b>CreateDate</b> <small>required</small>
+    <hr>
+    <b>dev_id</b> <small>optional</small>
+    <hr>
+    <b>FromCustID</b> <small>optional</small>
+    <hr>
+    <b>ToCustID</b> <small>optional</small>
+    <hr>
+    <b>card_nbr</b> <small>optional</small>
+    <hr>
+    <b>receipt_nbr</b> <small>optional</small>
+    <hr>
+    <b>cassette_1_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_2_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_3_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_4_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_5_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_6_disp</b> <small>optional</small>
+    <hr>
+    <b>track2</b> <small>optional</small>
+    <hr>
+    <b>bank_id_nbr</b> <small>optional</small>
+    <hr>
+    <b>coin_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_1_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_2_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_3_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_4_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_5_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_6_disp</b> <small>optional</small>
+    <hr>
+    <b>cashBalance</b> <small>optional</small>
+    <hr>
+    <b>ActID</b> <small>optional</small>
+    <hr>
+    <b>CreateUser</b> <small>optional</small>
+    <hr>
+    <b>ModifiedDate</b> <small>optional</small>
+    <hr>
+    <b>ModifiedUser</b> <small>optional</small>
+    <hr>
+    <b>card_seq</b> <small>optional</small>
+    <hr>
+    <b>from_acct_id</b> <small>optional</small>
+    <hr>
+    <b>from_acct_type</b> <small>optional</small>
+    <hr>
+    <b>to_acct_id</b> <small>optional</small>
+    <hr>
+    <b>to_acct_type</b> <small>optional</small>
+    <hr>
+    <b>authID</b> <small>optional</small>
+    <hr>
+    <b>sec_tran_code</b> <small>optional</small>
+    <hr>
+    <b>BlockID</b> <small>optional</small>
+    <hr>
+    <b>AddFlag</b> <small>optional</small>
+    <hr>
+    <b>MoveFlag</b> <small>optional</small>
+    <hr>
+    <b>Description</b> <small>optional</small>
+    <hr>
+    <b>ChpFee</b> <small>optional</small>
+    <hr>
+    <b>DevCompanyNbr</b> <small>optional</small>
+    <hr>
+    <b>IssuingCompanyNbr</b> <small>optional</small>
+    <hr>
+    <b>BarcodeHash</b> <small>optional</small>
+    <hr>
+    <b>CheckCategoryID</b> <small>optional</small>
+    <hr>
+    <b>FeedActID</b> <small>optional</small>
+    <hr>
+    <b>OrigTranID</b> <small>optional</small>
+    <hr>
+    <b>from_acct_nbr</b> <small>optional</small>
+    <hr>
+    <b>to_acct_nbr</b> <small>optional</small>
+    <hr>
+    <b>Note</b> <small>optional</small>
+    <hr>
+    <b>FailedLimitID</b> <small>optional</small>
+    <hr>
+    <b>external_ref_nbr</b> <small>optional</small>
+    <hr>
+    <b>upload_file</b> <small>optional</small>
+    <hr>
+    <b>event_id</b> <small>optional</small>
+    <hr>
+    <b>dev_address</b> <small>optional</small>
+    <hr>
+    <b>custID</b> <small>optional</small>
+    <hr>
+    <b>user_id</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>POST /api/v1/transactions</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "tranID": 318917,
+          "date_time": "2020-12-21T13:37:27.470Z",
+          "dev_id": 201,
+          "FromCustID": 94715,
+          "ToCustID": null,
+          "tran_status": 12,
+          "error_code": 0,
+          "tran_code": "WDL ",
+          "card_nbr": null,
+          "receipt_nbr": null,
+          "amt_req": "80.0",
+          "amt_auth": "80.0",
+          "cassette_1_disp": 0,
+          "cassette_2_disp": 4,
+          "cassette_3_disp": 0,
+          "cassette_4_disp": 0,
+          "cassette_5_disp": null,
+          "cassette_6_disp": null,
+          "track2": "0531030111",
+          "bank_id_nbr": null,
+          "coin_disp": null,
+          "coin_1_disp": 0,
+          "coin_2_disp": 0,
+          "coin_3_disp": 0,
+          "coin_4_disp": 0,
+          "coin_5_disp": null,
+          "coin_6_disp": null,
+          "cashBalance": null,
+          "ActID": 75318,
+          "CreateDate": "2020-12-21T13:37:27.470Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "card_seq": null,
+          "from_acct_id": 75318,
+          "from_acct_type": null,
+          "to_acct_id": null,
+          "to_acct_type": null,
+          "authID": null,
+          "sec_tran_code": "ALL ",
+          "BlockID": null,
+          "AddFlag": null,
+          "MoveFlag": null,
+          "Description": "Withdrawal at Arafath NDC ATM",
+          "ChpFee": null,
+          "DevCompanyNbr": 3,
+          "IssuingCompanyNbr": 30,
+          "BarcodeHash": null,
+          "CheckCategoryID": null,
+          "FeedActID": null,
+          "OrigTranID": null,
+          "from_acct_nbr": null,
+          "to_acct_nbr": null,
+          "Note": null,
+          "FailedLimitID": null,
+          "external_ref_nbr": null,
+          "upload_file": null,
+          "event_id": null,
+          "dev_address": null,
+          "custID": null,
+          "user_id": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Retrieve a Transaction</h1>
+    <p>Retrieves the details of an existing Transaction. You need only supply the unique identifier was returned upon Transaction creation.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Returns a Transaction object if a valid identifier was provided.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/transactions/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "tranID": 318917,
+          "date_time": "2020-12-21T13:37:27.470Z",
+          "dev_id": 201,
+          "FromCustID": 94715,
+          "ToCustID": null,
+          "tran_status": 12,
+          "error_code": 0,
+          "tran_code": "WDL ",
+          "card_nbr": null,
+          "receipt_nbr": null,
+          "amt_req": "80.0",
+          "amt_auth": "80.0",
+          "cassette_1_disp": 0,
+          "cassette_2_disp": 4,
+          "cassette_3_disp": 0,
+          "cassette_4_disp": 0,
+          "cassette_5_disp": null,
+          "cassette_6_disp": null,
+          "track2": "0531030111",
+          "bank_id_nbr": null,
+          "coin_disp": null,
+          "coin_1_disp": 0,
+          "coin_2_disp": 0,
+          "coin_3_disp": 0,
+          "coin_4_disp": 0,
+          "coin_5_disp": null,
+          "coin_6_disp": null,
+          "cashBalance": null,
+          "ActID": 75318,
+          "CreateDate": "2020-12-21T13:37:27.470Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "card_seq": null,
+          "from_acct_id": 75318,
+          "from_acct_type": null,
+          "to_acct_id": null,
+          "to_acct_type": null,
+          "authID": null,
+          "sec_tran_code": "ALL ",
+          "BlockID": null,
+          "AddFlag": null,
+          "MoveFlag": null,
+          "Description": "Withdrawal at Arafath NDC ATM",
+          "ChpFee": null,
+          "DevCompanyNbr": 3,
+          "IssuingCompanyNbr": 30,
+          "BarcodeHash": null,
+          "CheckCategoryID": null,
+          "FeedActID": null,
+          "OrigTranID": null,
+          "from_acct_nbr": null,
+          "to_acct_nbr": null,
+          "Note": null,
+          "FailedLimitID": null,
+          "external_ref_nbr": null,
+          "upload_file": null,
+          "event_id": null,
+          "dev_address": null,
+          "custID": null,
+          "user_id": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Update a Transaction</h1>
+    <p>Updates the specified Transaction by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+    <p>This request accepts mostly the same arguments as the Transaction creation call.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>tranID</b> <small>required</small>
+    <hr>
+    <b>date_time</b> <small>required</small>
+    <hr>
+    <b>tran_status</b> <small>required</small>
+    <hr>
+    <b>error_code</b> <small>required</small>
+    <hr>
+    <b>tran_code</b> <small>required</small>
+    <hr>
+    <b>amt_req</b> <small>required</small>
+    <hr>
+    <b>amt_auth</b> <small>required</small>
+    <hr>
+    <b>CreateDate</b> <small>required</small>
+    <hr>
+    <b>dev_id</b> <small>optional</small>
+    <hr>
+    <b>FromCustID</b> <small>optional</small>
+    <hr>
+    <b>ToCustID</b> <small>optional</small>
+    <hr>
+    <b>card_nbr</b> <small>optional</small>
+    <hr>
+    <b>receipt_nbr</b> <small>optional</small>
+    <hr>
+    <b>cassette_1_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_2_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_3_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_4_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_5_disp</b> <small>optional</small>
+    <hr>
+    <b>cassette_6_disp</b> <small>optional</small>
+    <hr>
+    <b>track2</b> <small>optional</small>
+    <hr>
+    <b>bank_id_nbr</b> <small>optional</small>
+    <hr>
+    <b>coin_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_1_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_2_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_3_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_4_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_5_disp</b> <small>optional</small>
+    <hr>
+    <b>coin_6_disp</b> <small>optional</small>
+    <hr>
+    <b>cashBalance</b> <small>optional</small>
+    <hr>
+    <b>ActID</b> <small>optional</small>
+    <hr>
+    <b>CreateUser</b> <small>optional</small>
+    <hr>
+    <b>ModifiedDate</b> <small>optional</small>
+    <hr>
+    <b>ModifiedUser</b> <small>optional</small>
+    <hr>
+    <b>card_seq</b> <small>optional</small>
+    <hr>
+    <b>from_acct_id</b> <small>optional</small>
+    <hr>
+    <b>from_acct_type</b> <small>optional</small>
+    <hr>
+    <b>to_acct_id</b> <small>optional</small>
+    <hr>
+    <b>to_acct_type</b> <small>optional</small>
+    <hr>
+    <b>authID</b> <small>optional</small>
+    <hr>
+    <b>sec_tran_code</b> <small>optional</small>
+    <hr>
+    <b>BlockID</b> <small>optional</small>
+    <hr>
+    <b>AddFlag</b> <small>optional</small>
+    <hr>
+    <b>MoveFlag</b> <small>optional</small>
+    <hr>
+    <b>Description</b> <small>optional</small>
+    <hr>
+    <b>ChpFee</b> <small>optional</small>
+    <hr>
+    <b>DevCompanyNbr</b> <small>optional</small>
+    <hr>
+    <b>IssuingCompanyNbr</b> <small>optional</small>
+    <hr>
+    <b>BarcodeHash</b> <small>optional</small>
+    <hr>
+    <b>CheckCategoryID</b> <small>optional</small>
+    <hr>
+    <b>FeedActID</b> <small>optional</small>
+    <hr>
+    <b>OrigTranID</b> <small>optional</small>
+    <hr>
+    <b>from_acct_nbr</b> <small>optional</small>
+    <hr>
+    <b>to_acct_nbr</b> <small>optional</small>
+    <hr>
+    <b>Note</b> <small>optional</small>
+    <hr>
+    <b>FailedLimitID</b> <small>optional</small>
+    <hr>
+    <b>external_ref_nbr</b> <small>optional</small>
+    <hr>
+    <b>upload_file</b> <small>optional</small>
+    <hr>
+    <b>event_id</b> <small>optional</small>
+    <hr>
+    <b>dev_address</b> <small>optional</small>
+    <hr>
+    <b>custID</b> <small>optional</small>
+    <hr>
+    <b>user_id</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>PUT /api/v1/transactions/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "tranID": 318917,
+          "date_time": "2020-12-21T13:37:27.470Z",
+          "dev_id": 201,
+          "FromCustID": 94715,
+          "ToCustID": null,
+          "tran_status": 12,
+          "error_code": 0,
+          "tran_code": "WDL ",
+          "card_nbr": null,
+          "receipt_nbr": null,
+          "amt_req": "80.0",
+          "amt_auth": "80.0",
+          "cassette_1_disp": 0,
+          "cassette_2_disp": 4,
+          "cassette_3_disp": 0,
+          "cassette_4_disp": 0,
+          "cassette_5_disp": null,
+          "cassette_6_disp": null,
+          "track2": "0531030111",
+          "bank_id_nbr": null,
+          "coin_disp": null,
+          "coin_1_disp": 0,
+          "coin_2_disp": 0,
+          "coin_3_disp": 0,
+          "coin_4_disp": 0,
+          "coin_5_disp": null,
+          "coin_6_disp": null,
+          "cashBalance": null,
+          "ActID": 75318,
+          "CreateDate": "2020-12-21T13:37:27.470Z",
+          "CreateUser": null,
+          "ModifiedDate": null,
+          "ModifiedUser": null,
+          "card_seq": null,
+          "from_acct_id": 75318,
+          "from_acct_type": null,
+          "to_acct_id": null,
+          "to_acct_type": null,
+          "authID": null,
+          "sec_tran_code": "ALL ",
+          "BlockID": null,
+          "AddFlag": null,
+          "MoveFlag": null,
+          "Description": "Withdrawal at Arafath NDC ATM",
+          "ChpFee": null,
+          "DevCompanyNbr": 3,
+          "IssuingCompanyNbr": 30,
+          "BarcodeHash": null,
+          "CheckCategoryID": null,
+          "FeedActID": null,
+          "OrigTranID": null,
+          "from_acct_nbr": null,
+          "to_acct_nbr": null,
+          "Note": null,
+          "FailedLimitID": null,
+          "external_ref_nbr": null,
+          "upload_file": null,
+          "event_id": null,
+          "dev_address": null,
+          "custID": null,
+          "user_id": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Delete a Transaction</h1>
+    <p>Permanently deletes a Transaction. It cannot be undone.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Message: "Transaction deleted". If the Transaction identifier does not exist, this call raises an error.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>DELETE /api/v1/transactions/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+          Transaction deleted
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>List All Transactions</h1>
+    <p>Returns a list of your transactions. The transactions are returned in the order they were created, with the oldest transactions appearing first.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>dev_id</b> <small>optional</small>
+    <hr>
+    <b>start_time</b> <small>optional</small>
+    <hr>
+    <b>end_time</b> <small>optional</small>
+    <hr>
+    <b>FromCustID</b> <small>optional</small>
+    <hr>
+    <b>ToCustID</b> <small>optional</small>
+    <hr>
+    <b>to_acct_id</b> <small>optional</small>
+    <hr>
+    <b>tran_status</b> <small>optional</small>
+    <hr>
+    <b>tran_code</b> <small>optional</small>
+    <hr>
+    <b>sec_tran_code</b> <small>optional</small>
+    <hr>
+    <b>tran_codes</b> <small>optional</small>
+    <hr>
+    <b>sec_tran_codes</b> <small>optional</small>
+    <hr>
+    <b>error_code</b> <small>optional</small>
+    <hr>
+    <b>OrigTranID</b> <small>optional</small>
+    <hr>
+    <b>limit</b> <small>optional</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      An array of transactions. Passing optional parameter(s) will result in filtering the transactions by the passed parameter(s). 
+      Each entry in the array is a separate transaction object. Use limit parameter to specify the number of objects in the array.
+      If no more transactions are available, the resulting array will be empty. 
+      This request should never raise an error.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/transactions</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        [
+          {
+            "tranID": 318917,
+            "date_time": "2020-12-21T13:37:27.470Z",
+            "dev_id": 201,
+            "FromCustID": 94715,
+            "ToCustID": null,
+            "tran_status": 12,
+            "error_code": 0,
+            "tran_code": "WDL ",
+            "card_nbr": null,
+            "receipt_nbr": null,
+            "amt_req": "80.0",
+            "amt_auth": "80.0",
+            "cassette_1_disp": 0,
+            "cassette_2_disp": 4,
+            "cassette_3_disp": 0,
+            "cassette_4_disp": 0,
+            "cassette_5_disp": null,
+            "cassette_6_disp": null,
+            "track2": "0531030111",
+            "bank_id_nbr": null,
+            "coin_disp": null,
+            "coin_1_disp": 0,
+            "coin_2_disp": 0,
+            "coin_3_disp": 0,
+            "coin_4_disp": 0,
+            "coin_5_disp": null,
+            "coin_6_disp": null,
+            "cashBalance": null,
+            "ActID": 75318,
+            "CreateDate": "2020-12-21T13:37:27.470Z",
+              ...
+          },
+          {...},
+          {...}
+        ]
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <p>Powered by <a href="https://www.tranact.com" target="_blank" class="w3-hover-text-green">Tranact</a></p>
+</footer>
+
+</body>
+</html>

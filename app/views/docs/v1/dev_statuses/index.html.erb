@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<title>DeviceStatuses - EZcash API</title>
+<%= render partial: 'docs/v1/shared/head' %>
+<body>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+  
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" >
+<%= render partial: 'docs/v1/shared/navigation' %>
+</header>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>DevStatuses</h1>
+    <p>
+    DevStatus objects allow you to perform calls on dev_statuses. 
+    The API allows you to create, delete, and update dev_statuses. 
+    You can retrieve individual dev_statuses as well as a list of all dev_statuses.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>END POINTS</h5>
+      POST /api/v1/dev_statuses
+      <br>
+      GET /api/v1/dev_statuses/:id?dev_id=:device_id
+      <br>
+      PUT /api/v1/dev_statuses/:id?dev_id=:device_id
+      <br>
+      DELETE /api/v1/dev_statuses/:id?dev_id=:device_id
+      <br>
+      GET /api/v1/dev_statuses
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>The DevStatus Object</h1>
+    <h5>Attributes</h5>
+    <hr>
+    <b>status</b> <small>char (:id)</small>
+    <hr>
+    <b>dev_id</b> <small>integer</small>
+    <hr>
+    <b>date_time</b> <small>datetime</small>
+    <hr>
+    <b>raw_status</b> <small>varchar</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>THE DEV STATUS OBJECT</h5>
+      <pre>
+        {
+          "dev_id": 301,
+          "date_time": "2020-11-30T15:00:19.000Z",
+          "status": "9025",
+          "raw_status": "P1011100011110"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Create a DevStatus</h1>
+    <h5>Parameters</h5>
+    <hr>
+    <b>status</b> <small>required</small>
+    <hr>
+    <b>dev_id</b> <small>required</small>
+    <hr>
+    <b>date_time</b> <small>required</small>
+    <hr>
+    <b>raw_status</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>POST /api/v1/dev_statuses</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "dev_id": 301,
+          "date_time": "2020-11-30T15:00:19.000Z",
+          "status": "9025",
+          "raw_status": "P1011100011110"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Retrieve a DevStatus</h1>
+    <p>Retrieves the details of an existing Devtatus. You need only supply the unique identifier was returned upon DevStatus creation.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>dev_id</b> <small>required</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Returns a DevStatus object if a valid identifier was provided.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/dev_statuses/:id?dev_id=:device_id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "dev_id": 301,
+          "date_time": "2020-11-30T15:00:19.000Z",
+          "status": "9025",
+          "raw_status": "P1011100011110"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Update a DevStatus</h1>
+    <p>Updates the specified DevStatus by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+    <p>This request accepts mostly the same arguments as the DevStatus creation call.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>status</b> <small>required</small>
+    <hr>
+    <b>dev_id</b> <small>required</small>
+    <hr>
+    <b>date_time</b> <small>required</small>
+    <hr>
+    <b>raw_status</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>PUT /api/v1/dev_statuses/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "dev_id": 301,
+          "date_time": "2020-11-30T15:00:19.000Z",
+          "status": "9025",
+          "raw_status": "P1011100011110"
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Delete a DevStatus</h1>
+    <p>Permanently deletes a DevStatus. It cannot be undone.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>dev_id</b> <small>required</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Message: "DevStatus deleted". If the DevStatus identifier does not exist, this call raises an error.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>DELETE /api/v1/device_statuses/:id?dev_id=:device_id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+          DevStatus deleted
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>List All DevStatuses</h1>
+    <p>Returns a list of your dev_statuses. The dev_statuses are returned in the order they were created, with the oldest dev_statuses appearing first.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>dev_id</b> <small>optional</small>
+    <hr>
+    <b>status</b> <small>optional</small>
+    <hr>
+    <b>start_time</b> <small>optional</small>
+    <hr>
+    <b>end</b> <small>optional</small>
+    <hr>
+    <b>limit</b> <small>optional</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      An array of dev_statuses. Passing optional parameter(s) will result in filtering the dev_statuses by the passed parameter(s). 
+      Each entry in the array is a separate dev_status object. Use limit parameter to specify the number of objects in the array.
+      If no more dev_statuses are available, the resulting array will be empty. 
+      This request should never raise an error.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/dev_statuses</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        [
+          {
+            "dev_id": 301,
+            "date_time": "2020-11-30T15:00:19.000Z",
+            "status": "9025",
+            "raw_status": "P1011100011110"
+          },
+          {...},
+          {...}
+        ]
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <p>Powered by <a href="https://www.tranact.com" target="_blank" class="w3-hover-text-green">Tranact</a></p>
+</footer>
+
+</body>
+</html>

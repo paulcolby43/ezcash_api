@@ -1,6 +1,7 @@
 class Denom < ApplicationRecord
 #  seslf.primary_key = 'dev_id'
-  self.primary_key = 'cassette_id'
+#  self.primary_key = 'cassette_id'
+  self.primary_keys = :cassette_id, :dev_id #Composite primary keys
   
   belongs_to :device, :foreign_key => 'dev_id'
   

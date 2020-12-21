@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<title>CustomerBarcodes - EZcash API</title>
+<%= render partial: 'docs/v1/shared/head' %>
+<body>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+  
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" >
+<%= render partial: 'docs/v1/shared/navigation' %>
+</header>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>CustomerBarcodes</h1>
+    <p>
+    CustomerBarcode objects allow you to perform calls on customer_barcodes. 
+    The API allows you to create, delete, and update customer_barcodes. The API
+    will also allow you to check the authorization details of a customer_barcode.
+    You can retrieve individual customer_barcodes as well as a list of all customer_barcodes.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>END POINTS</h5>
+      POST /api/v1/customer_barcodes
+      <br>
+      GET /api/v1/customer_barcodes/:id
+      <br>
+      PUT /api/v1/customer_barcodes/:id
+      <br>
+      DELETE /api/v1/customer_barcodes/:id
+      <br>
+      GET /api/v1/customer_barcodes
+      <br>
+      GET /api/v1/customer_barcodes/authorization?Barcode=:barcode
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>The CustomerBarcode Object</h1>
+    <h5>Attributes</h5>
+    <hr>
+    <b>RowID</b> <small>unique identifier - integer (:id)</small>
+    <hr>
+    <b>CustomerID</b> <small>integer</small>
+    <hr>
+    <b>CompanyNumber</b> <small>integer</small>
+    <hr>
+    <b>date_time</b> <small>datetime</small>
+    <hr>
+    <b>Barcode</b> <small>varchar</small>
+    <hr>
+    <b>TranID</b> <small>integer</small>
+    <hr>
+    <b>Used</b> <small>integer</small>
+    <hr>
+    <b>amount</b> <small>money</small>
+    <hr>
+    <b>ActID</b> <small>integer</small>
+    <hr>
+    <b>DevID</b> <small>integer</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>THE CUSTOMER BARCODE OBJECT</h5>
+      <pre>
+        {
+          "RowID": 19327,
+          "CustomerID": null,
+          "date_time": "2020-12-16T14:48:38.000Z",
+          "CompanyNumber": null,
+          "Barcode": "5358351135",
+          "TranID": 318874,
+          "Used": 1,
+          "amount": "0.0",
+          "ActID": 75326,
+          "DevID": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Create a CustomerBarcode</h1>
+    <h5>Parameters</h5>
+    <hr>
+    <b>RowID</b> <small>required</small>
+    <hr>
+    <b>date_time</b> <small>required</small>
+    <hr>
+    <b>Barcode</b> <small>required</small>
+    <hr>
+    <b>CustomerID</b> <small>optional</small>
+    <hr>
+    <b>CompanyNumber</b> <small>optional</small>
+    <hr>
+    <b>TranID</b> <small>optional</small>
+    <hr>
+    <b>Used</b> <small>optional</small>
+    <hr>
+    <b>amount</b> <small>optional</small>
+    <hr>
+    <b>ActID</b> <small>optional</small>
+    <hr>
+    <b>DevID</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>POST /api/v1/customer_barcodes</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "RowID": 19327,
+          "CustomerID": null,
+          "date_time": "2020-12-16T14:48:38.000Z",
+          "CompanyNumber": null,
+          "Barcode": "5358351135",
+          "TranID": 318874,
+          "Used": 1,
+          "amount": "0.0",
+          "ActID": 75326,
+          "DevID": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Retrieve a CustomerBarcode</h1>
+    <p>Retrieves the details of an existing CustomerBarcode. You need only supply the unique identifier that was returned upon CustomerBarcode creation.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Returns a CustomerBarcode object if a valid identifier was provided.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/customer_barcodes/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "RowID": 19327,
+          "CustomerID": null,
+          "date_time": "2020-12-16T14:48:38.000Z",
+          "CompanyNumber": null,
+          "Barcode": "5358351135",
+          "TranID": 318874,
+          "Used": 1,
+          "amount": "0.0",
+          "ActID": 75326,
+          "DevID": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Update a CustomerBarcode</h1>
+    <p>Updates the specified CustomerBarcode by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+    <p>This request accepts mostly the same arguments as the CustomerBarcode creation call.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>RowID</b> <small>required</small>
+    <hr>
+    <b>date_time</b> <small>required</small>
+    <hr>
+    <b>Barcode</b> <small>required</small>
+    <hr>
+    <b>CustomerID</b> <small>optional</small>
+    <hr>
+    <b>CompanyNumber</b> <small>optional</small>
+    <hr>
+    <b>TranID</b> <small>optional</small>
+    <hr>
+    <b>Used</b> <small>optional</small>
+    <hr>
+    <b>amount</b> <small>optional</small>
+    <hr>
+    <b>ActID</b> <small>optional</small>
+    <hr>
+    <b>DevID</b> <small>optional</small>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>PUT /api/v1/customer_barcodes/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "RowID": 19327,
+          "CustomerID": null,
+          "date_time": "2020-12-16T14:48:38.000Z",
+          "CompanyNumber": null,
+          "Barcode": "5358351135",
+          "TranID": 318874,
+          "Used": 1,
+          "amount": "0.0",
+          "ActID": 75326,
+          "DevID": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Delete a CustomerBarcode</h1>
+    <p>Permanently deletes a CustomerBarcode. It cannot be undone.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <p>No parameters</p>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>Message: "CustomerBarcode deleted". If the CustomerBarcode identifier does not exist, this call raises an error.</p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>DELETE /api/v1/customer_barcodes/:id</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+          CustomerBarcode deleted
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>List All CustomerBarcodes</h1>
+    <p>Returns a list of your customer_barcodes. The customer_barcodes are returned in the order they were created, with the oldest customer_barcodes appearing first.</p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>CustomerID</b> <small>optional</small>
+    <hr>
+    <b>DevID</b> <small>optional</small>
+    <hr>
+    <b>Barcode</b> <small>optional</small>
+    <hr>
+    <b>TranID</b> <small>optional</small>
+    <hr>
+    <b>Used</b> <small>optional</small>
+    <hr>
+    <b>ActID</b> <small>optional</small>
+    <hr>
+    <b>start_time</b> <small>optional</small>
+    <hr>
+    <b>end_time</b> <small>optional</small>
+    <hr>
+    <b>limit</b> <small>optional</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      An array of customer_barcodes. Passing optional parameter(s) will result in filtering the customer_barcodes by the passed parameter(s). 
+      Each entry in the array is a separate customer_barcode object. Use limit parameter to specify the number of objects in the array.
+      If no more customer_barcodes are available, the resulting array will be empty. 
+      This request should never raise an error.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/customer_barcodes</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        [
+          {
+            "RowID": 19327,
+            "CustomerID": null,
+            "date_time": "2020-12-16T14:48:38.000Z",
+            "CompanyNumber": null,
+            "Barcode": "5358351135",
+            "TranID": 318874,
+            "Used": 1,
+            "amount": "0.0",
+            "ActID": 75326,
+            "DevID": null
+          },
+          {...},
+          {...}
+        ]
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Retrieve the Authorization Details of a CustomerBarcode</h1>
+    <p>Returns the authorization details of your customer_barcode. The customer_barcode authorization details, along with the details of the existing CustomerBarcode, are returned.
+      The Barcode must be passed as a parameter.
+    </p>
+    <h5>Parameters</h5>
+    <hr>
+    <b>Barcode</b> <small>required</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      Returns the authorization details of a CustomerBarcode object, along with the regular details of a CustomerBarcode object, if a valid Barcode was provided.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/customer_barcodes</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        {
+          "authorized": true,
+          "authorized_amount": 2.0,
+          "available_balance": "25.0",
+          "single_withdrawal_limit": null,
+          "daily_withdrawal_limit": null,
+          "requested_amount": 2.0,
+          "RowID": 2,
+          "CustomerID": 65523,
+          "date_time": "2018-02-19T10:59:06.000Z",
+          "CompanyNumber": 3,
+          "Barcode": "097846993",
+          "TranID": null,
+          "Used": 0,
+          "amount": "2.0",
+          "ActID": 75317,
+          "DevID": null
+        }
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <p>Powered by <a href="https://www.tranact.com" target="_blank" class="w3-hover-text-green">Tranact</a></p>
+</footer>
+
+</body>
+</html>

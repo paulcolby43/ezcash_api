@@ -55,7 +55,8 @@ class Api::V1::DevStatusesController < ApplicationController
   private
   
   def set_dev_status
-    @dev_status = DevStatus.find(params[:id])
+#    @dev_status = DevStatus.find(params[:id])
+    @dev_status = DevStatus.find([params[:id], params[:dev_id]])
   end
   
   def dev_statuses_limit
