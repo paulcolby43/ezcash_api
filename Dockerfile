@@ -15,6 +15,8 @@ RUN apt-get install -y freetds-dev freetds-bin tdsodbc
 
 # RUN apt-get install -y build-essential libpq-dev nodejs
 
+RUN apt-get install vim -y --force-yes
+
 # Install gems
 RUN bundle install
 

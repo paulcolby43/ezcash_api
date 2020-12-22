@@ -9,6 +9,16 @@ services:
     image: tranact/ezcash_api_app:development
     # environment:
     #  - EZCASH_PASSWORD=${EZCASH_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          #cpus: 0.50
+          cpus: '1'
+          memory: 4GB
+        reservations:
+          #cpus: 0.25
+          cpus: '0.50'
+          memory: 3GB
 
   web:
     build:
@@ -21,6 +31,16 @@ services:
       - api
     links:
       - api
+    deploy:
+      resources:
+        limits:
+          #cpus: 0.50
+          cpus: '1'
+          memory: 4GB
+        reservations:
+          #cpus: 0.25
+          cpus: '0.50'
+          memory: 3GB
 
   nginx:
     build:
@@ -32,3 +52,13 @@ services:
       - 80:80
       - 443:443
     image: tranact/ezcash_api_nginx:development
+    deploy:
+      resources:
+        limits:
+          #cpus: 0.50
+          cpus: '0.25'
+          memory: 3GB
+        reservations:
+          #cpus: 0.25
+          cpus: '0.12'
+          memory: 1GB
