@@ -1,10 +1,13 @@
 class Api::V1::BillCountsController < ApplicationController
   before_action :set_bill_count, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /bill_counts
   def index
 #    @bill_counts = BillCount.all
-    @bill_counts = BillCount.device(params[:dev_id])
+#    @bill_counts = BillCount.device(params[:dev_id])
+    @bill_counts = current_user.company.bill_counts.device(params[:dev_id])
     .device(params[:device_id])
     .cassette_nbr(params[:cassette_nbr])
     .cassette_id(params[:cassette_id])

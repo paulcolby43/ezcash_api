@@ -1,14 +1,16 @@
 class Api::V1::BillHistsController < ApplicationController
   before_action :set_bill_hist, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /bill_hists
   def index
 #    @bill_hists = BillHist.all
-    @bill_hists = BillHist.denomination(params[:denomination])
+#    @bill_hists = BillHist.denomination(params[:denomination])
+    @bill_hists = current_user.company.bill_hists.denomination(params[:denomination])
     .start_time(parse_datetime(params[:start_time]))
     .end_time(parse_datetime(params[:end_time]))
     .device(params[:dev_id])
-    .device(params[:device_id])
     .cassette_id(params[:cassette_id])
     .user_name(params[:user_name])
     .cut_date(parse_datetime(params[:cut_dt]))
@@ -64,9 +66,9 @@ class Api::V1::BillHistsController < ApplicationController
   end
   
   def set_bill_hist
-#    @bill_hist = BillHist.find(params[:id])
+    @bill_hist = BillHist.find(params[:id])
 #    @bill_hist = BillHist.find_by(dev_id: params[:dev_id], cassette_id: params[:id])
-    @bill_hist = BillHist.find([params[:id], params[:dev_id]])
+#    @bill_hist = BillHist.find([params[:id], params[:dev_id]])
   end
   
   def bill_hist_params

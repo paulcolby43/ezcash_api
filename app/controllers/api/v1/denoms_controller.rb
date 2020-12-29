@@ -1,10 +1,13 @@
 class Api::V1::DenomsController < ApplicationController
   before_action :set_denom, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /denoms
   def index
 #    @denoms = Denom.all
-    @denoms = Denom.denomination(params[:denomination])
+#    @denoms = Denom.denomination(params[:denomination])
+    @denoms = current_user.company.denoms.denomination(params[:denomination])
     .device(params[:dev_id])
     .cassette_nbr(params[:cassette_nbr])
     .cassette_id(params[:cassette_id])

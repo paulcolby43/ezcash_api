@@ -1,10 +1,13 @@
 class Api::V1::AuthParamsController < ApplicationController
   before_action :set_auth_param, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /auth_params
   def index
 #    @auth_params = AuthParam.all
-    @auth_params = AuthParam.device(params[:dev_id])
+#    @auth_params = AuthParam.device(params[:dev_id])
+    @auth_params = current_user.company.auth_params.device(params[:dev_id])
     .device(params[:device_id])
     .param_name(params[:param_name])
     .description(params[:description])

@@ -4,6 +4,7 @@ class DevStatus < ApplicationRecord
   self.table_name = 'dev_statuses'
   
   belongs_to :device, :foreign_key => 'dev_id'
+  belongs_to :company
   
   scope :device, ->(dev_id) { where("dev_id = ?", dev_id) unless dev_id.blank?}
   scope :status, ->(status) { where("status = ?", status) unless status.blank?}

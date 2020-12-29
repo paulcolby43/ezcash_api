@@ -1,14 +1,15 @@
-class FeeDef < ApplicationRecord
-  self.table_name= 'FeeDefs'
-  self.primary_key = 'FeeID'
+class Group < ApplicationRecord
+  self.table_name= 'Groups'
+  self.primary_key = 'GroupID'
   
-  belongs_to :device, :foreign_key => 'dev_id'
+  belongs_to :group_company, :foreign_key => "GroupID"
+  has_many :users, :foreign_key => "dev_group"
   belongs_to :company
+  
   
   #############################
   #     Instance Methods      #
   #############################
-  
   
   
   #############################

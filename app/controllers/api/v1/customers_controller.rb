@@ -1,10 +1,13 @@
 class Api::V1::CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /customers
   def index
 #    @customers = Customer.all
-    @customers = Customer.company(params[:CompanyNumber])
+#    @customers = Customer.company(params[:CompanyNumber])
+    @customers = current_user.company.customers.company(params[:CompanyNumber])
     .limit(customers_limit)
 #    render json: @customers
     render json: JSON.pretty_generate(JSON.parse(@customers.to_json))
@@ -75,5 +78,5 @@ class Api::V1::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:NameF, :NameL, :CompanyNumber)
   end
-      
+  
 end

@@ -1,10 +1,13 @@
 class Api::V1::CustomerBarcodesController < ApplicationController
   before_action :set_customer_barcode, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /customer_barcodes
   def index
 #    @customer_barcodes = CustomerBarcode.all
-    @customer_barcodes = CustomerBarcode.customer_id(params[:CustomerID])
+#    @customer_barcodes = CustomerBarcode.customer_id(params[:CustomerID])
+    @customer_barcodes = current_user.company.customer_barcodes.customer_id(params[:CustomerID])
     .device(params[:DevID])
     .company_number(params[:CompanyNumber])
     .barcode(params[:Barcode])

@@ -1,9 +1,12 @@
 class Api::V1::DevStatusesController < ApplicationController
   before_action :set_dev_status, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /dev_statuses
   def index
-    @dev_statuses = DevStatus.device(params[:dev_id])
+#    @dev_statuses = DevStatus.device(params[:dev_id])
+    @dev_statuses = current_user.company.dev_statuses.device(params[:dev_id])
     .device(params[:device_id])
     .status(params[:status])
     .start_time(parse_datetime(params[:start_time]))

@@ -1,5 +1,7 @@
 class Api::V1::StatusDescsController < ApplicationController
   before_action :set_status_desc, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /status_descs
   def index

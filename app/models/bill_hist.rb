@@ -1,9 +1,10 @@
 class BillHist < ApplicationRecord
 #  self.primary_key = 'cassette_id'
-  self.primary_keys = :cassette_id, :dev_id #Composite primary keys
+#  self.primary_keys = :cassette_id, :dev_id #Composite primary keys
   self.table_name= 'bill_hist'
   
   belongs_to :device, :foreign_key => 'dev_id'
+  belongs_to :company
   
   scope :denomination, ->(denomination) { where("denomination = ?", denomination) unless denomination.blank?}
   scope :device, ->(dev_id) { where("dev_id = ?", dev_id) unless dev_id.blank?}

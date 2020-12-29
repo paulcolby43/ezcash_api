@@ -1,9 +1,12 @@
 class Api::V1::TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /transactions
   def index
-    @transactions = Transaction.device(params[:dev_id])
+#    @transactions = Transaction.device(params[:dev_id])
+    @transactions = current_user.company.transactions.device(params[:dev_id])
     .start_time(parse_datetime(params[:start_time]))
     .end_time(parse_datetime(params[:end_time]))
     .from_customer_id(params[:FromCustID])

@@ -1,10 +1,13 @@
 class Api::V1::AccountsController < ApplicationController
   before_action :set_account, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /accounts
   def index
 #    @accounts = Account.all
-    @accounts = Account.active(params[:Active])
+#    @accounts = Account.active(params[:Active])
+    @accounts = current_user.company.accounts.active(params[:Active])
       .customer(params[:CustomerID])
       .company(params[:CompanyNumber])
       .account_type(params[:ActTypeID])

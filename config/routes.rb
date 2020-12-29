@@ -26,7 +26,14 @@ Rails.application.routes.draw do
       resources :auth_params
       resources :accounts
       resources :account_types
-      resources :users
+      resources :users do
+        member do
+          get 'generate_api_token'
+        end
+      end
+      resources :role_permissions
+      resources :companies
+      resources :fee_defs
     end
   end
   

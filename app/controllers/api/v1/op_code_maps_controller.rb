@@ -1,5 +1,7 @@
 class Api::V1::OpCodeMapsController < ApplicationController
   before_action :set_op_code_map, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /op_code_maps
   def index

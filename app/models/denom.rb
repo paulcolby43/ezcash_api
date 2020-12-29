@@ -4,6 +4,7 @@ class Denom < ApplicationRecord
   self.primary_keys = :cassette_id, :dev_id #Composite primary keys
   
   belongs_to :device, :foreign_key => 'dev_id'
+  belongs_to :company
   
   scope :denomination, ->(denomination) { where("denomination = ?", denomination) unless denomination.blank?}
   scope :device, ->(dev_id) { where("dev_id = ?", dev_id) unless dev_id.blank?}

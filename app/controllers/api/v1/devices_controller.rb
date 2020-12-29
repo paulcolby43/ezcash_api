@@ -1,10 +1,13 @@
 class Api::V1::DevicesController < ApplicationController
   before_action :set_device, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /devices
   def index
-    @devices = Device.all
-#    @devices = Device.device_name(params[:device_name])
+#    @devices = Device.all
+#    @devices = Device.company_number(params[:CompanyNbr])
+    @devices = current_user.company.devices
 #    .device_name(params[:device_name])
 #    .yard_id(params[:yardid])
 #    render json: @devices

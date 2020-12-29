@@ -1,5 +1,7 @@
 class Api::V1::TranStatusDescsController < ApplicationController
   before_action :set_tran_status_desc, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /tran_status_descs
   def index

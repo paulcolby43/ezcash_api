@@ -1,9 +1,12 @@
 class Api::V1::AccountTypesController < ApplicationController
   before_action :set_account_type, only: [:show, :update, :destroy]
+  before_action :authenticate
+  load_and_authorize_resource
   
   # GET /account_types
   def index
     @account_types = AccountType.all
+    @account_types = current_user.company.account_types
 #    @account_types = AccountType.active(params[:Active])
 #      .customer(params[:CustomerID])
 #      .company(params[:CompanyNumber])

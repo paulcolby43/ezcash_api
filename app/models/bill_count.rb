@@ -3,6 +3,7 @@ class BillCount < ApplicationRecord
   self.primary_keys = :cassette_nbr, :dev_id #Composite primary keys
   
   belongs_to :device, :foreign_key => 'dev_id'
+  belongs_to :company
   
   scope :device, ->(dev_id) { where("dev_id = ?", dev_id) unless dev_id.blank?}
   scope :cassette_nbr, ->(cassette_nbr) { where("cassette_nbr = ?", cassette_nbr) unless cassette_nbr.blank?}

@@ -2,7 +2,8 @@ class Transaction < ApplicationRecord
   self.primary_key = 'tranID'
   self.table_name= 'transactions'
   
-  belongs_to :device, :foreign_key => 'dev_id'
+  belongs_to :device, :foreign_key => 'dev_id', optional: true
+  belongs_to :company, :foreign_key => "DevCompanyNbr"
   
   scope :device, ->(dev_id) { where("dev_id = ?", dev_id) unless dev_id.blank?}
   scope :from_customer_id, ->(fromcustid) { where("FromCustID = ?", fromcustid) unless fromcustid.blank?}
