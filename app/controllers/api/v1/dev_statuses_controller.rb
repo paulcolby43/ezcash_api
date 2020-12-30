@@ -6,8 +6,8 @@ class Api::V1::DevStatusesController < ApplicationController
   # GET /dev_statuses
   def index
 #    @dev_statuses = DevStatus.device(params[:dev_id])
-    @dev_statuses = current_user.company.dev_statuses.device(params[:dev_id])
-    .device(params[:device_id])
+#    @dev_statuses = current_user.company.dev_statuses.device(params[:dev_id])
+    @dev_statuses = DevStatus.device(params[:dev_id])
     .status(params[:status])
     .start_time(parse_datetime(params[:start_time]))
     .end_time(parse_datetime(params[:end_time]))

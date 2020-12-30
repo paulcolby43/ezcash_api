@@ -7,7 +7,7 @@ class Denom < ApplicationRecord
   belongs_to :company
   
   scope :denomination, ->(denomination) { where("denomination = ?", denomination) unless denomination.blank?}
-  scope :device, ->(dev_id) { where("dev_id = ?", dev_id) unless dev_id.blank?}
+  scope :device, ->(dev_id) { where(dev_id: dev_id) unless dev_id.blank?}
   scope :cassette_nbr, ->(cassette_nbr) { where("cassette_nbr = ?", cassette_nbr) unless cassette_nbr.blank?}
   scope :cassette_id, ->(cassette_id) { where("cassette_id = ?", cassette_id) unless cassette_id.blank?}
   scope :currency_type, ->(currency_type) { where("currency_type = ?", currency_type) unless currency_type.blank?}
