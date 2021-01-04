@@ -15,9 +15,9 @@ class User < ApplicationRecord
   #     Instance Methods      #
   #############################
   
-  def as_json(options={})
-    super(except: [:pwd_hash])
-  end
+#  def as_json(options={})
+#    super(except: [:pwd_hash])
+#  end
   
 #  def id
 #    user_role_index

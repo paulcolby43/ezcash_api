@@ -124,6 +124,10 @@ class Ability
       end
       can :create, RolePermission
       
+    # StatusDescs
+      ############
+      can :index, StatusDesc
+      
     # TranStatusDescs
       ############
       can :index, TranStatusDesc
