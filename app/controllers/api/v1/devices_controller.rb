@@ -7,7 +7,7 @@ class Api::V1::DevicesController < ApplicationController
   def index
 #    @devices = Device.all
 #    @devices = Device.company_number(params[:CompanyNbr])
-    @devices = current_user.company.devices
+    @devices = current_user.company.devices.company_number(params[:CompanyNbr])
 #    .device_name(params[:device_name])
 #    .yard_id(params[:yardid])
 #    render json: @devices

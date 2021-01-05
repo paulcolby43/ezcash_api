@@ -9,7 +9,7 @@ class User < ApplicationRecord
   scope :user_name, ->(user_name) { where("user_name = ?", user_name) unless user_name.blank?}
   scope :company_id, ->(company_id) { where("company_id = ?", company_id) unless company_id.blank?}
   
-  before_create :set_auth_token
+#  before_create :set_auth_token
   
   #############################
   #     Instance Methods      #

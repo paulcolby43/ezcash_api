@@ -9,8 +9,8 @@ class Api::V1::UsersController < ApplicationController
   def index
 #    @users = User.all
 #    Rails.logger.debug "******logged in? #{logged_in?} #{current_user.blank? ? '' : current_user.user_name}"
-#    @users = User.user_name(params[:user_name])
-    @users = current_user.company.users.user_name(params[:user_name])
+#    @users = current_user.company.users.user_name(params[:user_name])
+    @users = User.user_name(params[:user_name])
     .company_id(params[:company_id])
 #    .user_name(params[:user_name])
 #    .yard_id(params[:yardid])

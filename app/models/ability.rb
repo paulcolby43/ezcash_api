@@ -73,6 +73,7 @@ class Ability
       end
       can :create, Company
       cannot :index, Company
+      can :read, Company
       
     # Customers
       ############
@@ -145,6 +146,7 @@ class Ability
         user.company == this_user.company
       end
       can :create, User
+      can :read, User
       
     
     
