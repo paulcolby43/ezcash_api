@@ -147,7 +147,6 @@ class Ability
       end
       can :create, User
       can :read, User
-      
     
     
   end
