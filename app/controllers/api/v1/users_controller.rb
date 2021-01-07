@@ -29,7 +29,7 @@ class Api::V1::UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-    if @user.save
+    if @user.company_id == current_user.company_id and @user.save
       render json: @user, status: 201
     else
       render error: {error: 'Unable to create User.'}, status: 400

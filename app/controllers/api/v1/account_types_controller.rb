@@ -28,7 +28,7 @@ class Api::V1::AccountTypesController < ApplicationController
   # POST /account_types
   def create
     @account_type = AccountType.new(account_type_params)
-    if @account_type.save
+    if @account_type.CompanyNumber == current_user.company_id and @account_type.save
       render json: @account_type, status: 201
     else
       render error: {error: 'Unable to create AccountType.'}, status: 400
