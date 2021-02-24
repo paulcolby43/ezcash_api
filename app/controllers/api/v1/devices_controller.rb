@@ -60,7 +60,7 @@ class Api::V1::DevicesController < ApplicationController
   end
   
   def device_params
-    params.require(:device).permit()
+    params.require(:device).permit(:online)
   end
       
 end

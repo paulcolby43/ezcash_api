@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api:
+    ports:
+      - "3000:3000"
+    image: tranact/ezcash_api_app:development
+    environment:
+      - EZCASH_HOST=${EZCASH_HOST}
+      - EZCASH_DATABASE=${EZCASH_DATABASE}
+      - EZCASH_USERNAME=${EZCASH_USERNAME}
+      - EZCASH_PASSWORD=${EZCASH_PASSWORD}
+
+  web:
+    ports:
+      - "3001:3001"
+    image: tranact/ezcash_web_app:development
+    depends_on:
+      - api
+    links:
+      - api
+
+  nginx:
+    domainname: "ezcash"
+    depends_on:
+      - api
+    ports:
+      - 80:80
+      - 443:443
+    image: tranact/ezcash_api_nginx:development
