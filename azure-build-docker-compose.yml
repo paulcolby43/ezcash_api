@@ -6,8 +6,7 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
-    #image: tranact/ezcash_api_app:development
-    image: tranact/ezcash_api_app:local_docker_development
+    image: tranact/ezcash_api_app:development
     # environment:
     #  - EZCASH_PASSWORD=${EZCASH_PASSWORD}
 
@@ -17,8 +16,7 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "3001:3001"
-    #image: tranact/ezcash_web_app:development
-    image: tranact/ezcash_web_app:local_docker_development
+    image: tranact/ezcash_web_app:development
     depends_on:
       - api
     links:
@@ -34,5 +32,4 @@ services:
     ports:
       - 80:80
       - 443:443
-    #image: tranact/ezcash_api_nginx:development
-    image: tranact/ezcash_api_nginx:local_docker_development
+    image: tranact/ezcash_api_nginx:development

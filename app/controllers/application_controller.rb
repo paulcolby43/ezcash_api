@@ -39,7 +39,7 @@ class ApplicationController < ActionController::API
 protected
 
 def authenticate
-#  Rails.logger.debug "****************#{request.authorization}"
+  Rails.logger.debug "****************#{request.authorization}"
   authenticate_or_request_with_http_token do |token, options|
     user = User.find_by(api_auth_token: token)
     unless user.blank?
