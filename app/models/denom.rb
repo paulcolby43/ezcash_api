@@ -3,8 +3,8 @@ class Denom < ApplicationRecord
 #  self.primary_key = 'cassette_id'
   self.primary_keys = :cassette_id, :dev_id #Composite primary keys
   
-  belongs_to :device, :foreign_key => 'dev_id'
-  belongs_to :company
+  belongs_to :device, :foreign_key => 'dev_id', optional: true
+  belongs_to :company, optional: true
   
   scope :denomination, ->(denomination) { where("denomination = ?", denomination) unless denomination.blank?}
   scope :device, ->(dev_id) { where(dev_id: dev_id) unless dev_id.blank?}

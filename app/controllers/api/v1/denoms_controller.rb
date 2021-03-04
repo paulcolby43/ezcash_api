@@ -9,6 +9,7 @@ class Api::V1::DenomsController < ApplicationController
 #    @denoms = Denom.denomination(params[:denomination])
     @denoms = current_user.company.denoms.denomination(params[:denomination])
     .device(params[:dev_id])
+    .device(params[:device_id])
     .cassette_nbr(params[:cassette_nbr])
     .cassette_id(params[:cassette_id])
     .currency_type(params[:currency_type])

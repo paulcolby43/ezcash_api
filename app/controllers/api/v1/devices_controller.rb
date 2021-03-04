@@ -60,7 +60,8 @@ class Api::V1::DevicesController < ApplicationController
   end
   
   def device_params
-    params.require(:device).permit(:online)
+    params.require(:device).permit(:dev_id, :description, :CompanyNbr, :online, :encryption_key, :load_file, :receipt_file, :ip_address, :maxcoin, :bills_in_bundle, :round_method, :advanced_ndc, 
+      :edge_atm, :monitor_site, :monitor_group, :coin_dev_id, :inactive_flag, :CompanyNbr, :LocCompanyNbr, :TMK_LMK, :PortNbr, :PINEnabled, denoms_attributes: [:id, :denomination, :dev_id, :cassette_nbr, :cassette_id, :currency_type])
   end
       
 end
