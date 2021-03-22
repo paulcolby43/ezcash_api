@@ -3,7 +3,7 @@ class BillCount < ApplicationRecord
   self.primary_keys = :cassette_nbr, :dev_id #Composite primary keys
   
   belongs_to :device, :foreign_key => 'dev_id'
-  belongs_to :company
+  belongs_to :company, optional: true
   
   scope :device, ->(dev_id) { where(dev_id: dev_id) unless dev_id.blank?}
   scope :cassette_nbr, ->(cassette_nbr) { where("cassette_nbr = ?", cassette_nbr) unless cassette_nbr.blank?}
@@ -27,6 +27,10 @@ class BillCount < ApplicationRecord
     else
       return nil
     end
+  end
+  
+  def denom
+    Denom.find([cassette_nbr, dev_id])
   end
   
   def attributes_with_denomination

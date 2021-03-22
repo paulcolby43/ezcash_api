@@ -4,12 +4,16 @@ class User < ApplicationRecord
   
 #  belongs_to :group, :foreign_key => "dev_group"
   belongs_to :company
-  has_many :role_permissions, :foreign_key => "RoleID"
+#  has_many :role_permissions
   
   scope :user_name, ->(user_name) { where("user_name = ?", user_name) unless user_name.blank?}
   scope :company_id, ->(company_id) { where("company_id = ?", company_id) unless company_id.blank?}
   
-#  before_create :set_auth_token
+  before_create :create_auth_token
+  before_create :encrypt_password
+  
+  validates :user_name, uniqueness: true
+  validates :api_auth_token, uniqueness: true
   
   #############################
   #     Instance Methods      #
@@ -23,8 +27,20 @@ class User < ApplicationRecord
 #    user_role_index
 #  end
 
+  def encrypt_password
+    self.pwd_hash = Digest::MD5.hexdigest(pwd_hash)
+  end
+  
+  def create_auth_token
+    self.api_auth_token = SecureRandom.uuid.gsub(/\-/,'')
+  end
+  
+  def role_permissions
+    RolePermission.where(RoleID: user_role_index)
+  end
+
   #############################
-  #     Class Methods        #
+  #     Class Methods         #
   #############################
   
   def self.authenticate(username, pass)

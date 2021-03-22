@@ -32,6 +32,7 @@ Rails.application.routes.draw do
         end
       end
       resources :role_permissions
+      resources :ez_permission_descs
       resources :companies
       resources :fee_defs
     end

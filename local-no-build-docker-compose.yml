@@ -1,0 +1,33 @@
+version: '3'
+services:
+  api:
+    restart: always
+    ports:
+      - "3000:3000"
+    image: tranact/ezcash_api_app:local_docker_development
+    environment:
+      - EZCASH_HOST=${EZCASH_HOST}
+      - EZCASH_DATABASE=${EZCASH_DATABASE}
+      - EZCASH_USERNAME=${EZCASH_USERNAME}
+      - EZCASH_PASSWORD=${EZCASH_PASSWORD}
+
+  web:
+    restart: always
+    ports:
+      - "3001:3001"
+    image: tranact/ezcash_web_app:local_docker_development
+    depends_on:
+      - api
+    links:
+      - api
+    environment:
+      - EZCASH_WSDL_URL=${EZCASH_WSDL_URL}
+
+  nginx:
+    restart: always
+    depends_on:
+      - api
+    ports:
+      - 80:80
+      - 443:443
+    image: tranact/ezcash_api_nginx:local_docker_development

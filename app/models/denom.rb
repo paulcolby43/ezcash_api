@@ -13,11 +13,26 @@ class Denom < ApplicationRecord
   scope :currency_type, ->(currency_type) { where("currency_type = ?", currency_type) unless currency_type.blank?}
   scope :device_and_cassette_nbr, ->(dev_id, cassette_nbr) { where("dev_id = ? AND cassette_nbr = ?", dev_id, cassette_nbr) unless dev_id.blank? or cassette_nbr.blank?}
   
+  after_create :create_bill_count
+  before_destroy :delete_bill_count
+  
   #############################
   #     Instance Methods      #
   #############################
   
+  def bill_count
+    BillCount.find([cassette_nbr, dev_id])
+  end
   
+  def create_bill_count
+    BillCount.create(cassette_nbr: self.cassette_nbr, cassette_id: self.cassette_id, dev_id: self.dev_id, host_start_count: 0, host_cycle_count: 0, dev_start_count: 0, dev_cycle_count: 0, dev_divert_count: 0,
+    added_count: 0, old_added: 0, status: 0)
+  end
+  
+  def delete_bill_count
+    bill_count = BillCount.find([cassette_nbr, dev_id])
+    bill_count.destroy unless bill_count.blank?
+  end
   
   #############################
   #     Class Methods         #
