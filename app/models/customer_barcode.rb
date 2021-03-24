@@ -3,10 +3,10 @@ class CustomerBarcode < ApplicationRecord
   self.table_name= 'CustomerBarcode'
   
   belongs_to :device, :foreign_key => 'DevID', optional: true
-  belongs_to :account, :foreign_key => 'ActID'
+  belongs_to :account, :foreign_key => 'ActID', optional: true
 # belongs_to :transaction, :foreign_key => 'TranID'
 # belongs_to :customer, :foreign_key => 'CustomerID'
- belongs_to :company, :foreign_key => 'CompanyNumber'
+  belongs_to :company, :foreign_key => 'CompanyNumber', optional: true
   
   scope :device, ->(dev_id) { where("DevID = ?", dev_id) unless dev_id.blank?}
   scope :customer_id, ->(customer_id) { where("CustomerID = ?", customer_id) unless customer_id.blank?}

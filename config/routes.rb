@@ -18,6 +18,12 @@ Rails.application.routes.draw do
           get 'authorization'
         end
       end
+      resources :cards do
+        collection do
+          get 'encode'
+          get 'void'
+        end
+      end
       resources :customers
       resources :dev_statuses
       resources :status_descs
@@ -48,6 +54,7 @@ Rails.application.routes.draw do
       resources :dev_statuses, only: [:index]
       resources :customers, only: [:index]
       resources :customer_barcodes, only: [:index]
+      resources :cards, only: [:index]
       resources :transactions, only: [:index]
       resources :bill_counts, only: [:index]
       resources :bill_hists, only: [:index]

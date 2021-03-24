@@ -6,8 +6,8 @@ class Api::V1::CustomerBarcodesController < ApplicationController
   # GET /customer_barcodes
   def index
 #    @customer_barcodes = CustomerBarcode.all
-#    @customer_barcodes = CustomerBarcode.customer_id(params[:CustomerID])
-    @customer_barcodes = current_user.company.customer_barcodes.customer_id(params[:CustomerID])
+#    @customer_barcodes = current_user.company.customer_barcodes.customer_id(params[:CustomerID])
+    @customer_barcodes = CustomerBarcode.customer_id(params[:CustomerID])
     .device(params[:DevID])
     .company_number(params[:CompanyNumber])
     .barcode(params[:Barcode])
@@ -61,7 +61,7 @@ class Api::V1::CustomerBarcodesController < ApplicationController
     end
   end
   
-  # GET /customer_barcodes/:id/authorization
+  # GET /customer_barcodes/authorization
   def authorization
 #    render json: JSON.pretty_generate(JSON.parse(@customer_barcode.to_json))
     @customer_barcode = CustomerBarcode.find_by(Barcode: params[:Barcode])

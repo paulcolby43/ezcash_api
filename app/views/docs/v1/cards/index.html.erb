@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<title>Cards - EZcash API</title>
+<%= render partial: 'docs/v1/shared/head' %>
+<body>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+  
+<!-- Header -->
+<header class="w3-panel w3-center w3-opacity" >
+<%= render partial: 'docs/v1/shared/navigation' %>
+</header>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Cards</h1>
+    <p>
+    Card objects allow you to perform calls on cards. 
+    The API allows you to create, delete, and update cards.
+    You can retrieve individual cards as well as a list of all cards.
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>END POINTS</h5>
+      POST /api/v1/cards
+      <br>
+      GET /api/v1/cards/:id
+      <br>
+      PUT /api/v1/cards/:id
+      <br>
+      DELETE /api/v1/cards/:id
+      <br>
+      GET /api/v1/cards
+      <br>
+      GET /api/v1/cards/encode
+      <br>
+      GET /api/v1/cards/void
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Encode TUD Interface Call - Create a Card</h1>
+    <h5>Parameters</h5>
+    <hr>
+    <b>payment_nbr</b> <small>required</small>
+    <hr>
+    <b>amount</b> <small>required</small>
+    <hr>
+    <b>dev_id</b> <small>optional</small>
+    <hr>
+    <b>date</b> <small>optional (yyyy-mm-dd)</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      Upon encoding, the program will either return SUCCESS or FAILED to indicate if the card was encoded correctly. 
+      SUCCESS will be followed by a space and a 10 character barcode. If the 'date' parameter is not included, it will encode today’s date. 
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/cards/encode</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        SUCCESS SXEJMJ0GQB
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
+  <div class="w3-half">
+    <h1>Void TUD Interface Call - Void a Card</h1>
+    <h5>Parameters</h5>
+    <hr>
+    <b>payment_nbr</b> <small>required</small>
+    <hr>
+    <b>amount</b> <small>required</small>
+    <hr>
+    <b>date</b> <small>required (yyyy-mm-dd)</small>
+    <hr>
+    <h5>Returns</h5>
+    <hr>
+    <p>
+      The rules are the same as for the encode command. The other information is required, as the full card number used in the database is calculated based on all of those fields.  
+      The response here will be one of the following:
+      <br>
+      SUCCESS - Card was voided and will no longer pay at the ATM.
+      <br>
+      REJECTED - Card was already paid. 
+      <br>
+      FAILED - Card is not in the system.
+      <br>
+      PARTIALPAY x.xx of y.yy: Indicates that part of the money ($x.xx) has already been dispensed out of a total of $y.yy. 
+    </p>
+  </div>
+
+  <div class="w3-half" style="padding-right:200px">
+    <div style="float:right;">
+      <h5>GET /api/v1/cards/encode</h5>
+      <h5>RESPONSE</h5>
+      <pre>
+        SUCCESS SXEJMJ0GQB
+      </pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large"> 
+  <p>Powered by <a href="https://www.tranact.com" target="_blank" class="w3-hover-text-green">Tranact</a></p>
+</footer>
+
+</body>
+</html>

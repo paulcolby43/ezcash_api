@@ -89,6 +89,13 @@ class Ability
       end
       can :create, CustomerBarcode
       
+    # Cards
+      ############
+      can :manage, Card do |card|
+        user.company == card.company
+      end
+      can :create, Card
+      
     # Denoms
       ############
       can :manage, Denom do |denom|
