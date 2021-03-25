@@ -53,9 +53,12 @@ Rails.application.configure do
   # Allow requests from 'api' docker container domain
   Rails.application.config.hosts << 'api'
   
+  # Allow requests from azure container domain
+  config.hosts << "ezcash.eastus.azurecontainer.io"
+  
   # Allow requests from any domain
 #  Rails.application.config.hosts = nil
   
-  config.hosts << "ezcash.eastus.azurecontainer.io"
+  
   
 end
