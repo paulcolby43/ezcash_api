@@ -114,6 +114,18 @@ class Api::V1::CardsController < ApplicationController
     end
   end
   
+  def inquire
+    amount = params[:amount]
+    payment_nbr = params[:payment_nbr]
+    date = "#{params[:date]} 00:00:00"
+    @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
+    unless @card.blank?
+      render plain: "payment_nbr=#{payment_nbr} barcode=#{@card.barcodeHash} initial_amt=#{@card.card_amt} avail_amt=#{@card.avail_amt} card_status=#{@card.card_status}"
+    else
+      render plain: "FAILED"
+    end
+  end
+  
   private
   
   def set_card

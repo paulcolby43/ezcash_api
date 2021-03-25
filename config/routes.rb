@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         collection do
           get 'encode'
           get 'void'
+          get 'inquire'
         end
       end
       resources :customers
