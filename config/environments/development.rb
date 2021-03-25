@@ -56,4 +56,6 @@ Rails.application.configure do
   # Allow requests from any domain
 #  Rails.application.config.hosts = nil
   
+  config.hosts << "ezcash.eastus.azurecontainer.io"
+  
 end

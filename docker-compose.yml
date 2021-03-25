@@ -6,8 +6,8 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
-    #image: tranact/ezcash_api_app:development
-    image: tranact/ezcash_api_app:local_docker_development
+    image: tranact/ezcash_api_app:development
+    #image: tranact/ezcash_api_app:local_docker_development
     # environment:
     #  - EZCASH_PASSWORD=${EZCASH_PASSWORD}
 
