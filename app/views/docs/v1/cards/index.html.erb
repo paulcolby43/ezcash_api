@@ -59,10 +59,10 @@
 
   <div class="w3-half" style="padding-right:200px">
     <div style="float:right;">
-      <h5>GET /api/v1/cards/encode</h5>
+      <h5>GET /api/v1/cards/encode?payment_nbr=201&amount=10</h5>
       <h5>RESPONSE</h5>
       <pre>
-        SUCCESS SXEJMJ0GQB
+        SUCCESS 4508066736
       </pre>
     </div>
   </div>
@@ -95,9 +95,9 @@
     </p>
   </div>
 
-  <div class="w3-half" style="padding-right:200px">
+  <div class="w3-half" style="padding-right:120px">
     <div style="float:right;">
-      <h5>GET /api/v1/cards/void</h5>
+      <h5>GET /api/v1/cards/void?payment_nbr=201&amount=10&date=2021-03-29</h5>
       <h5>RESPONSE</h5>
       <pre>
         SUCCESS
@@ -129,14 +129,14 @@
     </p>
   </div>
 
-  <div class="w3-half" style="padding-right:200px">
+  <div class="w3-half" style="padding-right:120px">
     <div style="float:right;">
-      <h5>GET /api/v1/cards/inquire</h5>
+      <h5>GET /api/v1/cards/inquire?payment_nbr=201&amount=10&date=2021-03-29</h5>
       <h5>RESPONSE</h5>
       <pre>
         payment_nbr=2000180000 
         <br>
-        barcode=B360D451438B50AC 
+        barcode=4508066736 
         <br>
         initial_amt=20.00 
         <br>
