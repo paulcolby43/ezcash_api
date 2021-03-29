@@ -67,7 +67,8 @@ class Api::V1::CardsController < ApplicationController
     payment_nbr = params[:payment_nbr]
     date = params[:date].blank? ? Date.today.to_s : params[:date]
     dev_id = params[:dev_id]
-    barcode = SecureRandom.alphanumeric(10).upcase
+#    barcode = SecureRandom.alphanumeric(10).upcase #Alphanumeric
+    barcode = ('%010d' % rand(0..9999999999)) #Numeric
     company_nbr = current_user.blank? ? nil : current_user.company_id
     @card = Card.new(card_amt: amount, avail_amt: amount, card_nbr: payment_nbr, receipt_nbr: payment_nbr, dev_id: dev_id, issued_date: date, 
       last_activity_date: date, card_status: 'AC', bank_id_nbr: 111101, barcodeHash: barcode, IssuingCompanyNbr: company_nbr)
