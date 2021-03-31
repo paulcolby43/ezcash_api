@@ -8,6 +8,7 @@ COPY . /application
 
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "tud_socketing:start"]
 
 # Install FreeTDS
 RUN apt-get update
