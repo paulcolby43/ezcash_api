@@ -6,9 +6,8 @@ WORKDIR /application
 # Copy application code
 COPY . /application
 
-EXPOSE 3000
+EXPOSE 3000 3334
 CMD ["rails", "server", "-b", "0.0.0.0"]
-CMD ["rails", "tud_socketing:start"]
 
 # Install FreeTDS
 RUN apt-get update

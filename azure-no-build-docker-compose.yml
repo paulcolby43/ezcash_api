@@ -3,6 +3,7 @@ services:
   api:
     ports:
       - "3000:3000"
+      - "3334:3334"
     image: tranact/ezcash_api_app:development
     environment:
       - EZCASH_HOST=${EZCASH_HOST}
