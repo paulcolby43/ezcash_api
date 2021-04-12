@@ -9,6 +9,7 @@ class Device < ApplicationRecord
   has_many :dev_statuses, :foreign_key => 'dev_id'
   has_many :fee_defs, :foreign_key => 'dev_id'
   has_many :statuses, through: :dev_statuses
+  has_many :cards, :foreign_key => 'dev_id'
   
   scope :company_number, ->(company_nbr) { where("CompanyNbr = ?", company_nbr) unless company_nbr.blank?}
   

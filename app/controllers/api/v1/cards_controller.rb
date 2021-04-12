@@ -68,13 +68,13 @@ class Api::V1::CardsController < ApplicationController
     date = params[:date].blank? ? Date.today.to_s : params[:date]
     dev_id = params[:dev_id]
 #    barcode = SecureRandom.alphanumeric(10).upcase #Alphanumeric
-    barcode = ('%010d' % rand(0..9999999999)) #Numeric
+#    barcode = ('%010d' % rand(0..9999999999)) #Numeric
     company_nbr = current_user.blank? ? nil : current_user.company_id
     @card = Card.new(card_amt: amount, avail_amt: amount, card_nbr: payment_nbr, receipt_nbr: payment_nbr, dev_id: dev_id, issued_date: date, 
-      last_activity_date: date, card_status: 'AC', bank_id_nbr: 111101, barcodeHash: barcode, IssuingCompanyNbr: company_nbr)
+      last_activity_date: date, card_status: 'AC', bank_id_nbr: 111101, IssuingCompanyNbr: company_nbr)
     if @card.save
 #      render json: @card, status: 201
-      render plain: "SUCCESS #{barcode}"
+      render plain: "SUCCESS #{@card.barcode_from_hash}"
     else
 #      render error: {error: 'Unable to create Card.'}, status: 400
       render plain: "FAILED"
@@ -121,7 +121,7 @@ class Api::V1::CardsController < ApplicationController
     date = "#{params[:date]} 00:00:00"
     @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
     unless @card.blank?
-      render plain: "payment_nbr=#{payment_nbr} barcode=#{@card.barcodeHash} initial_amt=#{@card.card_amt} avail_amt=#{@card.avail_amt} card_status=#{@card.card_status}"
+      render plain: "payment_nbr=#{payment_nbr} barcode=#{@card.barcode_from_hash} initial_amt=#{@card.card_amt} avail_amt=#{@card.avail_amt} card_status=#{@card.card_status}"
     else
       render plain: "FAILED"
     end
