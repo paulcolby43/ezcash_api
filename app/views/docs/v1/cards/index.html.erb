@@ -43,7 +43,7 @@
     <hr>
     <b>amount</b> <small>required</small>
     <hr>
-    <b>dev_id</b> <small>optional</small>
+    <b>dev_id</b> <small>required</small>
     <hr>
     <b>date</b> <small>optional (yyyy-mm-dd)</small>
     <hr>
@@ -55,9 +55,9 @@
     </p>
   </div>
 
-  <div class="w3-half" style="padding-right:200px">
+  <div class="w3-half" style="padding-right:128px">
     <div style="float:right;">
-      <h5>GET /api/v1/cards/encode?payment_nbr=201&amount=10</h5>
+      <h5>GET /api/v1/cards/encode?payment_nbr=201&amount=10&dev_id=100</h5>
       <h5>RESPONSE</h5>
       <pre>
         SUCCESS 4508066736

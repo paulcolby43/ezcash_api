@@ -6,6 +6,8 @@ class Card < ApplicationRecord
   
   before_create :create_barcode_hash
   
+  validates :card_nbr, uniqueness: true
+  
   #############################
   #     Instance Methods      #
   #############################

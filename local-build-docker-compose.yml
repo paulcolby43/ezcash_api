@@ -1,0 +1,39 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+      - "3334:3334"
+    image: tranact/ezcash_api_app:development
+    #image: tranact/ezcash_api_app:local_docker_development
+    # environment:
+    #  - EZCASH_PASSWORD=${EZCASH_PASSWORD}
+
+  web:
+    build:
+      context: "../ez_cash_web_monitor"
+      dockerfile: ./Dockerfile
+    ports:
+      - "3001:3001"
+    #image: tranact/ezcash_web_app:development
+    image: tranact/ezcash_web_app:local_docker_development
+    depends_on:
+      - api
+    links:
+      - api
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    domainname: "ezcash"
+    depends_on:
+      - api
+    ports:
+      - 80:80
+      - 443:443
+    #image: tranact/ezcash_api_nginx:development
+    image: tranact/ezcash_api_nginx:local_docker_development
