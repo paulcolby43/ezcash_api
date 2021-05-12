@@ -3,7 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+#gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
+gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3', '~> 1.4'
@@ -30,7 +31,7 @@ gem "figaro"
 
 # Connect to MS SQL Database
 gem 'tiny_tds'#, '~> 0.7.0'
-gem 'activerecord-sqlserver-adapter'
+gem 'activerecord-sqlserver-adapter', '~> 6'
 
 # Image processing - A ruby wrapper for ImageMagick or GraphicsMagick command line.
 gem "mini_magick"

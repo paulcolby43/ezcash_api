@@ -7,7 +7,7 @@ WORKDIR /application
 COPY . /application
 
 #EXPOSE 3000 3334
-EXPOSE 3000 3334-3434
+EXPOSE 3000 3002 3334-3400
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
 # Install FreeTDS

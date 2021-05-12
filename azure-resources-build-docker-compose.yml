@@ -1,0 +1,68 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+      #- "3334:3334"
+      - "3334-3339:3334-3339"
+    #command: bash -c "rails tud_socketing:start"
+    image: tranact/ezcash_api_app:development
+    # environment:
+    #  - EZCASH_PASSWORD=${EZCASH_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          #cpus: 0.50
+          cpus: '1'
+          memory: 4GB
+        reservations:
+          #cpus: 0.25
+          cpus: '0.50'
+          memory: 3GB
+
+  web:
+    build:
+      context: "../ez_cash_web_monitor"
+      dockerfile: ./Dockerfile
+    ports:
+      - "3001:3001"
+    image: tranact/ezcash_web_app:development
+    depends_on:
+      - api
+    links:
+      - api
+    deploy:
+      resources:
+        limits:
+          #cpus: 0.50
+          cpus: '1'
+          memory: 4GB
+        reservations:
+          #cpus: 0.25
+          cpus: '0.50'
+          memory: 3GB
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    domainname: "ezcash"
+    depends_on:
+      - api
+    ports:
+      - 80:80
+      - 443:443
+    image: tranact/ezcash_api_nginx:development
+    deploy:
+      resources:
+        limits:
+          #cpus: 0.50
+          cpus: '0.25'
+          memory: 3GB
+        reservations:
+          #cpus: 0.25
+          cpus: '0.12'
+          memory: 1GB

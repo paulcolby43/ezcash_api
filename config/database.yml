@@ -12,7 +12,7 @@ development:
   
 test:
   <<: *default
-  database: <%= ENV["EZCASH_TEST_DATABASE"] %>
+  database: <%= ENV["EZCASH_DATABASE"] %>
   
 production:
   <<: *default

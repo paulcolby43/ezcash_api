@@ -50,8 +50,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
-  # Allow requests from 'api' docker container domain
-  Rails.application.config.hosts << 'api'
+  # Allow requests from 'ezcashapi' docker container domain
+  Rails.application.config.hosts << 'ezcashapi'
   
   # Allow requests from azure container domain
   config.hosts << "ezcash.eastus.azurecontainer.io"
