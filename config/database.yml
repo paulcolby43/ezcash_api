@@ -3,8 +3,8 @@
 default: &default
   adapter: sqlserver
   host: <%= ENV["EZCASH_HOST"] %>
-  username: <%= ENV["EZCASH_USERNAME"] %>
-  password: <%= ENV["EZCASH_PASSWORD"] %>
+  username: <%= ENV['EZCASH_USERNAME_FILE'].blank? ? ENV['EZCASH_USERNAME'] :  File.read(ENV['EZCASH_USERNAME_FILE']).strip.chomp %>
+  password: <%= ENV['EZCASH_PASSWORD_FILE'].blank? ? ENV['EZCASH_PASSWORD'] :  File.read(ENV['EZCASH_PASSWORD_FILE']).strip.chomp %>
   
 development:
   <<: *default

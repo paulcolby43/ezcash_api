@@ -9,7 +9,7 @@ namespace :tud_socketing do
 #    server = TCPServer.open(port) 
     loop do
       Thread.start(server.accept) do |client|
-        p "Thread started"
+        #p "Thread started"
         string = client.recv(1000).chomp ## Request Data received at the socket port
         unless string.blank?
           result = string.downcase.delete('<').delete('>').delete("!")

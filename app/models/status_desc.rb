@@ -1,10 +1,10 @@
 class StatusDesc < ApplicationRecord
-  self.primary_key = 'status'
+#  self.primary_key = 'status'
   self.table_name= 'status_desc'
   
-  belongs_to :dev_status, :foreign_key => :status
-  belongs_to :device
-  belongs_to :company
+  belongs_to :dev_status, :foreign_key => :status, optional: true
+  belongs_to :device, optional: true
+  belongs_to :company, optional: true
   
   scope :status, ->(status) { where("status = ?", status) unless status.blank?}
   scope :short_description, ->(short_desc) { where("short_desc = ?", short_desc) unless short_desc.blank?}

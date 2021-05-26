@@ -51,14 +51,12 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
   # Allow requests from 'ezcashapi' docker container domain
-  Rails.application.config.hosts << 'ezcashapi'
+#  Rails.application.config.hosts << 'ezcashapi'
   
   # Allow requests from azure container domain
-  config.hosts << "ezcash.eastus.azurecontainer.io"
+#  config.hosts << "ezcash.eastus.azurecontainer.io"
   
   # Allow requests from any domain
-#  Rails.application.config.hosts = nil
-  
-  
+  Rails.application.config.hosts = nil
   
 end

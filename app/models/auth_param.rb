@@ -1,8 +1,8 @@
 class AuthParam < ApplicationRecord
 #  self.primary_key = 'cassette_id'
 #  
-  belongs_to :device, :foreign_key => 'dev_id'
-  belongs_to :company
+  belongs_to :device, :foreign_key => 'dev_id', optional: true
+  belongs_to :company, optional: true
   
   scope :device, ->(dev_id) { where("dev_id = ?", dev_id) unless dev_id.blank?}
   scope :param_name, ->(param_name) { where("param_name = ?", param_name) unless param_name.blank?}

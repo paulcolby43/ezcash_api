@@ -3,14 +3,14 @@ class User < ApplicationRecord
   self.primary_key = 'user_name'
   
 #  belongs_to :group, :foreign_key => "dev_group"
-  belongs_to :company
+  belongs_to :company, optional: true
 #  has_many :role_permissions
   
   scope :user_name, ->(user_name) { where("user_name = ?", user_name) unless user_name.blank?}
   scope :company_id, ->(company_id) { where("company_id = ?", company_id) unless company_id.blank?}
   
   before_create :create_auth_token
-  before_create :encrypt_password
+  before_create :encrypt_password, unless: Proc.new { |user| user.company_id.blank? }
   
   validates :user_name, uniqueness: true
   validates :api_auth_token, uniqueness: true

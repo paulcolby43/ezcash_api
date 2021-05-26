@@ -4,7 +4,7 @@ class RolePermission < ActiveRecord::Base
   self.primary_keys = 'PermissionID', 'RoleID' #Composite primary keys
   
 #  belongs_to :user, :foreign_key => "user_role_index"
-  belongs_to :company
+  belongs_to :company, optional: true
   has_one :ez_permission_desc, :foreign_key => "PermissionID"
   
   scope :role_id, ->(role_id) { where("RoleID = ?", role_id) unless role_id.blank?}
