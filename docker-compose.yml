@@ -11,6 +11,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    restart: always
     ports:
       - "3002:3000"
       - "3334:3334"
@@ -29,14 +30,27 @@ services:
       - EZCASH_USERNAME_FILE=/run/secrets/ezcash_username
       - EZCASH_PASSWORD_FILE=/run/secrets/ezcash_password
 
-  ezcashweb:
+  #ezcashweb:
+  #  build:
+  #    context: "../ez_cash_web_monitor"
+  #    dockerfile: ./Dockerfile
+  #  ports:
+  #    - "3003:3001"
+  #  #image: tranact/ezcash_web_app:development
+  #  image: tranact/ezcash_web_app:local_docker_development
+  #  depends_on:
+  #    - ezcashapi
+  #  links:
+  #    - ezcashapi
+
+  ezcashtoken:
     build:
-      context: "../ez_cash_web_monitor"
+      context: "../ez_token"
       dockerfile: ./Dockerfile
     ports:
-      - "3003:3001"
-    #image: tranact/ezcash_web_app:development
-    image: tranact/ezcash_web_app:local_docker_development
+      - "3003:3000"
+    #image: tranact/ezcash_token_app:development
+    image: tranact/ezcash_token_app:local_docker_development
     depends_on:
       - ezcashapi
     links:

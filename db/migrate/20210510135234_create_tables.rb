@@ -774,6 +774,18 @@ class CreateTables < ActiveRecord::Migration[6.0]
       t.integer "company_id"
     end
     
+    create_table :fees do |t|
+      t.varchar "name", limit: 255, null: false
+      t.text_basic "description"
+      t.integer "company_id"
+      t.integer "device_id"
+      t.decimal "amount", precision: 12, scale: 2
+      t.varchar "fee_type"
+      t.varchar "transfer_type"
+      t.boolean "active"
+      t.timestamps
+    end
+    
     add_foreign_key "Accounts", "Companies", column: "CompanyNumber", primary_key: "CompanyNumber", name: "FK_Accounts_Companies"
     add_foreign_key "Companies", "Groups", column: "DefaultCustGroupID", primary_key: "GroupID", name: "FK_Companies_DefGrp"
     add_foreign_key "Customer", "Accounts", column: "DefaultAccount", primary_key: "ActID", name: "FK_Customer_Accounts"

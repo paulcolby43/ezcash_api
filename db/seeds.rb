@@ -460,10 +460,14 @@ TudUserAuth.create!([
 ])
 
 User.create!([
-  {user_name: "ez", pwd_hash: "8a8bb7cd343aa2ad99b7d762030857a2", user_role_index: 5, pwd_needs_change: 0, pwd_last_changed: "1899-12-30 00:00:00", win_auth: 0, dev_group: nil, dev_site: nil, disable_add: 0},
+  {user_name: "ez", pwd_hash: "8a8bb7cd343aa2ad99b7d762030857a2", user_role_index: 5, pwd_needs_change: 0, pwd_last_changed: "1899-12-30 00:00:00", win_auth: 0, dev_group: nil, dev_site: nil, disable_add: 0, company_id: 1},
   {user_name: "manager", pwd_hash: "df7efb50f6da87818a11f5ea5f6f7f09", user_role_index: 3, pwd_needs_change: 0, pwd_last_changed: nil, win_auth: nil, dev_group: nil, dev_site: nil, disable_add: 0},
   {user_name: "replenisher", pwd_hash: "2541c4cb94e881e0a4f9d28efe0cd0cf", user_role_index: 4, pwd_needs_change: 0, pwd_last_changed: nil, win_auth: nil, dev_group: nil, dev_site: nil, disable_add: 0},
   {user_name: "superadmin", pwd_hash: "b6c1c42866f3f78328d2915fc575b77d", user_role_index: 5, pwd_needs_change: 0, pwd_last_changed: nil, win_auth: nil, dev_group: nil, dev_site: nil, disable_add: 0}
+])
+
+Company.create!([
+  {CompanyNumber: 1, CompanyName: "EZ Company"}
 ])
 
 EzPermissionDesc.create!([
