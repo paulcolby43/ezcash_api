@@ -70,7 +70,7 @@ class Api::V1::BillCountsController < ApplicationController
   end
   
   def bill_count_params
-    params.require(:bill_count).permit(:dev_id, :cassette_nbr, :cassette_id, :host_start_count, :host_cycle_count, :dev_start_count, :dev_cycle_count, :dev_divert_count, :added_count, :old_added, :status)
+    params.require(:bill_count).permit(:denomination, :dev_id, :cassette_nbr, :cassette_id, :host_start_count, :host_cycle_count, :dev_start_count, :dev_cycle_count, :dev_divert_count, :added_count, :old_added, :status)
   end
       
 end
