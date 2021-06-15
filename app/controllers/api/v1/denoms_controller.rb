@@ -64,7 +64,7 @@ class Api::V1::DenomsController < ApplicationController
   end
   
   def denom_params
-    params.require(:denom).permit()
+    params.require(:denom).permit(:denomination, :dev_id, :cassette_nbr, :cassette_id, :currency_type)
   end
       
 end
