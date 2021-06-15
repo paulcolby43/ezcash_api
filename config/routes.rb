@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
       resources :bill_counts
       resources :bill_hists
-      resources :denoms, only: [:show, :index]
+      resources :denoms
       resources :transactions
       resources :customer_barcodes do
         collection do
