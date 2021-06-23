@@ -46,7 +46,10 @@ namespace :tud_socketing do
 #              @card = Card.new(card_amt: amount, avail_amt: amount, card_nbr: payment_nbr, dev_id: dev_id, receipt_nbr: payment_nbr, issued_date: date, 
 #                last_activity_date: date, card_status: 'AC', bank_id_nbr: 111101, barcodeHash: barcode)
             elsif command == 'void'
-              @customer_barcode = CustomerBarcode.where(RowID: payment_nbr, amount: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+              @transaction = Transaction.where(receipt_nbr: payment_nbr, amt_req: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+              unless @transaction.blank?
+                @customer_barcode = CustomerBarcode.where(TranID: @transaction.id, amount: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+              end
 #              unless @card.blank?
               unless @customer_barcode.blank?
 #                @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
@@ -81,7 +84,10 @@ namespace :tud_socketing do
                 client.puts "FAILED payment_nbr=#{params['payment_nbr']} amount=#{params['amount']} date=#{params['date']}"
               end
             elsif command == 'inquire'
-              @customer_barcode = CustomerBarcode.where(RowID: payment_nbr, amount: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+              @transaction = Transaction.where(receipt_nbr: payment_nbr, amt_req: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+              unless @transaction.blank?
+                @customer_barcode = CustomerBarcode.where(TranID: @transaction.id, amount: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+              end
 #              @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
 #              unless @card.blank?
               unless @customer_barcode.blank?
