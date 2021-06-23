@@ -7,6 +7,7 @@ class CustomerBarcode < ApplicationRecord
 # belongs_to :transaction, :foreign_key => 'TranID'
 # belongs_to :customer, :foreign_key => 'CustomerID'
   belongs_to :company, :foreign_key => 'CompanyNumber', optional: true
+  belongs_to :corresponding_transaction, class_name: 'Transaction', foreign_key: 'TranID', optional: true
   
   validates_uniqueness_of :Barcode, scope: :CustomerID
   

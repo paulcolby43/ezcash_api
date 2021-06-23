@@ -13,6 +13,34 @@ class Customer < ApplicationRecord
   #     Instance Methods      #
   #############################
   
+  def full_name
+    unless self.NameF.blank? and self.NameL.blank? and self.NameS.blank?
+      "#{self.NameF} #{self.NameL}"
+    else
+      unless self.phone.blank?
+        self.phone
+      else
+        "Anonymous - #{id}"
+      end
+    end
+  end
+  
+  def phone
+    self.PhoneMobile
+  end
+  
+  def first_name
+    self.NameF
+  end
+  
+  def last_name
+    self.NameL
+  end
+  
+  def email
+    self.Email
+  end
+  
   def quick_pay(amount, receipt_number, device_id)
     from_account_id = company.transaction_account.blank? ? nil : company.transaction_account.id
     from_account = Account.find_by(ActID: from_account_id)

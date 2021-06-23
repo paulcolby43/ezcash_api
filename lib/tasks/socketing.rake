@@ -56,17 +56,22 @@ namespace :tud_socketing do
 #                if @card.avail_amt.zero?
                 if @customer_barcode and @customer_barcode.Used?
                   # Card was already paid/used
-                  client.puts "REJECTED"
+                  client.puts "REJECTED - CUSTOMER BARCODE MARKED AS USED"
 #                elsif @card.avail_amt == @card.card_amt
                 elsif @customer_barcode and not @customer_barcode.Used?
                   # Card has not been paid/used yet
 #                  @card.card_status = 'VD'
-                  @customer_barcode.Used = 1
-#                  if @card.save
-                  if @customer_barcode.save
-                    client.puts  "SUCCESS"
+                  if @transaction.can_reverse?
+                    @transaction.reverse
+                    @customer_barcode.Used = 1
+  #                  if @card.save
+                    if @transaction.reversed? and @customer_barcode.save
+                      client.puts  "SUCCESS"
+                    else
+                      client.puts "FAILED - CANNOT SAVE CUSTOMER BARCODE"
+                    end
                   else
-                    client.puts "FAILED"
+                    client.puts "FAILED - CANNOT REVERSE"
                   end
                 else
                   client.puts "FAILED"
