@@ -8,6 +8,8 @@ class CustomerBarcode < ApplicationRecord
 # belongs_to :customer, :foreign_key => 'CustomerID'
   belongs_to :company, :foreign_key => 'CompanyNumber', optional: true
   
+  validates_uniqueness_of :Barcode, scope: :CustomerID
+  
   scope :device, ->(dev_id) { where("DevID = ?", dev_id) unless dev_id.blank?}
   scope :customer_id, ->(customer_id) { where("CustomerID = ?", customer_id) unless customer_id.blank?}
   scope :company_number, ->(company_number) { where("CompanyNumber = ?", company_number) unless company_number.blank?}
@@ -28,6 +30,14 @@ class CustomerBarcode < ApplicationRecord
   
   def not_used?
     self.Used == 0
+  end
+  
+  def status
+    self.Used? ? 'Used' : 'Unused'
+  end
+  
+  def available_amount
+    self.Used? ? 0 : self.amount
   end
   
   #############################

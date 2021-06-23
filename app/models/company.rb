@@ -22,10 +22,36 @@ class Company < ApplicationRecord
   
   scope :company_number, ->(company_number) { where("CompanyNumber = ?", company_number) unless company_number.blank?}
   
+  after_create_commit :create_transaction_and_fee_accounts
+  
   #############################
   #     Instance Methods      #
   #############################
   
+  def name
+    self.CompanyName
+  end
+  
+  def fee_account
+    accounts.find_by(ActID: self.FeeActID)
+  end
+  
+  def transaction_account
+    accounts.find_by(ActID: self.TxnActID)
+  end
+  
+  def create_transaction_and_fee_accounts
+    if self.transaction_account.blank?
+      new_transaction_account_type = AccountType.create(CompanyNumber: self.CompanyNumber, AccountTypeDesc: "#{name} Transaction Wallet Type", CorpAcctFlag: 1)
+      new_transaction_account = Account.create(CompanyNumber: self.CompanyNumber, MinBalance: -1000000, ActTypeID: new_transaction_account_type.id)
+      self.update_column(:TxnActID, new_transaction_account.id)
+    end
+    if self.fee_account.blank?
+      new_fee_account_type = AccountType.create(CompanyNumber: self.CompanyNumber, AccountTypeDesc: "#{name} Fee Wallet Type", CorpAcctFlag: 1)
+      new_fee_account = Account.create(CompanyNumber: self.CompanyNumber, ActTypeID: new_fee_account_type.id)
+      self.update_column(:FeeActID, new_fee_account.id)
+    end
+  end
   
   #############################
   #     Class Methods         #

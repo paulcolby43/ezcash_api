@@ -470,6 +470,10 @@ Company.create!([
   {CompanyNumber: 1, CompanyName: "EZ Company"}
 ])
 
+Group.create!([
+  {GroupID: 15, GroupDescription: "Anonymous Payee", Active: 1, ParentGroupID: 12, IsCustomer: true}
+])
+
 EzPermissionDesc.create!([
   {PermissionID: 0, Description: "View Monitor"},
   {PermissionID: 1, Description: "Control Devices"},

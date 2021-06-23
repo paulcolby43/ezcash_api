@@ -3,7 +3,10 @@ class Account < ApplicationRecord
   self.table_name= 'Accounts'
   
   belongs_to :company, :foreign_key => 'CompanyNumber'
-  belongs_to :account_type, :foreign_key => 'ActTypeID'
+  belongs_to :account_type, :foreign_key => 'ActTypeID', optional: true
+  
+  has_many :customer_cards, :foreign_key => "ActID", autosave: false, dependent: :destroy
+  has_many :customers, through: :customer_cards
   
   scope :active, ->(active) { where("Active = ?", active) unless active.blank?}
   scope :customer, ->(customer_id) { where("CustomerID = ?", customer_id) unless customer_id.blank?}
@@ -121,6 +124,14 @@ class Account < ApplicationRecord
     return response.merge({'available_balance' => available_balance_amount, 'single_withdrawal_limit' => single_withdrawal_limit_amount, 'daily_withdrawal_limit' => daily_withdrawal_limit_amount, 'requested_amount' => amount.to_f})
     
   end
+  
+#  def customer_card
+#    CustomerCard.find_by_ActID(id)
+#  end
+#  
+#  def customer_cards
+#    CustomerCard.where(ActID: id)
+#  end
   
   #############################
   #     Class Methods         #

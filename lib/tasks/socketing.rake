@@ -24,46 +24,69 @@ namespace :tud_socketing do
           unless command.blank? or (amount.blank? and payment_nbr.blank? and date.blank?)
             if command == 'encode'
               date = params[:date].blank? ? Date.today.to_s : params[:date]
-              barcode = ('%010d' % rand(0..9999999999))
-              @card = Card.new(card_amt: amount, avail_amt: amount, card_nbr: payment_nbr, dev_id: dev_id, receipt_nbr: payment_nbr, issued_date: date, 
-                last_activity_date: date, card_status: 'AC', bank_id_nbr: 111101, barcodeHash: barcode)
-              if @card.save
-                client.puts "SUCCESS #{barcode}"
+#              barcode = ('%010d' % rand(0..9999999999))
+              barcode = SecureRandom.random_number(10**10).to_s
+#              @customer = Customer.create(CompanyNumber: current_user.company_id, LangID: 1, Active: 1, GroupID: 15)
+#              @account = Account.create(CompanyNumber: current_user.company_id, ActNbr: @receipt_number, Balance: 0, MinBalance: 0, ActTypeID: current_user.company.quick_pay_account_type_id)
+              @customer = Customer.create(CompanyNumber: 1, LangID: 1, Active: 1, GroupID: 15)
+              @account = Account.create(CompanyNumber: 1, Balance: 0, MinBalance: 0)
+              @customer.accounts << @account
+              @transaction = @customer.quick_pay(amount, payment_nbr, dev_id)
+              response_code = @transaction.error_code unless @transaction.blank?
+              unless response_code.blank? or response_code.to_i > 0
+                @customer_barcode = CustomerBarcode.create(CustomerID: @customer.id, date_time: Time.now, CompanyNumber: 1, Barcode: barcode, TranID: @transaction.id, Used: 0, amount: amount, ActID: @account.id, DevID: dev_id)
+                unless @customer_barcode.blank?
+                  client.puts "SUCCESS #{barcode}"
+                else
+                  client.puts "FAILED"
+                end
               else
                 client.puts "FAILED"
               end
+#              @card = Card.new(card_amt: amount, avail_amt: amount, card_nbr: payment_nbr, dev_id: dev_id, receipt_nbr: payment_nbr, issued_date: date, 
+#                last_activity_date: date, card_status: 'AC', bank_id_nbr: 111101, barcodeHash: barcode)
             elsif command == 'void'
-              unless @card.blank?
-                @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
-                if @card.avail_amt.zero?
-                  # Card was already paid
+              @customer_barcode = CustomerBarcode.where(RowID: payment_nbr, amount: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+#              unless @card.blank?
+              unless @customer_barcode.blank?
+#                @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
+#                if @card.avail_amt.zero?
+                if @customer_barcode and @customer_barcode.Used?
+                  # Card was already paid/used
                   client.puts "REJECTED"
-                elsif @card.avail_amt == @card.card_amt
-                  # Card has not been paid yet
-                  @card.card_status = 'VD'
-                  if @card.save
+#                elsif @card.avail_amt == @card.card_amt
+                elsif @customer_barcode and not @customer_barcode.Used?
+                  # Card has not been paid/used yet
+#                  @card.card_status = 'VD'
+                  @customer_barcode.Used = 1
+#                  if @card.save
+                  if @customer_barcode.save
                     client.puts  "SUCCESS"
                   else
                     client.puts "FAILED"
                   end
                 else
-                  original_amount = @card.card_amt
-                  available_amount = @card.avail_amt
-                  paid_amount = original_amount - available_amount
-                  @card.card_status = 'VD'
-                  if @card.save
-                    client.puts "PARTIALPAY #{paid_amount} of #{original_amount}"
-                  else
-                    client.puts "FAILED"
-                  end
+                  client.puts "FAILED"
+#                  original_amount = @card.card_amt
+#                  available_amount = @card.avail_amt
+#                  paid_amount = original_amount - available_amount
+#                  @card.card_status = 'VD'
+#                  if @card.save
+#                    client.puts "PARTIALPAY #{paid_amount} of #{original_amount}"
+#                  else
+#                    client.puts "FAILED"
+#                  end
                 end
               else
                 client.puts "FAILED payment_nbr=#{params['payment_nbr']} amount=#{params['amount']} date=#{params['date']}"
               end
             elsif command == 'inquire'
-              @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
-              unless @card.blank?
-                response_string = "payment_nbr=#{payment_nbr}barcode=#{@card.barcode_from_hash}initial_amt=#{@card.card_amt}avail_amt=#{@card.avail_amt}card_status=#{@card.card_status}"
+              @customer_barcode = CustomerBarcode.where(RowID: payment_nbr, amount: amount, date_time: date.to_date.midnight..date.to_date.end_of_day).first
+#              @card = Card.where(card_amt: amount, card_nbr: payment_nbr, issued_date: date).first
+#              unless @card.blank?
+              unless @customer_barcode.blank?
+#                response_string = "payment_nbr=#{payment_nbr}barcode=#{@card.barcode_from_hash}initial_amt=#{@card.card_amt}avail_amt=#{@card.avail_amt}card_status=#{@card.card_status}"
+                response_string = "payment_nbr=#{payment_nbr}barcode=#{@customer_barcode.Barcode}initial_amt=#{@customer_barcode.amount}avail_amt=#{@customer_barcode.available_amount}card_status=#{@customer_barcode.status}"
                 client.puts response_string
               else
                 response_string = "FAILED payment_nbr=#{params['payment_nbr']} amount=#{params['amount']} date=#{params['date']}"
