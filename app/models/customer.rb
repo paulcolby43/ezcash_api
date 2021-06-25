@@ -60,10 +60,10 @@ class Customer < ApplicationRecord
         from_account.update_attribute('Balance', from_account.Balance - (requested_amount + fee_amount))
         to_account.update_attribute('Balance', to_account.Balance + requested_amount)
       else
-        transaction.update_attributes(amt_auth: 0, error_code: 905) # Insufficient funds
+        transaction.update(amt_auth: 0, error_code: 905) # Insufficient funds
       end
     else
-      transaction.update_attributes(amt_auth: 0, error_code: 901) # From account invalid
+      transaction.update(amt_auth: 0, error_code: 901) # From account invalid
     end
     # Transfer fee between accounts
     
