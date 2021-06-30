@@ -51,10 +51,17 @@ services:
       - "3003:3000"
     #image: tranact/ezcash_token_app:development
     image: tranact/ezcash_token_app:local_docker_development
-    depends_on:
-      - ezcashapi
-    links:
-      - ezcashapi
+    secrets:
+      - ezcash_username
+      - ezcash_password
+    environment:
+      - EZCASH_HOST="71.41.52.58"
+      - EZCASH_DATABASE="ezcash_token"
+      #- EZCASH_USERNAME="transact"
+      #- EZCASH_PASSWORD="ultr@5"
+      - EZCASH_USERNAME_FILE=/run/secrets/ezcash_username
+      - EZCASH_PASSWORD_FILE=/run/secrets/ezcash_password
+      - EZCASH_WSDL_URL="http://localhost:8080/ezcashapi/api/devicecommand"
 
   #nginx:
   #  build:
